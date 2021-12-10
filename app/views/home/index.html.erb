@@ -1,0 +1,7 @@
+<h1>Welcome to the Warehouse App</h1>
+
+<h2>Galpoes Cadastrados</h2>
+<%= @wh.each do |w| %>
+  <%= w.name %>
+  <%= w.code%>
+<% end %>
