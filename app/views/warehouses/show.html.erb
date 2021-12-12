@@ -1,0 +1,19 @@
+<%= @wh.name %>
+<%= @wh.code %>
+<dl>
+<dt>Descrição:</dt>
+<dd><%= @wh.description %></dd>
+<dt>Endereço:</dt>
+<dd><%= @wh.address %>-<%= @wh.city %>/<%= @wh.state %></dd>
+<dt>CEP:</dt>
+<dd><%= @wh.postal_code %></dd>
+<dt>Area Total:</dt>
+<dd><%= @wh.total_area %> m2</dd>
+<dt>Area Util:</dt>
+<dd><%= @wh.useful_area %> m2</dd>
+</dl>
+
+<%= link_to 'Voltar', root_path %>
+
+
+
