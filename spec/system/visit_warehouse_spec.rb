@@ -12,13 +12,13 @@ describe 'Visitor sees the warehouse' do
     click_on 'Alimenticio'
 
     # Assert
-    expect(page).to have_content('Alimenticio')
-    expect(page).to have_content('ALM')
-    expect(page).to have_content('Otimo galpao numa linda cidade')
-    expect(page).to have_content('Av Fernandes Lima-Maceio/AL')
-    expect(page).to have_content('CEP: 57050-000')
-    expect(page).to have_content('Area Total: 10000 m2')
-    expect(page).to have_content('Area Util: 8000 m2')       
+    expect(page).to have_content 'Alimenticio'
+    expect(page).to have_content 'ALM'
+    expect(page).to have_content 'Descrição: Otimo galpao numa linda cidade'
+    expect(page).to have_content 'Endereço: Av Fernandes Lima-Maceio/AL'
+    expect(page).to have_content 'CEP: 57050-000'
+    expect(page).to have_content 'Area Total: 10000 m2'
+    expect(page).to have_content 'Area Util: 8000 m2'
   end
 
   it 'and can return to home page' do 
@@ -33,6 +33,6 @@ describe 'Visitor sees the warehouse' do
     click_on 'Voltar'
 
     # Assert
-    expect(current_path).to eq root_path  
+    expect(current_path).to eq root_path
   end
 end
