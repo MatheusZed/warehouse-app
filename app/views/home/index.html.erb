@@ -1,7 +1,12 @@
-<h1>Welcome to the Warehouse App</h1>
+<h1>WareHouse App</h1>
+<h3>Welcome to the Warehouse App</h3>
 
 <h2>Galpoes Cadastrados</h2>
-<%= @wh.each do |w| %>
+<% @wh.each do |w| %>
   <%= link_to(w.name, warehouse_path(w.id)) %>
   <%= w.code%>
+  <br>
 <% end %>
+<br>
+<br>
+<%= link_to 'Cadastrar novo galpao', new_warehouse_path %>

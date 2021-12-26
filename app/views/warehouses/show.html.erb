@@ -1,5 +1,6 @@
 <%= @wh.name %>
 <%= @wh.code %>
+<%= flash[:notice] %>
 <dl>
 <dt>Descrição:</dt>
 <dd><%= @wh.description %></dd>
@@ -14,6 +15,3 @@
 </dl>
 
 <%= link_to 'Voltar', root_path %>
-
-
-

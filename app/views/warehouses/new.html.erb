@@ -1,0 +1,41 @@
+<h1>Novo Galpao</h1>
+
+<%= form_with(model: @wh) do |form| %>
+  <div>
+    <%= form.label :name, 'Nome' %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :code, 'Codigo' %>
+    <%= form.text_field :code %>
+  </div>
+  <div>
+    <%= form.label :description, 'Descricao' %>
+    <%= form.text_area :description %>
+  </div>
+  <div>
+    <%= form.label :address, 'Endereco' %>
+    <%= form.text_field :address %>
+  </div>
+  <div>
+    <%= form.label :city, 'Cidade' %>
+    <%= form.text_field :city %>
+  </div>
+  <div>
+    <%= form.label :state, 'Estado' %>
+    <%= form.text_field :state %>
+  </div>
+  <div>
+    <%= form.label :postal_code, 'CEP' %>
+    <%= form.text_field :postal_code %>
+  </div>
+  <div>
+    <%= form.label :total_area, 'Area Total' %>
+    <%= form.number_field :total_area %>
+  </div>
+  <div>
+    <%= form.label :useful_area, 'Area Util' %>
+    <%= form.number_field :useful_area %>
+  </div>
+  <%= form.submit 'Gravar'%>
+<% end %>
