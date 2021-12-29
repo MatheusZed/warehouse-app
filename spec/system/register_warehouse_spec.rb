@@ -6,10 +6,10 @@ describe 'Visitor register warehouse' do
 
     #Act
     visit root_path
-    click_on 'Cadastrar novo galpao'
+    click_on 'Register new warehouse'
 
     #Assert
-    expect(page).to have_content 'Novo Galpao'
+    expect(page).to have_content 'New Warehouse'
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Codigo'
     expect(page).to have_field 'Descricao'
@@ -27,7 +27,7 @@ describe 'Visitor register warehouse' do
 
     #Act
     visit root_path
-    click_on 'Cadastrar novo galpao'
+    click_on 'Register new warehouse'
     fill_in 'Nome', with: 'Juiz de Fora'
     fill_in 'Codigo', with: 'JDF'
     fill_in 'Descricao', with: 'Um galpao mineiro com o pé no Rio'
