@@ -16,10 +16,18 @@ describe 'Visitor view homepage' do
 
   it 'and see the the registred warehouse' do
     # Arrange => Preparar o banco
-    Warehouse.create name: 'Guarulhos',    code: 'GRU'
-    Warehouse.create name: 'Porto Alegre', code: 'POA'
-    Warehouse.create name: 'Sao Luiz',     code: 'SLZ'
-    Warehouse.create name: 'Vitoria',      code: 'VIX'
+    Warehouse.create(name: 'Guarulhos', code: 'GRU', description: 'Aeroporto',
+                     address: 'Av Guarulhos', city: 'Sao Paulo', state: 'SP',
+                     postal_code:'55000-000', total_area: 10000, useful_area: 8000)
+    Warehouse.create(name: 'Porto Alegre', code: 'POA', description: 'Lugar bonito',
+                     address: 'Av Porto Alegre', city: 'Porto Alegre', state: 'RS',
+                     postal_code:'55000-000', total_area: 10000, useful_area: 8000)
+    Warehouse.create(name: 'Sao Luiz', code: 'SLZ', description: 'Nao Sei',
+                     address: 'Av Sao Luiz', city: 'Sao Luiz', state: 'MA',
+                     postal_code:'55000-000', total_area: 10000, useful_area: 8000)
+    Warehouse.create(name: 'Vitoria', code: 'VIX', description: 'Codigo legal',
+                     address: 'Av Vitoria', city: 'Vitoria', state: 'ES',
+                     postal_code:'55000-000', total_area: 10000, useful_area: 8000)
     
     # Act => Agir ou Executar
     visit root_path

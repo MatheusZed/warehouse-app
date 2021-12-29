@@ -30,7 +30,7 @@ describe 'Visitor sees the warehouse' do
     # Act
     visit root_path
     click_on 'Alimenticio'
-    click_on 'Voltar'
+    click_on 'Return'
 
     # Assert
     expect(current_path).to eq root_path

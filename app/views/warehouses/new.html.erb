@@ -1,4 +1,12 @@
 <h1>New Warehouse</h1>
+<% if @wh.errors.any? %>
+  <span>Check the fields below</span>
+  <ul>
+  <% @wh.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
 
 <%= form_with(model: @wh) do |form| %>
   <div>
@@ -37,5 +45,5 @@
     <%= form.label :useful_area, 'Area Util' %>
     <%= form.number_field :useful_area %>
   </div>
-  <%= form.submit 'Gravar'%>
+  <%= form.submit 'Register'%>
 <% end %>
