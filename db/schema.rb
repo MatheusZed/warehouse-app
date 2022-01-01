@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_194607) do
+ActiveRecord::Schema.define(version: 2021_12_29_215701) do
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "fantasy_name"
+    t.string "legal_name"
+    t.string "cnpj"
+    t.string "address"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "warehouses", force: :cascade do |t|
     t.string "name"
     t.string "code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.string "address"
     t.string "city"
@@ -24,6 +33,8 @@ ActiveRecord::Schema.define(version: 2021_12_11_194607) do
     t.string "postal_code"
     t.integer "total_area"
     t.integer "useful_area"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
