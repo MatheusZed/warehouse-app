@@ -2,6 +2,7 @@ pt-BR:
   activerecord:
     models:
       warehouse: Galpão
+      supplier: Fornecedor
     attributes:
       warehouse:
         name: Nome
@@ -13,3 +14,10 @@ pt-BR:
         postal_code: CEP
         total_area: Area Total
         useful_area: Area Util
+      supplier:
+        fantasy_name: Nome Fantasia
+        legal_name: Razao Social
+        cnpj: CNPJ
+        address: Endereco
+        email: Email
+        phone: Telefone
