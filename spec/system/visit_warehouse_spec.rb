@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Visitor sees the warehouse' do
-  it 'and see all registered data' do
+  it 'and sees all registered data' do
     # Arrange
     Warehouse.create(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
                      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',

@@ -2,13 +2,13 @@ require 'rails_helper'
 
 describe 'Visitor register warehouse' do 
   it 'throught the link in homepage' do
-    #Arrange
+    # Arrange
 
-    #Act
+    # Act
     visit root_path
     click_on 'Register new warehouse'
 
-    #Assert
+    # Assert
     expect(page).to have_content 'New Warehouse'
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Codigo'
@@ -23,9 +23,9 @@ describe 'Visitor register warehouse' do
   end
 
   it 'successfully' do
-    #Arrange
+    # Arrange
 
-    #Act
+    # Act
     visit root_path
     click_on 'Register new warehouse'
     fill_in 'Nome', with: 'Juiz de Fora'
@@ -39,7 +39,7 @@ describe 'Visitor register warehouse' do
     fill_in 'Area Util', with: '3000'
     click_on 'Register'
 
-    #Assert
+    # Assert
     expect(page).to have_content 'Successfully registered warehouse' 
     expect(page).to have_content 'Juiz de Fora'
     expect(page).to have_content 'JDF'
@@ -51,9 +51,9 @@ describe 'Visitor register warehouse' do
   end
 
   it 'and all fields are required' do
-    #Arrange
+    # Arrange
 
-    #Act
+    # Act
     visit root_path
     click_on 'Register new warehouse'
     fill_in 'Nome', with: ''
@@ -61,7 +61,7 @@ describe 'Visitor register warehouse' do
     fill_in 'Endereco', with: ''
     click_on 'Register'
 
-    #Assert
+    # Assert
     expect(page).not_to have_content 'Successfully registered warehouse'
     expect(page).to have_content "It wasn't possible to record the warehouse"
     expect(page).to have_content 'Nome não pode ficar em branco'

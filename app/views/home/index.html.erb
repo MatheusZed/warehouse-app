@@ -4,6 +4,6 @@
 <h2>Registered warehouses</h2>
 <% @wh.each do |w| %>
   <%= link_to(w.name, warehouse_path(w.id)) %>
-  <%= w.code%>
+  <%= w.code %>
   <br/>
 <% end %>

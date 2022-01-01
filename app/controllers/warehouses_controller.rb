@@ -14,7 +14,7 @@ class WarehousesController < ApplicationController
                                                          :postal_code, :total_area,
                                                          :useful_area)
     @wh = Warehouse.new(warehouse_params)
-    
+
     if @wh.save()
     #flash[:notice] = 'Galpao registrado com sucesso'
       redirect_to warehouse_path(@wh.id), notice: 'Successfully registered warehouse'
@@ -22,5 +22,5 @@ class WarehousesController < ApplicationController
       flash.now[:alert] = "It wasn't possible to record the warehouse"
       render 'new'
     end
-  end  
+  end
 end
