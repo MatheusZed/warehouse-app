@@ -60,4 +60,12 @@ describe 'Visitor view homepage' do
     expect(page).not_to have_content 'Area Total: 10000 m2'
     expect(page).not_to have_content 'Area Util: 8000 m2'
   end
+
+  it "and doesn't exist any warehouse" do
+    #Act
+    visit root_path
+
+    #Assert
+    expect(page).to have_content 'No registered warehouse'  
+  end
 end

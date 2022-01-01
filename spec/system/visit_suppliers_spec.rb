@@ -45,4 +45,13 @@ describe 'Visitor see suppliers' do
     expect(page).not_to have_content 'maria.pao@yahoo.com'
     expect(page).not_to have_content '91124-7799'    
   end
+
+  it "and doesn't exist any supplier" do
+    #Act
+    visit root_path
+    click_on 'See suppliers'
+
+    #Assert
+    expect(page).to have_content 'No registered supplier'  
+  end
 end
