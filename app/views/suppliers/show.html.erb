@@ -1,0 +1,14 @@
+<%= @sp.fantasy_name %>
+<%= @sp.legal_name %>
+<dl>
+<dt>CNPJ:</dt>
+<dd><%= @sp.cnpj %></dd>
+<dt>Endereço:</dt>
+<dd><%= @sp.address %>
+<dt>Email:</dt>
+<dd><%= @sp.email %></dd>
+<dt>Telefone:</dt>
+<dd><%= @sp.phone %></dd>
+</dl>
+
+<%= link_to 'Return', suppliers_path %>

@@ -1,0 +1,6 @@
+<h1>Registered suppliers</h1>
+<% @sp.each do |s| %>
+  <%= link_to(s.fantasy_name, supplier_path(s.id)) %>
+  <%= s.cnpj %>
+  <br/>
+<% end %>
