@@ -62,10 +62,10 @@ describe 'Visitor view homepage' do
   end
 
   it "and doesn't exist any warehouse" do
-    #Act
+    # Act
     visit root_path
 
-    #Assert
+    # Assert
     expect(page).to have_content 'No registered warehouse'  
   end
 end

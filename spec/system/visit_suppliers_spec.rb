@@ -47,11 +47,11 @@ describe 'Visitor see suppliers' do
   end
 
   it "and doesn't exist any supplier" do
-    #Act
+    # Act
     visit root_path
     click_on 'See suppliers'
 
-    #Assert
+    # Assert
     expect(page).to have_content 'No registered supplier'  
   end
 end

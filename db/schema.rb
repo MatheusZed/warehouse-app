@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_29_215701) do
+ActiveRecord::Schema.define(version: 2022_01_02_064132) do
+
+  create_table "product_models", force: :cascade do |t|
+    t.string "name"
+    t.integer "weight"
+    t.integer "height"
+    t.integer "width"
+    t.integer "length"
+    t.integer "supplier_id", null: false
+    t.string "sku"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["supplier_id"], name: "index_product_models_on_supplier_id"
+  end
 
   create_table "suppliers", force: :cascade do |t|
     t.string "fantasy_name"
@@ -26,6 +39,8 @@ ActiveRecord::Schema.define(version: 2021_12_29_215701) do
   create_table "warehouses", force: :cascade do |t|
     t.string "name"
     t.string "code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.string "address"
     t.string "city"
@@ -33,8 +48,7 @@ ActiveRecord::Schema.define(version: 2021_12_29_215701) do
     t.string "postal_code"
     t.integer "total_area"
     t.integer "useful_area"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "product_models", "suppliers"
 end

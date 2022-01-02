@@ -1,0 +1,41 @@
+<h1>New Product Model</h1>
+<% if @pm.errors.any? %>
+  <span>Check the fields below:</span>
+  <ul>
+  <% @pm.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @pm) do |form| %>
+  <div>
+    <%= form.label :name, 'Nome' %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :weight, 'Peso' %>
+    <%= form.text_field :weight %>
+  </div>
+  <div>
+    <%= form.label :height, 'Altura' %>
+    <%= form.text_field :height %>
+  </div>
+  <div>
+    <%= form.label :width, 'Largura' %>
+    <%= form.text_field :width %>
+  </div>
+  <div>
+    <%= form.label :length, 'Comprimento' %>
+    <%= form.text_field :length %>
+  </div>
+  <div>
+    <%= form.label :supplier_id, 'Fornecedor' %>
+    <%= form.collection_select(:supplier_id, @sp, :id, :fantasy_name) %>
+  </div>
+  <div>
+    <%= form.label :sku, 'Codigo SKU' %>
+    <%= form.text_field :sku %>
+  </div>
+  <%= form.submit 'Register'%>
+<% end %>

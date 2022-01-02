@@ -3,6 +3,7 @@ pt-BR:
     models:
       warehouse: Galpão
       supplier: Fornecedor
+      product_model: MOdelo de Produto
     attributes:
       warehouse:
         name: Nome
@@ -21,3 +22,11 @@ pt-BR:
         address: Endereco
         email: Email
         phone: Telefone
+      product_model:
+        name: Nome
+        weight: Peso
+        height: Altura
+        width: Largura
+        length: Comprimento
+        supplier_id: Fornecedor
+        sku: Codigo SKU

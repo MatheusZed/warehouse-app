@@ -9,6 +9,7 @@ describe 'Visitor navigates' do
     expect(page).to have_css 'nav a', text: 'Register new warehouse'
     expect(page).to have_css 'nav a', text: 'Register new supplier'
     expect(page).to have_css 'nav a', text: 'See suppliers'
+    expect(page).to have_css 'nav a', text: 'Register new product model'
 
 
     # Assert 2
@@ -17,6 +18,7 @@ describe 'Visitor navigates' do
       expect(page).to have_link 'Register new warehouse', href: new_warehouse_path
       expect(page).to have_link 'Register new supplier', href: new_supplier_path
       expect(page).to have_link 'See suppliers', href: suppliers_path
+      expect(page).to have_link 'Register new product model', href: new_product_model_path
     end
   end
 end
