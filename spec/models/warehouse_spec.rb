@@ -1,121 +1,123 @@
 require 'rails_helper'
 
 RSpec.describe Warehouse, type: :model do
-  it 'should not be valid if name is empty' do
-    # Arrange
-    wh = Warehouse.new(name: '', code: 'AMZ', description: 'Codigo legal',
-                       address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
-                       postal_code:'70510-000', total_area: 10000, useful_area: 8000)
+  context 'should not be valid if the fields are empty' do
+    it 'name' do
+      # Arrange
+      wh = Warehouse.new(name: '', code: 'AMZ', description: 'Codigo legal',
+                        address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
+                        postal_code:'70510-000', total_area: 10000, useful_area: 8000)
 
-    # Act
-    result = wh.valid?
+      # Act
+      result = wh.valid?
 
-    # Assert
-    expect(result).to eq false
-  end
+      # Assert
+      expect(result).to eq false
+    end
 
-  it 'should not be valid if code is empty' do
-    # Arrange
-    wh = Warehouse.new(name: 'Amazonas', code: '', description: 'Codigo legal',
-                       address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
-                       postal_code:'70510-000', total_area: 10000, useful_area: 8000)
+    it 'code' do
+      # Arrange
+      wh = Warehouse.new(name: 'Amazonas', code: '', description: 'Codigo legal',
+                        address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
+                        postal_code:'70510-000', total_area: 10000, useful_area: 8000)
 
-    # Act
-    result = wh.valid?
+      # Act
+      result = wh.valid?
 
-    # Assert
-    expect(result).to eq false
-  end
+      # Assert
+      expect(result).to eq false
+    end
 
-  it 'should not be valid if description is empty' do
-    # Arrange
-    wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: '',
-                       address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
-                       postal_code:'70510-000', total_area: 10000, useful_area: 8000)
+    it 'description' do
+      # Arrange
+      wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: '',
+                        address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
+                        postal_code:'70510-000', total_area: 10000, useful_area: 8000)
 
-    # Act
-    result = wh.valid?
+      # Act
+      result = wh.valid?
 
-    # Assert
-    expect(result).to eq false
-  end
+      # Assert
+      expect(result).to eq false
+    end
 
-  it 'should not be valid if address is empty' do
-    # Arrange
-    wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
-                       address: '', city: 'Amazonas', state: 'AM',
-                       postal_code:'70510-000', total_area: 10000, useful_area: 8000)
+    it 'address' do
+      # Arrange
+      wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
+                        address: '', city: 'Amazonas', state: 'AM',
+                        postal_code:'70510-000', total_area: 10000, useful_area: 8000)
 
-    # Act
-    result = wh.valid?
+      # Act
+      result = wh.valid?
 
-    # Assert
-    expect(result).to eq false    
-  end
+      # Assert
+      expect(result).to eq false    
+    end
 
-  it 'should not be valid if city is empty' do
-    # Arrange
-    wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
-                       address: 'Av Amazonas', city: '', state: 'AM',
-                       postal_code:'70510-000', total_area: 10000, useful_area: 8000)
+    it 'city' do
+      # Arrange
+      wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
+                        address: 'Av Amazonas', city: '', state: 'AM',
+                        postal_code:'70510-000', total_area: 10000, useful_area: 8000)
 
-    # Act
-    result = wh.valid?
+      # Act
+      result = wh.valid?
 
-    # Assert
-    expect(result).to eq false
-  end
+      # Assert
+      expect(result).to eq false
+    end
 
-  it 'should not be valid if state is empty' do
-    # Arrange
-    wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
-                       address: 'Av Amazonas', city: 'Amazonas', state: '',
-                       postal_code:'70510-000', total_area: 10000, useful_area: 8000)
+    it 'state' do
+      # Arrange
+      wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
+                        address: 'Av Amazonas', city: 'Amazonas', state: '',
+                        postal_code:'70510-000', total_area: 10000, useful_area: 8000)
 
-    # Act
-    result = wh.valid?
+      # Act
+      result = wh.valid?
 
-    # Assert
-    expect(result).to eq false
-  end
+      # Assert
+      expect(result).to eq false
+    end
 
-  it 'should not be valid if postal code is empty' do
-    # Arrange
-    wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
-                       address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
-                       postal_code:'', total_area: 10000, useful_area: 8000)
+    it 'postal code' do
+      # Arrange
+      wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
+                        address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
+                        postal_code:'', total_area: 10000, useful_area: 8000)
 
-    # Act
-    result = wh.valid?
+      # Act
+      result = wh.valid?
 
-    # Assert
-    expect(result).to eq false
-  end
+      # Assert
+      expect(result).to eq false
+    end
 
-  it 'should not be valid if total area is empty' do
-    # Arrange
-    wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
-                       address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
-                       postal_code:'70510-000', total_area: nil, useful_area: 8000)
+    it 'total area' do
+      # Arrange
+      wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
+                        address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
+                        postal_code:'70510-000', total_area: '', useful_area: 8000)
 
-    # Act
-    result = wh.valid?
+      # Act
+      result = wh.valid?
 
-    # Assert
-    expect(result).to eq false
-  end
+      # Assert
+      expect(result).to eq false
+    end
 
-  it 'should not be valid if useful area is empty' do
-    # Arrange
-    wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
-                       address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
-                       postal_code:'705100-000', total_area: 10000, useful_area: nil)
+    it 'useful area' do
+      # Arrange
+      wh = Warehouse.new(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
+                        address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
+                        postal_code:'705100-000', total_area: 10000, useful_area: '')
 
-    # Act
-    result = wh.valid?
+      # Act
+      result = wh.valid?
 
-    # Assert
-    expect(result).to eq false
+      # Assert
+      expect(result).to eq false
+    end
   end
 
   it 'should not be valid if name is duplicate' do
@@ -156,8 +158,8 @@ RSpec.describe Warehouse, type: :model do
     it 'cep eq 705' do
       # Arrange
       wh = Warehouse.new(name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio',
-                       address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
-                       postal_code:'705', total_area: 15000, useful_area: 12000)
+                         address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
+                         postal_code:'705', total_area: 15000, useful_area: 12000)
                        
       # Act
       result = wh.valid?
@@ -169,8 +171,8 @@ RSpec.describe Warehouse, type: :model do
     it 'cep eq 700000-00' do
       # Arrange
       wh = Warehouse.new(name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio',
-                        address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
-                        postal_code:'700000-00', total_area: 15000, useful_area: 12000)
+                         address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
+                         postal_code:'700000-00', total_area: 15000, useful_area: 12000)
 
       # Act
       result = wh.valid?
@@ -182,8 +184,8 @@ RSpec.describe Warehouse, type: :model do
     it 'cep eq aaaaa-aaa' do
       # Arrange
       wh = Warehouse.new(name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio',
-                        address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
-                        postal_code:'aaaaa-aaa', total_area: 15000, useful_area: 12000)
+                         address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
+                         postal_code:'aaaaa-aaa', total_area: 15000, useful_area: 12000)
                         
                         # Act
       result = wh.valid?
@@ -195,8 +197,8 @@ RSpec.describe Warehouse, type: :model do
     it 'cep eq 111112-111' do
       # Arrange
       wh = Warehouse.new(name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio',
-                        address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
-                        postal_code:'111112-111', total_area: 15000, useful_area: 12000)
+                         address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
+                         postal_code:'111112-111', total_area: 15000, useful_area: 12000)
                         
                         # Act
       result = wh.valid?
@@ -208,8 +210,8 @@ RSpec.describe Warehouse, type: :model do
     it 'cep eq 11111-1112' do
       # Arrange
       wh = Warehouse.new(name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio',
-                        address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
-                        postal_code:'11111-1112', total_area: 15000, useful_area: 12000)
+                         address: 'Av Curitiba', city: 'Curitiba', state: 'PR',
+                         postal_code:'11111-1112', total_area: 15000, useful_area: 12000)
                         
                         # Act
       result = wh.valid?

@@ -14,6 +14,7 @@ class ProductModelsController < ApplicationController
                                                                  :width, :length, :sku,
                                                                  :supplier_id)
     @pm = ProductModel.new(product_model_params)
+    @sp = Supplier.all
 
     if @pm.save()
     redirect_to product_model_path(@pm.id), notice: 'Successfully registered product model'

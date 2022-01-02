@@ -55,6 +55,17 @@ describe 'Visitor register suppliers' do
     expect(page).to have_content 'Nome Fantasia não pode ficar em branco'
     expect(page).to have_content 'Razao Social não pode ficar em branco'
     expect(page).to have_content 'CNPJ não pode ficar em branco'
-    expect(page).to have_content 'Email não pode ficar em branco'    
+    expect(page).to have_content 'Email não pode ficar em branco'
+  end
+
+  it 'and the cnpj must be 14 digits long' do
+    # Act
+    visit root_path
+    click_on 'Register new supplier'
+    fill_in 'CNPJ', with: '1154478894521'
+    click_on 'Register'
+
+    # Assert
+    expect(page).to have_content 'CNPJ não é valido, precisa conter 14 digitos'
   end
 end

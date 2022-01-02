@@ -28,5 +28,5 @@ pt-BR:
         height: Altura
         width: Largura
         length: Comprimento
-        supplier_id: Fornecedor
+        supplier: Fornecedor
         sku: Codigo SKU
