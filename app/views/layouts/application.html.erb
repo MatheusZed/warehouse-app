@@ -15,11 +15,11 @@
       <nav>
         <%= link_to 'Home', root_path %>
         <%= link_to 'See suppliers', suppliers_path %>
-        <%= link_to 'Register new supplier', new_supplier_path %>
-        <%= link_to 'Register new product model', new_product_model_path %>
 
         <% if user_signed_in? %>
           <%= link_to 'Register new warehouse', new_warehouse_path %>
+          <%= link_to 'Register new supplier', new_supplier_path %>
+          <%= link_to 'Register new product model', new_product_model_path %>
           <span>Ola <%= current_user.email %></span> |
           <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
         <% else %>

@@ -1,4 +1,6 @@
 class SuppliersController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     @sp = Supplier.all
   end

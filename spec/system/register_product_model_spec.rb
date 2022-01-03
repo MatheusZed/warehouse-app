@@ -1,6 +1,23 @@
 require 'rails_helper'
 
 describe 'User register product model' do
+  it 'Visitor not sees the menu' do
+    # Act
+    visit root_path
+
+    # Assert
+    expect(page).not_to have_link 'Register new product model'    
+  end
+
+  it "Visitor don't access the form directly" do
+    # Act
+    visit new_product_model_path
+
+    # Assert
+    expect(current_path).to eq new_user_session_path
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
+  end
+
   it 'successfully' do
     # Arrange
     Supplier.create!(fantasy_name: 'POP', legal_name: 'POP FUNKO', 
@@ -9,8 +26,10 @@ describe 'User register product model' do
     Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek', 
                      cnpj: '64765467000105', address: 'Av Fernandes Lima', 
                      email: 'souls@geek.com', phone: '92854-8955')
-    
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+        
     # Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new product model'
     fill_in 'Nome',	with: 'Estatua goku SSGSS'
@@ -39,8 +58,10 @@ describe 'User register product model' do
     Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek', 
                      cnpj: '64765467000105', address: 'Av Fernandes Lima', 
                      email: 'souls@geek.com', phone: '92854-8955')
+    user = User.create!(email: 'joao@email.com', password: 'admino')
     
     # Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new product model'
     fill_in 'Nome',	with: 'Estatua goku SSGSS'
@@ -62,7 +83,11 @@ describe 'User register product model' do
   end
 
   it 'and all fields are required' do
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
     # Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new product model'
     fill_in 'Nome', with: ''
@@ -86,7 +111,11 @@ describe 'User register product model' do
   end
 
   it 'and neither weight nor dimensions can have values equal to or less than zero' do
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
     # Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new product model'
     fill_in 'Peso', with: '0'

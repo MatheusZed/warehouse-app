@@ -15,7 +15,7 @@ describe 'User register warehouse' do
 
     # Assert
     expect(current_path).to eq new_user_session_path
-    expect(page).to have_content ''
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
   it 'throught the link in homepage' do

@@ -1,4 +1,6 @@
 class ProductModelsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+  
   def show
     id = params[:id]
     @pm = ProductModel.find(id)

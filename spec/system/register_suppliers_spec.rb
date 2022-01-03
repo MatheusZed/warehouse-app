@@ -1,8 +1,29 @@
 require 'rails_helper'
 
 describe 'Visitor register suppliers' do
-  it 'throught the link in homepage' do
+  it 'Visitor not sees the menu' do
     # Act
+    visit root_path
+
+    # Assert
+    expect(page).not_to have_link 'Register new supplier'    
+  end
+
+  it "Visitor don't access the form directly" do
+    # Act
+    visit new_supplier_path
+
+    # Assert
+    expect(current_path).to eq new_user_session_path
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
+  end
+
+  it 'throught the link in homepage' do
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
+    #Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new supplier'
 
@@ -18,7 +39,11 @@ describe 'Visitor register suppliers' do
   end
 
   it 'successfully' do
-    # Act
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
+    #Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new supplier'
     fill_in 'Nome Fantasia', with: 'Cleber'
@@ -40,7 +65,11 @@ describe 'Visitor register suppliers' do
   end
 
   it 'and some fields are required' do
-    # Act
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
+    #Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new supplier'
     fill_in 'Nome Fantasia', with: ''
@@ -59,7 +88,11 @@ describe 'Visitor register suppliers' do
   end
 
   it 'and the cnpj must be 14 digits long' do
-    # Act
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
+    #Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new supplier'
     fill_in 'CNPJ', with: '1154478894521'
