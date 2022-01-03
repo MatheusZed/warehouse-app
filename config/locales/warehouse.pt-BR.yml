@@ -29,4 +29,5 @@ pt-BR:
         width: Largura
         length: Comprimento
         supplier: Fornecedor
+        supplier_id: Fornecedor
         sku: Codigo SKU

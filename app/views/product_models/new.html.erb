@@ -10,31 +10,31 @@
 
 <%= form_with(model: @pm) do |form| %>
   <div>
-    <%= form.label :name, 'Nome' %>
+    <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
   <div>
-    <%= form.label :weight, 'Peso' %>
+    <%= form.label :weight %>
     <%= form.text_field :weight %>
   </div>
   <div>
-    <%= form.label :height, 'Altura' %>
+    <%= form.label :height %>
     <%= form.text_field :height %>
   </div>
   <div>
-    <%= form.label :width, 'Largura' %>
+    <%= form.label :width %>
     <%= form.text_field :width %>
   </div>
   <div>
-    <%= form.label :length, 'Comprimento' %>
+    <%= form.label :length %>
     <%= form.text_field :length %>
   </div>
   <div>
-    <%= form.label :supplier_id, 'Fornecedor' %>
+    <%= form.label :supplier_id %>
     <%= form.collection_select(:supplier_id, @sp, :id, :fantasy_name) %>
   </div>
   <div>
-    <%= form.label :sku, 'Codigo SKU' %>
+    <%= form.label :sku %>
     <%= form.text_field :sku %>
   </div>
   <%= form.submit 'Register'%>

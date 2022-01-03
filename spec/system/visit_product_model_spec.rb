@@ -24,7 +24,7 @@ describe 'Visitor sees the product model' do
     expect(page).to have_content 'Fornecedor: Joao'
   end
 
-  it 'and can return to suppliers page' do
+  it 'and can return to supplier page' do
     # Arrange
     s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
                          cnpj: '30605809000108', address: 'Av Fernandes Lima', 

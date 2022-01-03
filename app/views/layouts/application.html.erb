@@ -18,6 +18,13 @@
         <%= link_to 'See suppliers', suppliers_path %>
         <%= link_to 'Register new supplier', new_supplier_path %>
         <%= link_to 'Register new product model', new_product_model_path %>
+
+        <% if user_signed_in? %>
+          <span>Ola <%= current_user.email %></span> |
+          <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Entrar', new_user_session_path %>
+        <% end %>
       </nav>
     </header>
     <main>
