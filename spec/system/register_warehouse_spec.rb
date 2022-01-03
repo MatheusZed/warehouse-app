@@ -1,10 +1,29 @@
 require 'rails_helper'
 
-describe 'Visitor register warehouse' do 
+describe 'User register warehouse' do
+  it 'Visitor not sees the menu' do
+    # Act
+    visit root_path
+
+    # Assert
+    expect(page).not_to have_link 'Register new warehouse'    
+  end
+
+  it "Visitor don't access the form directly" do
+    # Act
+    visit new_warehouse_path
+
+    # Assert
+    expect(current_path).to eq new_user_session_path
+    expect(page).to have_content ''
+  end
+
   it 'throught the link in homepage' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    # Act
+    #Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new warehouse'
 
@@ -24,8 +43,10 @@ describe 'Visitor register warehouse' do
 
   it 'successfully' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    # Act
+    #Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new warehouse'
     fill_in 'Nome', with: 'Juiz de Fora'
@@ -52,8 +73,10 @@ describe 'Visitor register warehouse' do
 
   it 'and all fields are required' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    # Act
+    #Act
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Register new warehouse'
     fill_in 'Nome', with: ''

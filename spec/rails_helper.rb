@@ -34,6 +34,9 @@ RSpec.configure do |config|
   config.before(type: :system) do
     driven_by :rack_test
   end
+
+  config.include Warden::Test::Helpers
+  
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

@@ -1,7 +1,12 @@
 require 'rails_helper'
 
-describe 'Visitor navigates' do
+describe 'User navigates' do
   it 'using the menu' do
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
+    # Act
+    login_as(user, :scope => :user)
     visit root_path
 
     # Assert 1
