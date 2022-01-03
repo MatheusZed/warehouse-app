@@ -1,0 +1,28 @@
+<h1>New Product Bundle</h1>
+<% if @pb.errors.any? %>
+  <span>Check the fields below:</span>
+  <ul>
+  <% @pb.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @pb) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :sku %>
+    <%= form.text_field :sku %>
+  </div>
+  <div>
+    <%= form.label :height %>
+    <%= form.text_field :height %>
+  </div>
+  <div>
+    <%= form.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name%>
+  </div>
+  <%= form.submit 'Register'%>
+<% end %>

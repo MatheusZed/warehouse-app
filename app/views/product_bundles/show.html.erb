@@ -1,0 +1,7 @@
+<h1><%= @pb.name %></h1>
+Codigo SKU: <%= @pb.sku %>
+<br/>
+<% @pb.product_models.each do |p| %>
+  <%= p.name %>
+  <br/>
+<% end %>
