@@ -1,4 +1,4 @@
-<%= @pm.name %>
+<h1><%= @pm.name %></h1>
 <dl>
 <dt>Peso:</dt>
 <dd><%= @pm.weight %></dd> gramas
@@ -9,3 +9,5 @@
 <dt>Fornecedor:</dt>
 <dd><%= @pm.supplier.fantasy_name %></dd>
 </dl>
+
+<%= link_to 'Return', supplier_path %>

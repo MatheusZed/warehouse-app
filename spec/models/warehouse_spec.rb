@@ -122,9 +122,9 @@ RSpec.describe Warehouse, type: :model do
 
   it 'should not be valid if name is duplicate' do
     # Arrange
-    wh1 = Warehouse.create(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
-                           address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
-                           postal_code:'70510-000', total_area: 10000, useful_area: 8000)
+    wh1 = Warehouse.create!(name: 'Amazonas', code: 'AMZ', description: 'Codigo legal',
+                            address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
+                            postal_code:'70510-000', total_area: 10000, useful_area: 8000)
 
     wh2 = Warehouse.new(name: 'Amazonas', code: 'AMA', description: 'Otimo galpao mas frio',
                         address: 'Av Amazonas', city: 'Amazonas', state: 'AM',
@@ -139,9 +139,9 @@ RSpec.describe Warehouse, type: :model do
 
   it 'should not be valid if code is duplicate' do
     # Arrange
-    wh1 = Warehouse.create(name: 'Vitoria', code: 'VIX', description: 'Codigo legal',
-                           address: 'Av Vitoria', city: 'Vitoria', state: 'ES',
-                           postal_code:'55000-000', total_area: 10000, useful_area: 8000)
+    wh1 = Warehouse.create!(name: 'Vitoria', code: 'VIX', description: 'Codigo legal',
+                            address: 'Av Vitoria', city: 'Vitoria', state: 'ES',
+                            postal_code:'55000-000', total_area: 10000, useful_area: 8000)
 
     wh2 = Warehouse.new(name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio',
                         address: 'Av Curitiba', city: 'Curitiba', state: 'PR',

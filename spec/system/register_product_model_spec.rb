@@ -3,12 +3,12 @@ require 'rails_helper'
 describe 'User register product model' do
   it 'successfully' do
     # Arrange
-    Supplier.create(fantasy_name: 'POP', legal_name: 'POP FUNKO', 
-                    cnpj: '30605809000108', address: 'Av Fernandes Lima', 
-                    email: 'pop@funko.com', phone: '91124-7753')
-    Supplier.create(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek', 
-                    cnpj: '64765467000105', address: 'Av Fernandes Lima', 
-                    email: 'souls@geek.com', phone: '92854-8955')
+    Supplier.create!(fantasy_name: 'POP', legal_name: 'POP FUNKO', 
+                     cnpj: '30605809000108', address: 'Av Fernandes Lima', 
+                     email: 'pop@funko.com', phone: '91124-7753')
+    Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek', 
+                     cnpj: '64765467000105', address: 'Av Fernandes Lima', 
+                     email: 'souls@geek.com', phone: '92854-8955')
     
     # Act
     visit root_path
@@ -33,12 +33,12 @@ describe 'User register product model' do
 
   it 'successfully with another supplier' do
     # Arrange
-    Supplier.create(fantasy_name: 'POP', legal_name: 'POP FUNKO', 
-                    cnpj: '30605809000108', address: 'Av Fernandes Lima', 
-                    email: 'pop@funko.com', phone: '91124-7753')
-    Supplier.create(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek', 
-                    cnpj: '64765467000105', address: 'Av Fernandes Lima', 
-                    email: 'souls@geek.com', phone: '92854-8955')
+    Supplier.create!(fantasy_name: 'POP', legal_name: 'POP FUNKO', 
+                     cnpj: '30605809000108', address: 'Av Fernandes Lima', 
+                     email: 'pop@funko.com', phone: '91124-7753')
+    Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek', 
+                     cnpj: '64765467000105', address: 'Av Fernandes Lima', 
+                     email: 'souls@geek.com', phone: '92854-8955')
     
     # Act
     visit root_path

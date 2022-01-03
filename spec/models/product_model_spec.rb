@@ -15,12 +15,12 @@ RSpec.describe ProductModel, type: :model do
   context 'should not be valid if the fields are empty' do
     it 'name' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
 
       pm = ProductModel.new(name: '', weight: 1000, height: 4,
-                            width: 17, length: 22, supplier_id: 1, sku: 'I12A')
+                            width: 17, length: 22, supplier: s, sku: 'I12A')
 
       # Act
       result = pm.valid?
@@ -31,12 +31,12 @@ RSpec.describe ProductModel, type: :model do
 
     it 'weight' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
 
       pm = ProductModel.new(name: 'Saco de Feijao', weight: '', height: 4,
-                            width: 17, length: 22, supplier_id: 1, sku: 'I12A')
+                            width: 17, length: 22, supplier: s, sku: 'I12A')
 
       # Act
       result = pm.valid?
@@ -47,12 +47,12 @@ RSpec.describe ProductModel, type: :model do
 
     it 'height' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
 
       pm = ProductModel.new(name: 'Saco de Feijao', weight: 1000, height: '',
-                            width: 17, length: 22, supplier_id: 1, sku: 'I12A')
+                            width: 17, length: 22, supplier: s, sku: 'I12A')
 
       # Act
       result = pm.valid?
@@ -63,12 +63,12 @@ RSpec.describe ProductModel, type: :model do
 
     it 'width' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
 
       pm = ProductModel.new(name: 'Saco de Feijao', weight: 1000, height: 4,
-                            width: '', length: 22, supplier_id: 1, sku: 'I12A')
+                            width: '', length: 22, supplier: s, sku: 'I12A')
 
       # Act
       result = pm.valid?
@@ -79,12 +79,12 @@ RSpec.describe ProductModel, type: :model do
 
     it 'length' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
 
       pm = ProductModel.new(name: 'Saco de Feijao', weight: 1000, height: 4,
-                            width: 17, length: '', supplier_id: 1, sku: 'I12A')
+                            width: 17, length: '', supplier: s, sku: 'I12A')
 
       # Act
       result = pm.valid?
@@ -107,12 +107,12 @@ RSpec.describe ProductModel, type: :model do
 
     it 'sku' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
 
       pm = ProductModel.new(name: 'Saco de Feijao', weight: 1000, height: 4,
-                            width: 17, length: 22, supplier_id: 1, sku: '')
+                            width: 17, length: 22, supplier: s, sku: '')
 
       # Act
       result = pm.valid?
@@ -124,13 +124,13 @@ RSpec.describe ProductModel, type: :model do
 
   it 'should not be valid if sku is duplicate' do
     # Arrange
-    Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                    cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                    email: 'joao.feijao@yahoo.com', phone: '91124-7753')
-    ProductModel.create(name: 'Saco de Feijao', weight: 1000, height: 4,
-                        width: 17, length: 22, supplier_id: 1, sku: 'I12A')
+    s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                         cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                         email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+    ProductModel.create!(name: 'Saco de Feijao', weight: 1000, height: 4,
+                         width: 17, length: 22, supplier: s, sku: 'I12A')
     pm = ProductModel.new(name: 'Vaca', weight: 100000, height: 140,
-                          width: 143, length: 138, supplier_id: 1, sku: 'I12A')
+                          width: 143, length: 138, supplier: s, sku: 'I12A')
 
     # Act
     result = pm.valid?
@@ -142,11 +142,11 @@ RSpec.describe ProductModel, type: :model do
   context 'must not be valid if the fields are less than one' do
     it 'weight' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
       pm = ProductModel.new(name: 'Vaca', weight: 0, height: 140,
-                            width: 143, length: 138, supplier_id: 1, sku: 'I12A')
+                            width: 143, length: 138, supplier: s, sku: 'I12A')
 
       # Act
       result = pm.valid?
@@ -157,11 +157,11 @@ RSpec.describe ProductModel, type: :model do
 
     it 'height' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
       pm = ProductModel.new(name: 'Vaca', weight: 100000, height: 0,
-                            width: 143, length: 138, supplier_id: 1, sku: 'I12A')
+                            width: 143, length: 138, supplier: s, sku: 'I12A')
 
       # Act
       result = pm.valid?
@@ -172,11 +172,11 @@ RSpec.describe ProductModel, type: :model do
 
     it 'width' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
       pm = ProductModel.new(name: 'Vaca', weight: 100000, height: 140,
-                            width: 0, length: 138, supplier_id: 1, sku: 'I12A')
+                            width: 0, length: 138, supplier: s, sku: 'I12A')
 
       # Act
       result = pm.valid?
@@ -187,11 +187,11 @@ RSpec.describe ProductModel, type: :model do
 
     it 'length' do
       # Arrange
-      Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-                      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-                      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                           cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
       pm = ProductModel.new(name: 'Vaca', weight: 100000, height: 140,
-                            width: 143, length: 0, supplier_id: 1, sku: 'I12A')
+                            width: 143, length: 0, supplier: s, sku: 'I12A')
 
       # Act
       result = pm.valid?

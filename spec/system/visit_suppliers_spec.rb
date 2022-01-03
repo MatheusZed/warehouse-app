@@ -3,12 +3,12 @@ require 'rails_helper'
 describe 'Visitor see suppliers' do
   it 'and sees the resgistered suppliers' do
     # Arrange
-    Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
-                    cnpj: '30605809000108', address: 'Av Fernandes Lima', 
-                    email: 'joao.feijao@yahoo.com', phone: '91124-7753')
-    Supplier.create(fantasy_name: 'Maria', legal_name: 'Maria e o pao', 
-                    cnpj: '59201134000113', address: 'Av Fernandes China', 
-                    email: 'maria.pao@yahoo.com', phone: '91124-7799')
+    Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
+                     cnpj: '30605809000108', address: 'Av Fernandes Lima', 
+                     email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+    Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e o pao', 
+                     cnpj: '59201134000113', address: 'Av Fernandes China', 
+                     email: 'maria.pao@yahoo.com', phone: '91124-7799')
 
     # Act
     visit root_path
@@ -24,12 +24,12 @@ describe 'Visitor see suppliers' do
 
   it "and don't sees the suppliers details" do
     # Arrange
-    Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
-                    cnpj: '30605809000108', address: 'Av Fernandes Lima', 
-                    email: 'joao.feijao@yahoo.com', phone: '91124-7753')
-    Supplier.create(fantasy_name: 'Maria', legal_name: 'Maria e o pao', 
-                    cnpj: '59201134000113', address: 'Av Fernandes China', 
-                    email: 'maria.pao@yahoo.com', phone: '91124-7799')
+    Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
+                     cnpj: '30605809000108', address: 'Av Fernandes Lima', 
+                     email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+    Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e o pao', 
+                     cnpj: '59201134000113', address: 'Av Fernandes China', 
+                     email: 'maria.pao@yahoo.com', phone: '91124-7799')
 
     # Act
     visit root_path

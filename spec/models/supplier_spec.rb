@@ -57,9 +57,9 @@ RSpec.describe Supplier, type: :model do
 
   it 'should not be valid if cnpj is duplicate' do
     # Arrange
-    sp1 = Supplier.create(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
-                          cnpj: '30605809000108', address: 'Av Gigante', 
-                          email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+    sp1 = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
+                           cnpj: '30605809000108', address: 'Av Gigante', 
+                           email: 'joao.feijao@yahoo.com', phone: '91124-7753')
     sp2 = Supplier.new(fantasy_name: 'Joao', legal_name: 'Joao e o doce', 
                        cnpj: '30605809000108', address: 'Av Casa da Bruxa', 
                        email: 'joao.doceria@yahoo.com', phone: '91124-7753')
