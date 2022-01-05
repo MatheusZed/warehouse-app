@@ -66,6 +66,6 @@ describe 'Visitor view homepage' do
     visit root_path
 
     # Assert
-    expect(page).to have_content 'No registered warehouse'  
+    expect(page).to have_content 'No registered warehouse'
   end
 end

@@ -1,0 +1,41 @@
+<% if supplier.id == nil %>
+<h1>New Supplier</h1>
+<% else %>
+<h1>Edit Supplier</h1>
+<% end %>
+<% if supplier.errors.any? %>
+  <span>Check the fields below:</span>
+  <ul>
+  <% supplier.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: supplier) do |form| %>
+  <div>
+    <%= form.label :fantasy_name %>
+    <%= form.text_field :fantasy_name %>
+  </div>
+  <div>
+    <%= form.label :legal_name %>
+    <%= form.text_field :legal_name %>
+  </div>
+  <div>
+    <%= form.label :cnpj %>
+    <%= form.text_field :cnpj %>
+  </div>
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+  <div>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+  <div>
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+  <%= form.submit 'Save'%>
+<% end %>

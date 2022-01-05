@@ -6,7 +6,7 @@ describe 'Visitor register suppliers' do
     visit root_path
 
     # Assert
-    expect(page).not_to have_link 'Register new supplier'    
+    expect(page).not_to have_link 'Register new supplier'
   end
 
   it "Visitor don't access the form directly" do
@@ -35,7 +35,7 @@ describe 'Visitor register suppliers' do
     expect(page).to have_field 'Endereco'
     expect(page).to have_field 'Email'
     expect(page).to have_field 'Telefone'
-    expect(page).to have_button 'Register'
+    expect(page).to have_button 'Save'
   end
 
   it 'successfully' do
@@ -52,7 +52,7 @@ describe 'Visitor register suppliers' do
     fill_in 'Endereco', with: 'Av Rio Branco'
     fill_in 'Email', with: 'cleberbritadeiras@gmail.com'
     fill_in 'Telefone', with: '99991-4488'
-    click_on 'Register'
+    click_on 'Save'
     
     # Assert
     expect(page).to have_content 'Successfully registered supplier' 
@@ -76,7 +76,7 @@ describe 'Visitor register suppliers' do
     fill_in 'Razao Social', with: ''
     fill_in 'CNPJ', with: ''
     fill_in 'Email', with: ''
-    click_on 'Register'
+    click_on 'Save'
 
     # Assert
     expect(page).not_to have_content 'Successfully registered supplier'
@@ -96,7 +96,7 @@ describe 'Visitor register suppliers' do
     visit root_path
     click_on 'Register new supplier'
     fill_in 'CNPJ', with: '1154478894521'
-    click_on 'Register'
+    click_on 'Save'
 
     # Assert
     expect(page).to have_content 'CNPJ não é valido, precisa conter 14 digitos'

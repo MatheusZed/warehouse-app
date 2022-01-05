@@ -6,7 +6,7 @@ describe 'User register product model' do
     visit root_path
 
     # Assert
-    expect(page).not_to have_link 'Register new product model'    
+    expect(page).not_to have_link 'Register new product model'
   end
 
   it "Visitor don't access the form directly" do
@@ -21,10 +21,10 @@ describe 'User register product model' do
   it 'successfully' do
     # Arrange
     Supplier.create!(fantasy_name: 'POP', legal_name: 'POP FUNKO', 
-                     cnpj: '30605809000108', address: 'Av Fernandes Lima', 
+                     cnpj: '30605809000108', address: 'Av Fernandes Lima',
                      email: 'pop@funko.com', phone: '91124-7753')
-    Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek', 
-                     cnpj: '64765467000105', address: 'Av Fernandes Lima', 
+    Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek',
+                     cnpj: '64765467000105', address: 'Av Fernandes Lima',
                      email: 'souls@geek.com', phone: '92854-8955')
     user = User.create!(email: 'joao@email.com', password: 'admino')
         
@@ -39,7 +39,7 @@ describe 'User register product model' do
     fill_in 'Comprimento',	with: '45'
     fill_in 'Codigo SKU',	with: 'CN203040ABC'
     select 'POP',	from: 'Fornecedor'
-    click_on 'Register'
+    click_on 'Save'
 
     # Assert
     expect(page).to have_content 'Successfully registered product model'
@@ -53,10 +53,10 @@ describe 'User register product model' do
   it 'successfully with another supplier' do
     # Arrange
     Supplier.create!(fantasy_name: 'POP', legal_name: 'POP FUNKO', 
-                     cnpj: '30605809000108', address: 'Av Fernandes Lima', 
+                     cnpj: '30605809000108', address: 'Av Fernandes Lima',
                      email: 'pop@funko.com', phone: '91124-7753')
-    Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek', 
-                     cnpj: '64765467000105', address: 'Av Fernandes Lima', 
+    Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek',
+                     cnpj: '64765467000105', address: 'Av Fernandes Lima',
                      email: 'souls@geek.com', phone: '92854-8955')
     user = User.create!(email: 'joao@email.com', password: 'admino')
     
@@ -71,7 +71,7 @@ describe 'User register product model' do
     fill_in 'Comprimento',	with: '45'
     fill_in 'Codigo SKU',	with: 'CN203040ABC'
     select 'Souls Geek',	from: 'Fornecedor'
-    click_on 'Register'
+    click_on 'Save'
 
     # Assert
     expect(page).to have_content 'Successfully registered product model'
@@ -96,7 +96,7 @@ describe 'User register product model' do
     fill_in 'Largura', with: ''
     fill_in 'Comprimento',	with: ''
     fill_in 'Codigo SKU',	with: ''
-    click_on 'Register'
+    click_on 'Save'
 
     # Assert
     expect(page).not_to have_content 'Successfully registered product model'
@@ -122,7 +122,7 @@ describe 'User register product model' do
     fill_in 'Altura', with: '0'
     fill_in 'Largura', with: '0'
     fill_in 'Comprimento',	with: '0'
-    click_on 'Register'
+    click_on 'Save'
 
     # Assert
     expect(page).to have_content 'Peso deve ser maior que 0'

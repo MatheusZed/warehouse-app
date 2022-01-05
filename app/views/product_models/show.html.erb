@@ -1,13 +1,13 @@
-<h1><%= @pm.name %></h1>
+<h1><%= @product_model.name %></h1>
 <dl>
 <dt>Peso:</dt>
-<dd><%= @pm.weight %></dd> gramas
+<dd><%= @product_model.weight %></dd> gramas
 <dt>Dimensoes:</dt>
-<dd><%= @pm.dimensions %>
+<dd><%= @product_model.dimensions %>
 <dt>Codigo SKU:</dt>
-<dd><%= @pm.sku %></dd>
+<dd><%= @product_model.sku %></dd>
 <dt>Fornecedor:</dt>
-<dd><%= @pm.supplier.fantasy_name %></dd>
+<dd><%= @product_model.supplier.fantasy_name %></dd>
 </dl>
 
 <%= link_to 'Return', :back %>

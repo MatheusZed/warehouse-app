@@ -1,11 +1,14 @@
 <h1>Registered suppliers</h1>
 
-<% if @sp.empty? %>
+<% if @supplier.empty? %>
 No registered supplier
 <% else %>
-  <% @sp.each do |s| %>
+  <% @supplier.each do |s| %>
     <%= link_to(s.fantasy_name, supplier_path(s.id)) %>
     <%= s.cnpj %>
+    <% if user_signed_in? %>
+    | <%= link_to 'Edit', edit_supplier_path(s.id), id: "edit-#{s.id}" %>
+    <% end%>
     <br/>
   <% end %>
 <% end %>

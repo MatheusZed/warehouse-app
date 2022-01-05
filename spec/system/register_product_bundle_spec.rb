@@ -6,7 +6,7 @@ describe 'User registers a kit' do
     visit root_path
 
     # Assert
-    expect(page).not_to have_link 'Register new product bundle'    
+    expect(page).not_to have_link 'Register new product bundle'
   end
 
   it "Visitor don't access the form directly" do

@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'Visitor sees the supplier' do
   it 'and sees all registered data' do
     # Arrange
-    s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao e os doces', 
-                         cnpj: '22416076000135', address: 'Rua Benedito Spinardi', 
+    s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao e os doces',
+                         cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
                          email: 'joao.doceria@yahoo.com', phone: '91124-2854')
 
     # Act
@@ -18,13 +18,13 @@ describe 'Visitor sees the supplier' do
     expect(page).to have_content "CNPJ: #{s.cnpj}"
     expect(page).to have_content "Endereço: #{s.address}"
     expect(page).to have_content "Email: #{s.email}"
-    expect(page).to have_content "Telefone: #{s.phone}"    
+    expect(page).to have_content "Telefone: #{s.phone}"
   end
 
   it 'and can return to suppliers page' do
     # Arrange
-    Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao e os doces', 
-                     cnpj: '22416076000135', address: 'Rua Benedito Spinardi', 
+    Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao e os doces',
+                     cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
                      email: 'joao.doceria@yahoo.com', phone: '91124-2854')
 
     # Act

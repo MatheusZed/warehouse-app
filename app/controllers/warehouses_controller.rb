@@ -1,13 +1,13 @@
 class WarehousesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def show
     id = params[:id]
-    @wh = Warehouse.find(id)
+    @warehouse = Warehouse.find(id)
   end
 
   def new
-    @wh = Warehouse.new
+    @warehouse = Warehouse.new
   end
 
   def create
@@ -15,14 +15,35 @@ class WarehousesController < ApplicationController
                                                          :address, :state, :city,
                                                          :postal_code, :total_area,
                                                          :useful_area)
-    @wh = Warehouse.new(warehouse_params)
+    @warehouse = Warehouse.new(warehouse_params)
 
-    if @wh.save()
+    if @warehouse.save()
     #flash[:notice] = 'Galpao registrado com sucesso'
-      redirect_to warehouse_path(@wh.id), notice: 'Successfully registered warehouse'
+      redirect_to warehouse_path(@warehouse.id), notice: 'Successfully registered warehouse'
     else
       flash.now[:alert] = "It wasn't possible to record the warehouse"
       render 'new'
+    end
+  end
+
+  def edit
+    id = params[:id]
+    @warehouse = Warehouse.find(id)
+  end
+
+  def update
+    id = params[:id]
+    @warehouse = Warehouse.find(id)
+    warehouse_params = params.require(:warehouse).permit(:name, :code, :description,
+                                                         :address, :state, :city,
+                                                         :postal_code, :total_area,
+                                                         :useful_area)
+
+    if @warehouse.update(warehouse_params)
+      redirect_to warehouse_path(@warehouse.id), notice: 'Successfully edited warehouse'
+      else
+        flash.now[:alert] = "It wasn't possible to edit the warehouse"
+        render 'new'
     end
   end
 end

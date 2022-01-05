@@ -1,0 +1,45 @@
+<% if product_model.id == nil %>
+<h1>New Product Model</h1>
+<% else %>
+<h1>Edit Product Model</h1>
+<% end %>
+<% if product_model.errors.any? %>
+  <span>Check the fields below:</span>
+  <ul>
+  <% product_model.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: product_model) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :weight %>
+    <%= form.text_field :weight %>
+  </div>
+  <div>
+    <%= form.label :height %>
+    <%= form.text_field :height %>
+  </div>
+  <div>
+    <%= form.label :width %>
+    <%= form.text_field :width %>
+  </div>
+  <div>
+    <%= form.label :length %>
+    <%= form.text_field :length %>
+  </div>
+  <div>
+    <%= form.label :supplier_id %>
+    <%= form.collection_select(:supplier_id, @supplier, :id, :fantasy_name) %>
+  </div>
+  <div>
+    <%= form.label :sku %>
+    <%= form.text_field :sku %>
+  </div>
+  <%= form.submit 'Save'%>
+<% end %>

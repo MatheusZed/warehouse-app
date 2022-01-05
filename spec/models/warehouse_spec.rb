@@ -51,7 +51,7 @@ RSpec.describe Warehouse, type: :model do
       result = wh.valid?
 
       # Assert
-      expect(result).to eq false    
+      expect(result).to eq false
     end
 
     it 'city' do

@@ -1,14 +1,14 @@
-<h1><%= @sp.fantasy_name %></h1>
-<%= @sp.legal_name %>
+<h1><%= @supplier.fantasy_name %></h1>
+<%= @supplier.legal_name %>
 <dl>
 <dt>CNPJ:</dt>
-<dd><%= @sp.cnpj %></dd>
+<dd><%= @supplier.cnpj %></dd>
 <dt>Endereço:</dt>
-<dd><%= @sp.address %>
+<dd><%= @supplier.address %>
 <dt>Email:</dt>
-<dd><%= @sp.email %></dd>
+<dd><%= @supplier.email %></dd>
 <dt>Telefone:</dt>
-<dd><%= @sp.phone %></dd>
+<dd><%= @supplier.phone %></dd>
 </dl>
 
 <h2>Products from this supplier</h2>
@@ -17,10 +17,14 @@
     <th>Nome</th>
     <th>Codigo SKU</th>
   </tr>
-  <% @sp.product_models.each do |pm| %>
+  <% @supplier.product_models.each do |pm| %>
   <tr>
     <td><%= link_to(pm.name, pm) %></td>
-    <td><%= pm.sku %></td>
+    <% if user_signed_in? %>
+      <td><%= pm.sku %> | <%= link_to 'Edit', edit_product_model_path(pm.id), id: "edit-#{pm.id}" %></td>
+    <% else %>
+      <td><%= pm.sku %></td>
+    <% end%>
   </tr>
   <% end %>
 </table>

@@ -57,7 +57,7 @@ RSpec.describe Supplier, type: :model do
 
   it 'should not be valid if cnpj is duplicate' do
     # Arrange
-    sp1 = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
+    sp1 = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
                            cnpj: '30605809000108', address: 'Av Gigante', 
                            email: 'joao.feijao@yahoo.com', phone: '91124-7753')
     sp2 = Supplier.new(fantasy_name: 'Joao', legal_name: 'Joao e o doce', 
@@ -68,25 +68,25 @@ RSpec.describe Supplier, type: :model do
     result = sp2.valid?
 
     # Assert
-    expect(result).to eq false    
+    expect(result).to eq false
   end
 
   context 'should not be valid if cnpj is in wrong format' do
     it 'cnpj eq 30605809000' do
       # Arrange
-      sp = Supplier.new(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
+      sp = Supplier.new(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
                         cnpj: '30605809000', address: 'Av Gigante', 
                         email: 'joao.feijao@yahoo.com', phone: '91124-7753')
       # Act
       result = sp.valid?
 
       # Assert
-      expect(result).to eq false 
+      expect(result).to eq false
     end
 
     it 'cnpj eq 306058090001089' do
       # Arrange
-      sp = Supplier.new(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
+      sp = Supplier.new(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
                         cnpj: '306058090001089', address: 'Av Gigante', 
                         email: 'joao.feijao@yahoo.com', phone: '91124-7753')
       # Act
@@ -98,7 +98,7 @@ RSpec.describe Supplier, type: :model do
 
     it 'cnpj eq aaaaaaaaaaaaa' do
       # Arrange
-      sp = Supplier.new(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao', 
+      sp = Supplier.new(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
                         cnpj: 'aaaaaaaaaaaaa', address: 'Av Gigante', 
                         email: 'joao.feijao@yahoo.com', phone: '91124-7753')
       # Act

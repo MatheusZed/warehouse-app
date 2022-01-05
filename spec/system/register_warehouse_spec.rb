@@ -6,7 +6,7 @@ describe 'User register warehouse' do
     visit root_path
 
     # Assert
-    expect(page).not_to have_link 'Register new warehouse'    
+    expect(page).not_to have_link 'Register new warehouse'
   end
 
   it "Visitor don't access the form directly" do
@@ -38,7 +38,7 @@ describe 'User register warehouse' do
     expect(page).to have_field 'CEP'
     expect(page).to have_field 'Area Total'
     expect(page).to have_field 'Area Util'
-    expect(page).to have_button 'Register'
+    expect(page).to have_button 'Save'
   end
 
   it 'successfully' do
@@ -58,10 +58,10 @@ describe 'User register warehouse' do
     fill_in 'CEP', with: '36000-000'
     fill_in 'Area Total', with: '5000'
     fill_in 'Area Util', with: '3000'
-    click_on 'Register'
+    click_on 'Save'
 
     # Assert
-    expect(page).to have_content 'Successfully registered warehouse' 
+    expect(page).to have_content 'Successfully registered warehouse'
     expect(page).to have_content 'Juiz de Fora'
     expect(page).to have_content 'JDF'
     expect(page).to have_content 'Descrição: Um galpao mineiro com o pé no Rio'
@@ -82,7 +82,7 @@ describe 'User register warehouse' do
     fill_in 'Nome', with: ''
     fill_in 'Codigo', with: ''
     fill_in 'Endereco', with: ''
-    click_on 'Register'
+    click_on 'Save'
 
     # Assert
     expect(page).not_to have_content 'Successfully registered warehouse'

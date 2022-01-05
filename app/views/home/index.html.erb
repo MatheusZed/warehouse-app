@@ -2,12 +2,15 @@
 <h3>Welcome to the Warehouse App</h3>
 
 <h2>Registered warehouses</h2>
-<% if @wh.empty? %>
+<% if @warehouse.empty? %>
 No registered warehouse
 <% else %>
-  <% @wh.each do |w| %>
+  <% @warehouse.each do |w| %>
     <%= link_to(w.name, w) %>
     <%= w.code %>
+    <% if user_signed_in? %>
+    | <%= link_to 'Edit', edit_warehouse_path(w.id), id: "edit-#{w.id}" %>
+    <% end %>
     <br/>
   <% end %>
 <% end %>
