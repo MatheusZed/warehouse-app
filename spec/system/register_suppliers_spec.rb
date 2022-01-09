@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Visitor register suppliers' do
+describe 'User register suppliers' do
   it 'Visitor not sees the menu' do
     # Act
     visit root_path

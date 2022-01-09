@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
-  resources :warehouses,      only: [:show, :new, :create, :edit, :update]
-  resources :suppliers,       only: [:index, :show, :new, :create, :edit, :update]
-  resources :product_models,  only: [:show, :new, :create, :edit, :update]
-  resources :product_bundles, only: [:show, :new, :create, :edit, :update]
+  resources :warehouses,         except: %i[destroy]
+  resources :suppliers,          except: %i[destroy]
+  resources :product_models,     except: %i[index destroy]
+  resources :product_bundles,    except: %i[index destroy]
+  resources :product_categories, except: %i[destroy]  
 end

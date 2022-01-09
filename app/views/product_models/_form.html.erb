@@ -38,8 +38,8 @@
     <%= form.collection_select(:supplier_id, @supplier, :id, :fantasy_name) %>
   </div>
   <div>
-    <%= form.label :sku %>
-    <%= form.text_field :sku %>
+    <%= form.label :product_category_id %>
+    <%= form.collection_select(:product_category_id, @product_category, :id, :name) %>
   </div>
   <%= form.submit 'Save'%>
 <% end %>

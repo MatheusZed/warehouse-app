@@ -6,8 +6,9 @@ describe 'Visitor sees the product model' do
     s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
                          cnpj: '30605809000108', address: 'Av Fernandes Lima',
                          email: 'joao.feijao@yahoo.com', phone: '91124-7753')
-    ProductModel.create!(name: 'Saco de Feijao', weight: 1000, height: 4,
-                         width: 17, length: 22, supplier: s, sku: 'I12A')
+    pc = ProductCategory.new(name: 'Conservados')
+    pm = ProductModel.create!(name: 'Saco de Feijao', weight: 1000, height: 4, width: 17,
+                              length: 22, supplier: s, product_category: pc)
 
     # Act
     visit root_path
@@ -20,7 +21,7 @@ describe 'Visitor sees the product model' do
     expect(page).to have_content 'Saco de Feijao'
     expect(page).to have_content 'Peso: 1000'
     expect(page).to have_content 'Dimensoes: 4 x 17 x 22'
-    expect(page).to have_content 'SKU: I12A'    
+    expect(page).to have_content pm.sku
     expect(page).to have_content 'Fornecedor: Joao'
   end
 
@@ -29,8 +30,9 @@ describe 'Visitor sees the product model' do
     s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
                          cnpj: '30605809000108', address: 'Av Fernandes Lima',
                          email: 'joao.feijao@yahoo.com', phone: '91124-7753')
-    ProductModel.create!(name: 'Saco de Feijao', weight: 1000, height: 4,
-                         width: 17, length: 22, supplier: s, sku: 'I12A')
+    pc = ProductCategory.new(name: 'Conservados')
+    ProductModel.create!(name: 'Saco de Feijao', weight: 1000, height: 4, width: 17,
+                         length: 22, supplier: s, product_category: pc)
 
     # Act
     visit root_path

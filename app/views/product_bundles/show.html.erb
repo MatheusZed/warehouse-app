@@ -1,7 +1,9 @@
-<h1><%= @pb.name %></h1>
-Codigo SKU: <%= @pb.sku %>
+<h1><%= @product_bundle.name %></h1>
+Codigo SKU: <%= @product_bundle.sku %>
 <br/>
-<% @pb.product_models.each do |p| %>
+<% @product_bundle.product_models.each do |p| %>
   <%= p.name %>
   <br/>
 <% end %>
+
+<%= link_to 'Return', :back %>

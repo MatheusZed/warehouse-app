@@ -18,6 +18,27 @@ describe 'User register product model' do
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
+  it 'throught the link in homepage' do
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
+    #Act
+    login_as(user, :scope => :user)
+    visit root_path
+    click_on 'Register new product model'
+
+    # Assert
+    expect(page).to have_content 'New Product Model'
+    expect(page).to have_field 'Nome'
+    expect(page).to have_field 'Peso'
+    expect(page).to have_field 'Altura'
+    expect(page).to have_field 'Largura'
+    expect(page).to have_field 'Comprimento'
+    expect(page).to have_field 'Fornecedor'
+    expect(page).to have_field 'Categoria de Produto'
+    expect(page).to have_button 'Save'
+  end
+
   it 'successfully' do
     # Arrange
     Supplier.create!(fantasy_name: 'POP', legal_name: 'POP FUNKO', 
@@ -26,6 +47,8 @@ describe 'User register product model' do
     Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek',
                      cnpj: '64765467000105', address: 'Av Fernandes Lima',
                      email: 'souls@geek.com', phone: '92854-8955')
+    ProductCategory.create!(name: 'Enlatados')
+    ProductCategory.create!(name: 'Action Figure')
     user = User.create!(email: 'joao@email.com', password: 'admino')
         
     # Act
@@ -37,17 +60,19 @@ describe 'User register product model' do
     fill_in 'Altura',	with: '150'
     fill_in 'Largura',	with: '45'
     fill_in 'Comprimento',	with: '45'
-    fill_in 'Codigo SKU',	with: 'CN203040ABC'
     select 'POP',	from: 'Fornecedor'
+    select 'Action Figure', from: 'Categoria de Produto'
     click_on 'Save'
 
     # Assert
+    pm = ProductModel.last
     expect(page).to have_content 'Successfully registered product model'
     expect(page).to have_content 'Estatua goku SSGSS'
     expect(page).to have_content 'Peso: 1500 gramas'
     expect(page).to have_content 'Dimensoes: 150 x 45 x 45'
-    expect(page).to have_content 'Codigo SKU: CN203040ABC'
+    expect(page).to have_content "Codigo SKU: #{pm.sku}"
     expect(page).to have_content 'Fornecedor: POP'
+    expect(page).to have_content 'Categoria de Produto: Action Figure'
   end
 
   it 'successfully with another supplier' do
@@ -58,6 +83,8 @@ describe 'User register product model' do
     Supplier.create!(fantasy_name: 'Souls Geek', legal_name: 'Souls Geek',
                      cnpj: '64765467000105', address: 'Av Fernandes Lima',
                      email: 'souls@geek.com', phone: '92854-8955')
+    ProductCategory.create!(name: 'Figure Action')
+    ProductCategory.create!(name: 'Action Figure')
     user = User.create!(email: 'joao@email.com', password: 'admino')
     
     # Act
@@ -69,17 +96,19 @@ describe 'User register product model' do
     fill_in 'Altura',	with: '150'
     fill_in 'Largura',	with: '45'
     fill_in 'Comprimento',	with: '45'
-    fill_in 'Codigo SKU',	with: 'CN203040ABC'
     select 'Souls Geek',	from: 'Fornecedor'
+    select 'Figure Action', from: 'Categoria de Produto'
     click_on 'Save'
 
     # Assert
+    pm = ProductModel.last
     expect(page).to have_content 'Successfully registered product model'
     expect(page).to have_content 'Estatua goku SSGSS'
     expect(page).to have_content 'Peso: 1500 gramas'
     expect(page).to have_content 'Dimensoes: 150 x 45 x 45'
-    expect(page).to have_content 'Codigo SKU: CN203040ABC'
+    expect(page).to have_content "Codigo SKU: #{pm.sku}"
     expect(page).to have_content 'Fornecedor: Souls Geek'
+    expect(page).to have_content 'Categoria de Produto: Figure Action'
   end
 
   it 'and all fields are required' do
@@ -95,19 +124,19 @@ describe 'User register product model' do
     fill_in 'Altura', with: ''
     fill_in 'Largura', with: ''
     fill_in 'Comprimento',	with: ''
-    fill_in 'Codigo SKU',	with: ''
+    fill_in 'Comprimento',	with: ''
     click_on 'Save'
 
     # Assert
     expect(page).not_to have_content 'Successfully registered product model'
     expect(page).to have_content "It wasn't possible to record the product model"
     expect(page).to have_content 'Fornecedor é obrigatório(a)'
+    expect(page).to have_content 'Categoria de Produto é obrigatório(a)'
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'Peso não pode ficar em branco'
     expect(page).to have_content 'Altura não pode ficar em branco'
     expect(page).to have_content 'Largura não pode ficar em branco'
     expect(page).to have_content 'Comprimento não pode ficar em branco'
-    expect(page).to have_content 'Codigo SKU não pode ficar em branco'   
   end
 
   it 'and neither weight nor dimensions can have values equal to or less than zero' do

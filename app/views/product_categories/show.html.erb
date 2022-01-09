@@ -1,0 +1,10 @@
+<h1><%= @product_category.name %></h1>
+<br/>
+<% @product_category.product_models.each do |p| %>
+  <%= p.supplier.fantasy_name %> | <%= p.name %> | <%= p.sku %>
+  <br/>
+<% end %>
+
+<br/>
+<br/>
+<%= link_to 'Return', :back %>

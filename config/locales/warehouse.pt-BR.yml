@@ -5,6 +5,7 @@ pt-BR:
       supplier: Fornecedor
       product_model: Modelo de Produto
       product_bundle: Pacote de produto
+      product_category: Categoria de Produto
     attributes:
       warehouse:
         name: Nome
@@ -29,9 +30,13 @@ pt-BR:
         height: Altura
         width: Largura
         length: Comprimento
+        sku: Codigo SKU
         supplier: Fornecedor
         supplier_id: Fornecedor
-        sku: Codigo SKU
+        product_category: Categoria de Produto
+        product_category_id: Categoria de Produto
       product_bundle:
         name: Nome
         sku: Codigo SKU
+      product_category:
+        name: Nome

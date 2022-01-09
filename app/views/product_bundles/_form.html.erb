@@ -1,0 +1,26 @@
+<% if product_bundle.id == nil %>
+<h1>New Product Bundle</h1>
+<% else %>
+<h1>Edit Product Bundle</h1>
+<% end %>
+<% if product_bundle.errors.any? %>
+  <span>Check the fields below:</span>
+  <ul>
+  <% product_bundle.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: product_bundle) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name%>
+  </div>
+  <div>
+  <%= form.submit 'Save'%>
+  </div>
+<% end %>

@@ -6,8 +6,9 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4,
-                         width: 17, length: 22, supplier: s, sku: 'I12A')
+    pc = ProductCategory.new(name: 'Conservados')
+    ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+                         length: 22, supplier: s, product_category: pc)
 
     # Act
     visit root_path
@@ -23,8 +24,9 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4,
-                         width: 17, length: 22, supplier: s, sku: 'I12A')
+    pc = ProductCategory.new(name: 'Conservados')
+    ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+                         length: 22, supplier: s, product_category: pc)
 
     # Act
     visit edit_product_model_path(s.id)
@@ -39,10 +41,11 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4,
-                              width: 17, length: 22, supplier: s, sku: 'I12A')
-    p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4,
-                              width: 5, length: 5, supplier: s, sku: 'I13A')
+    pc = ProductCategory.new(name: 'Conservados')
+    p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+                              length: 22, supplier: s, product_category: pc)
+    p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
+                              length: 5, supplier: s, product_category: pc)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -50,7 +53,7 @@ describe 'User edits product model' do
     visit root_path
     click_on 'See suppliers'
     click_on 'Maria'
-    click_on 'Edit', id: "edit-#{p1.id}"
+    click_on 'Edit', id: "edit_pm-#{p1.id}"
 
     # Assert
     expect(current_path).to eq edit_product_model_path(p1.id)
@@ -62,10 +65,11 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4,
-                              width: 17, length: 22, supplier: s, sku: 'I12A')
-    p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4,
-                              width: 5, length: 5, supplier: s, sku: 'I13A')
+    pc = ProductCategory.new(name: 'Conservados')
+    p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+                              length: 22, supplier: s, product_category: pc)
+    p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
+                              length: 5, supplier: s, product_category: pc)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -73,7 +77,7 @@ describe 'User edits product model' do
     visit root_path
     click_on 'See suppliers'
     click_on 'Maria'
-    click_on 'Edit', id: "edit-#{p1.id}"
+    click_on 'Edit', id: "edit_pm-#{p1.id}"
     fill_in 'Nome',	with: 'Ossos de galinha'
     fill_in 'Peso',	with: '100' 
     click_on 'Save'
@@ -90,10 +94,11 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4,
-                              width: 17, length: 22, supplier: s, sku: 'I12A')
-    p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4,
-                              width: 5, length: 5, supplier: s, sku: 'I13A')
+    pc = ProductCategory.new(name: 'Conservados')
+    p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+                              length: 22, supplier: s, product_category: pc)
+    p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
+                              length: 5, supplier: s, product_category: pc)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -102,7 +107,7 @@ describe 'User edits product model' do
     visit root_path
     click_on 'See suppliers'
     click_on 'Maria'
-    click_on 'Edit', id: "edit-#{p1.id}"
+    click_on 'Edit', id: "edit_pm-#{p1.id}"
     fill_in 'Nome',	with: ''
     fill_in 'Peso',	with: '0' 
     click_on 'Save'

@@ -1,0 +1,13 @@
+<h1>Registered product category</h1>
+
+<% if @product_category.empty? %>
+No registered product category
+<% else %>
+  <% @product_category.each do |pm| %>
+    <%= link_to(pm.name, product_category_path(pm.id)) %>
+    <% if user_signed_in? %>
+    | <%= link_to 'Edit', edit_product_category_path(pm.id), id: "edit-#{pm.id}" %>
+    <% end%>
+    <br/>
+  <% end %>
+<% end %>

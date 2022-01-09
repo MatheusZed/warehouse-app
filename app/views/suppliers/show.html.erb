@@ -11,26 +11,57 @@
 <dd><%= @supplier.phone %></dd>
 </dl>
 
-<h2>Products from this supplier</h2>
-<table>
-  <tr>
-    <th>Nome</th>
-    <th>Codigo SKU</th>
-  </tr>
-  <% @supplier.product_models.each do |pm| %>
-  <tr>
-    <td><%= link_to(pm.name, pm) %></td>
-    <% if user_signed_in? %>
-      <td><%= pm.sku %> | <%= link_to 'Edit', edit_product_model_path(pm.id), id: "edit-#{pm.id}" %></td>
-    <% else %>
-      <td><%= pm.sku %></td>
-    <% end%>
-  </tr>
-  <% end %>
-</table>
+<div id='pm'>
+<% if @supplier.product_models.empty? %>
+  <h2>No registered product model</h2>
+<% else %>
+  <h2>Product models from this supplier</h2>
+  <table>
+    <tr>
+      <th>Nome</th>
+      <th>Codigo SKU</th>
+    </tr>
+    <% @supplier.product_models.each do |pm| %>
+    <tr>
+      <td><%= link_to(pm.name, pm) %></td>
+      <% if user_signed_in? %>
+        <td><%= pm.sku %> | <%= link_to 'Edit', edit_product_model_path(pm.id), id: "edit_pm-#{pm.id}" %></td>
+      <% else %>
+        <td><%= pm.sku %></td>
+      <% end%>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+</div>
 
 <br/>
 <br/>
+
+<div id='pb'>
+<% if @supplier.product_models(&:product_bundles).empty? %>
+  <h2>No registered product bundle</h2>
+<% else %>
+  <h2>Bundles from this supplier</h2>
+  <table>
+    <tr>
+      <th>Nome</th>
+      <th>Codigo SKU</th>
+    </tr>
+    <% @supplier.product_models.map(&:product_bundles).uniq { |i| i.name }.flatten.each do |pb| %>
+    <tr>
+      <td><%= link_to(pb.name, pb) %></td>
+      <% if user_signed_in? %>
+        <td><%= pb.sku %> | <%= link_to 'Edit', edit_product_bundle_path(pb.id), id: "edit_pb-#{pb.id}" %></td>
+      <% else %>
+        <td><%= pb.sku %></td>
+      <% end%>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+</div>
+
 <br/>
 <br/>
 

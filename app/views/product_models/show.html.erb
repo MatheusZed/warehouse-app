@@ -8,6 +8,8 @@
 <dd><%= @product_model.sku %></dd>
 <dt>Fornecedor:</dt>
 <dd><%= @product_model.supplier.fantasy_name %></dd>
+<dt>Categoria de Produto:</dt>
+<dd><%= @product_model.product_category.name %></dd>
 </dl>
-
+<%# Nao posso deixar isso pq dps que eu crio quando aperto voltar ele nao acha o caminho %>
 <%= link_to 'Return', :back %>

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Visitor view homepage' do
-  # Arrange
+
   it 'and see a welcome message' do
     visit root_path
 
