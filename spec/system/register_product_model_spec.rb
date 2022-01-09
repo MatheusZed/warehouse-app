@@ -23,7 +23,7 @@ describe 'User register product model' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new product model'
 
@@ -52,7 +52,7 @@ describe 'User register product model' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
         
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new product model'
     fill_in 'Nome',	with: 'Estatua goku SSGSS'
@@ -88,7 +88,7 @@ describe 'User register product model' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
     
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new product model'
     fill_in 'Nome',	with: 'Estatua goku SSGSS'
@@ -116,7 +116,7 @@ describe 'User register product model' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new product model'
     fill_in 'Nome', with: ''
@@ -144,7 +144,7 @@ describe 'User register product model' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new product model'
     fill_in 'Peso', with: '0'

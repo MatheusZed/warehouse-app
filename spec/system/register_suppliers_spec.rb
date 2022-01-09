@@ -23,7 +23,7 @@ describe 'User register suppliers' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new supplier'
 
@@ -43,7 +43,7 @@ describe 'User register suppliers' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new supplier'
     fill_in 'Nome Fantasia', with: 'Cleber'
@@ -69,7 +69,7 @@ describe 'User register suppliers' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new supplier'
     fill_in 'Nome Fantasia', with: ''
@@ -92,7 +92,7 @@ describe 'User register suppliers' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new supplier'
     fill_in 'CNPJ', with: '1154478894521'

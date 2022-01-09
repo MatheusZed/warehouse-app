@@ -23,7 +23,7 @@ describe 'User register warehouse' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new warehouse'
 
@@ -46,7 +46,7 @@ describe 'User register warehouse' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new warehouse'
     fill_in 'Nome', with: 'Juiz de Fora'
@@ -76,7 +76,7 @@ describe 'User register warehouse' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new warehouse'
     fill_in 'Nome', with: ''

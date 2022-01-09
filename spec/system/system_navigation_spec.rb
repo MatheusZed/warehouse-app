@@ -6,7 +6,7 @@ describe 'User navigates' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
 
     # Assert 1

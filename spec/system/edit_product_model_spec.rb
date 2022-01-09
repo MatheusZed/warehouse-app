@@ -49,7 +49,7 @@ describe 'User edits product model' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'See suppliers'
     click_on 'Maria'
@@ -73,7 +73,7 @@ describe 'User edits product model' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'See suppliers'
     click_on 'Maria'
@@ -102,8 +102,8 @@ describe 'User edits product model' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
-    login_as(user, :scope => :user)
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'See suppliers'
     click_on 'Maria'

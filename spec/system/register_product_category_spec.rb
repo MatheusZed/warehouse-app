@@ -23,7 +23,7 @@ describe 'User registers a category' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new product category'
 
@@ -38,7 +38,7 @@ describe 'User registers a category' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new product category'
     fill_in 'Nome',	with: 'Congelados'
@@ -54,7 +54,7 @@ describe 'User registers a category' do
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Register new product category'
     fill_in 'Nome',	with: ''

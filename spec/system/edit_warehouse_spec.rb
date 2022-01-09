@@ -40,7 +40,7 @@ describe 'User edits warehouse' do
 
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     #find("edit-#{wh1.id}").click
     click_on 'Edit', id: "edit-#{wh1.id}"
@@ -62,7 +62,7 @@ describe 'User edits warehouse' do
 
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Edit', id: "edit-#{wh1.id}"
     fill_in 'Nome',	with: 'Alimenticios'
@@ -86,7 +86,7 @@ describe 'User edits warehouse' do
 
 
     # Act
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Edit', id: "edit-#{wh2.id}"
     fill_in 'CEP',	with: '570510-000'
