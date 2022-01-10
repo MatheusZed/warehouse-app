@@ -6,7 +6,7 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.new(name: 'Conservados')
+    pc = ProductCategory.create!(name: 'Conservados')
     ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
                          length: 22, supplier: s, product_category: pc)
 
@@ -24,7 +24,7 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.new(name: 'Conservados')
+    pc = ProductCategory.create!(name: 'Conservados')
     ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
                          length: 22, supplier: s, product_category: pc)
 
@@ -41,7 +41,7 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.new(name: 'Conservados')
+    pc = ProductCategory.create!(name: 'Conservados')
     p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
                               length: 22, supplier: s, product_category: pc)
     p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
@@ -65,7 +65,7 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.new(name: 'Conservados')
+    pc = ProductCategory.create!(name: 'Conservados')
     p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
                               length: 22, supplier: s, product_category: pc)
     p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
@@ -94,7 +94,7 @@ describe 'User edits product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.new(name: 'Conservados')
+    pc = ProductCategory.create!(name: 'Conservados')
     p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
                               length: 22, supplier: s, product_category: pc)
     p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4, width: 5,

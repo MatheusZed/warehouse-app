@@ -17,8 +17,12 @@
 
 <% @items.each_pair do |product_model, quantity| %>
   <div id="product-<%= product_model.id %>">
-    <%= product_model.name %>
-    Quantidade: <%= quantity %>
+    <div>
+      <%= product_model.name %>
+    </div>
+    <div>
+      Quantidade: <%= quantity %>
+    </div>
   </div>
 <% end %>
 

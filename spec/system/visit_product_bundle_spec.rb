@@ -6,7 +6,7 @@ describe 'Visitor sees the product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.new(name: 'Conservados')
+    pc = ProductCategory.create!(name: 'Conservados')
     pm1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
                                length: 22, supplier: s, product_category: pc)
     pm2 = ProductModel.create!(name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
@@ -40,7 +40,7 @@ describe 'Visitor sees the product model' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
                          cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
                          email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.new(name: 'Conservados')
+    pc = ProductCategory.create!(name: 'Conservados')
     pm1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
                                length: 22, supplier: s, product_category: pc)
     pm2 = ProductModel.create!(name: 'Osso de Frango', weight: 1000, height: 4, width: 17,

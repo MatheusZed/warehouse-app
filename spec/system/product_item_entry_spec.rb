@@ -9,7 +9,7 @@ describe 'User enter new items' do
     s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e o pao',
                          cnpj: '59201134000113', address: 'Av Fernandes China',
                          email: 'maria.pao@yahoo.com', phone: '91124-7799')
-    pc = ProductCategory.new(name: 'Conservados')
+    pc = ProductCategory.create!(name: 'Conservados')
     pm1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
                                length: 22, supplier: s, product_category: pc)
     pm2 = ProductModel.create!(name: 'Osso de Frango', weight: 5, height: 15, width: 2,
