@@ -23,6 +23,7 @@
           <%= link_to 'Register new product category', new_product_category_path %>
           <%= link_to 'Register new product model', new_product_model_path %>
           <%= link_to 'Register new product bundle', new_product_bundle_path %>
+          <%= link_to 'Enter new items', product_items_entry_path %>
           <span>Ola <%= current_user.email %></span> |
           <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
         <% else %>

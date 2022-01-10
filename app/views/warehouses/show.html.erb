@@ -13,4 +13,13 @@
 <dd><%= @warehouse.useful_area %> m2</dd>
 </dl>
 
+<h2>Estoque</h2>
+
+<% @items.each_pair do |product_model, quantity| %>
+  <div id="product-<%= product_model.id %>">
+    <%= product_model.name %>
+    Quantidade: <%= quantity %>
+  </div>
+<% end %>
+
 <%= link_to 'Return', root_path %>

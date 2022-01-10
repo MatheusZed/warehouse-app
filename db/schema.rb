@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_07_173030) do
+ActiveRecord::Schema.define(version: 2022_01_09_231327) do
 
   create_table "product_bundle_items", force: :cascade do |t|
     t.integer "product_model_id", null: false
@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(version: 2022_01_07_173030) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "product_items", force: :cascade do |t|
+    t.integer "warehouse_id", null: false
+    t.integer "product_model_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_model_id"], name: "index_product_items_on_product_model_id"
+    t.index ["warehouse_id"], name: "index_product_items_on_warehouse_id"
   end
 
   create_table "product_models", force: :cascade do |t|
@@ -88,6 +97,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_173030) do
 
   add_foreign_key "product_bundle_items", "product_bundles"
   add_foreign_key "product_bundle_items", "product_models"
+  add_foreign_key "product_items", "product_models"
+  add_foreign_key "product_items", "warehouses"
   add_foreign_key "product_models", "product_categories"
   add_foreign_key "product_models", "suppliers"
 end

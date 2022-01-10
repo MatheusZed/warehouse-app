@@ -11,5 +11,14 @@
 <dt>Categoria de Produto:</dt>
 <dd><%= @product_model.product_category.name %></dd>
 </dl>
+
+Available Warehouses
+
+<% @available_items.each_pair do |warehouse, quantity| %>
+  <div id="warehouse-<%= warehouse.id %>">
+    <%= warehouse.code %>: <%= quantity %>
+  </div>
+<% end %>
+
 <%# Nao posso deixar isso pq dps que eu crio quando aperto voltar ele nao acha o caminho %>
 <%= link_to 'Return', :back %>
