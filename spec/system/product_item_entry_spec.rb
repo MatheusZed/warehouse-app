@@ -1,6 +1,40 @@
 require 'rails_helper'
 
 describe 'User enter new items' do
+  it 'Visitor not sees the menu' do
+    # Act
+    visit root_path
+
+    # Assert
+    expect(page).not_to have_link 'Enter new items'
+  end
+
+  it "Visitor don't access the form directly" do
+    # Act
+    visit product_items_entry_path
+
+    # Assert
+    expect(current_path).to eq new_user_session_path
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
+  end
+
+  it 'throught the link in homepage' do
+    # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
+    #Act
+    login_as(user, scope: :user)
+    visit root_path
+    click_on 'Enter new items'
+
+    # Assert
+    expect(page).to have_content 'Log batch entry'
+    expect(page).to have_field 'Quantidade'
+    expect(page).to have_field 'Galpao Destino'
+    expect(page).to have_field 'Produto'
+    expect(page).to have_button 'Save'
+  end
+
   it 'Successfully' do
     # Arrange
     wh1 = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
