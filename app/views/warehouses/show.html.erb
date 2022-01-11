@@ -26,4 +26,20 @@
   </div>
 <% end %>
 
+
+<h2>Entrada de Itens</h2>
+<%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |form| %>
+  <div>
+    <%= form.label :quantity, 'Quantidade' %>
+    <%= form.number_field :quantity %>
+  </div>
+      <div>
+    <%= form.label :product_model_id, 'Produto' %>
+    <%= form.collection_select :product_model_id, @product_models, :id, :name %>
+  </div>
+  <div>
+    <%= form.submit 'Save'%>
+  </div>
+<% end %>
+
 <%= link_to 'Return', root_path %>

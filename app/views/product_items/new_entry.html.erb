@@ -1,4 +1,12 @@
 <h1>Log batch entry</h1>
+<% if @product_item.errors.any? %>
+  <span>Check the fields below:</span>
+  <ul>
+  <% @product_item.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
 
 <%= form_with(url: product_items_entry_path ) do |form| %>
   <div>

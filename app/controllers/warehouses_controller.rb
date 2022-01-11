@@ -4,6 +4,7 @@ class WarehousesController < ApplicationController
   def show
     id = params[:id]
     @warehouse = Warehouse.find(id)
+    @product_models = ProductModel.all
     @items = @warehouse.product_items.group(:product_model).count
   end
 
@@ -45,6 +46,31 @@ class WarehousesController < ApplicationController
       else
         flash.now[:alert] = "It wasn't possible to edit the warehouse"
         render 'new'
+    end
+  end
+
+  def product_entry
+    warehouse_id = params[:id]
+    quantity = params[:quantity].to_i
+    product_model_id = params[:product_model_id]
+    sku = params[:sku]
+    
+    w = Warehouse.find(warehouse_id)
+    pm = ProductModel.find(product_model_id)
+    @pi = ProductItem.new(warehouse: w, product_model: pm , sku: sku)
+    quantity = quantity - 1
+    
+    if quantity > 0
+      if @pi.save()
+      quantity.times do
+        m = ProductItem.create!(warehouse: w, product_model: pm , sku: sku)
+      end
+
+      redirect_to w, notice: 'Successfully registered items'
+      end
+    else
+    flash.now[:alert] = "It wasn't possible to record the items"
+    render 'new_entry'
     end
   end
 end
