@@ -13,22 +13,31 @@
   <body>
     <header>
       <nav>
-        <%= link_to 'Home', root_path %>
-        <%= link_to 'See suppliers', suppliers_path %>
-        <%= link_to 'See product categories', product_categories_path %>
+        <div style="width: 70%; float:left">
+          <%= link_to 'Home', root_path %>
+          <%= link_to 'See suppliers', suppliers_path %>
+          <%= link_to 'See product categories', product_categories_path %>
 
-        <% if user_signed_in? %>
-          <%= link_to 'Register new warehouse', new_warehouse_path %>
-          <%= link_to 'Register new supplier', new_supplier_path %>
-          <%= link_to 'Register new product category', new_product_category_path %>
-          <%= link_to 'Register new product model', new_product_model_path %>
-          <%= link_to 'Register new product bundle', new_product_bundle_path %>
-          <%= link_to 'Enter new items', product_items_entry_path %>
-          <span>Ola <%= current_user.email %></span> |
-          <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to 'Entrar', new_user_session_path %>
-        <% end %>
+          <% if user_signed_in? %>
+            <%= link_to 'Register new warehouse', new_warehouse_path %>
+            <%= link_to 'Register new supplier', new_supplier_path %>
+            <%= link_to 'Register new product category', new_product_category_path %>
+            <%= link_to 'Register new product model', new_product_model_path %>
+            <%= link_to 'Register new product bundle', new_product_bundle_path %>
+            <%= link_to 'Enter new items', product_items_entry_path %>
+            <span>Ola <%= current_user.email %></span> |
+            <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to 'Entrar', new_user_session_path %>
+          <% end %>
+        </div>
+        <div style="float:right">
+          <%= form_with url: search_path, method: :get do %>
+            <%= label_tag :q, 'Search:' %>
+            <%= text_field_tag :q %>
+            <%= submit_tag 'Search' %>
+          <% end %>
+        </div>
       </nav>
     </header>
     <main>

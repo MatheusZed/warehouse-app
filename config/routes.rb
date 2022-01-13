@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
+  get 'search', to:'home#search'
   resources :warehouses,         except: %i[destroy] do
     post 'product_entry', on: :member
   end

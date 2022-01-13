@@ -1,0 +1,6 @@
+<h1>Search results</h1>
+<ul>
+  <% @warehouses.each do |wh| %>
+    <li><%= link_to(wh.name, warehouse_path(wh.id)) %>,  <%= wh.code %></li>
+  <% end %>
+</ul>
