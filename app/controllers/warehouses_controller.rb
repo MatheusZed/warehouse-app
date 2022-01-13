@@ -1,5 +1,5 @@
 class WarehousesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :product_entry]
 
   def show
     id = params[:id]
@@ -50,27 +50,15 @@ class WarehousesController < ApplicationController
   end
 
   def product_entry
-    warehouse_id = params[:id]
-    quantity = params[:quantity].to_i
-    product_model_id = params[:product_model_id]
-    sku = params[:sku]
+    @pe = ProductEntryService.new(quantity: params[:quantity], product_model_id: params[:product_model_id],
+                                  warehouse_id: params[:id], sku: params[:sku])
+    @product_models = ProductModel.all
     
-    w = Warehouse.find(warehouse_id)
-    pm = ProductModel.find(product_model_id)
-    @pi = ProductItem.new(warehouse: w, product_model: pm , sku: sku)
-    quantity = quantity - 1
-    
-    if quantity > 0
-      if @pi.save()
-      quantity.times do
-        m = ProductItem.create!(warehouse: w, product_model: pm , sku: sku)
-      end
-
-      redirect_to w, notice: 'Successfully registered items'
-      end
+    if @pe.process()
+      redirect_to warehouse_path(@pe.warehouse_id), notice: 'Successfully registered items'
     else
-    flash.now[:alert] = "It wasn't possible to record the items"
-    render 'new_entry'
+      flash.now[:alert] = "It wasn't possible to record the items"
+      render warehouse_path(@pe.warehouse_id), locals: { pe: @product_entry }
     end
   end
 end

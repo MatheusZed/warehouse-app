@@ -1,4 +1,4 @@
-<%= @warehouse.name %>
+<h1><%= @warehouse.name %></h1>
 <%= @warehouse.code %>
 <dl>
 <dt>Descrição:</dt>
@@ -28,6 +28,17 @@
 
 
 <h2>Entrada de Itens</h2>
+<% if @pe %> 
+  <% if @pe.errors.any? %>
+    <span>Check the fields below:</span>
+    <ul>
+    <% @pe.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
 <%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |form| %>
   <div>
     <%= form.label :quantity, 'Quantidade' %>
@@ -42,4 +53,7 @@
   </div>
 <% end %>
 
+<br>
+<br>
+<br>
 <%= link_to 'Return', root_path %>
