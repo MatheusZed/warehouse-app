@@ -1,59 +1,79 @@
-<h1><%= @warehouse.name %></h1>
-<%= @warehouse.code %>
-<dl>
-<dt>Descrição:</dt>
-<dd><%= @warehouse.description %></dd>
-<dt>Endereço:</dt>
-<dd><%= @warehouse.address %>-<%= @warehouse.city %>/<%= @warehouse.state %></dd>
-<dt>CEP:</dt>
-<dd><%= @warehouse.postal_code %></dd>
-<dt>Area Total:</dt>
-<dd><%= @warehouse.total_area %> m2</dd>
-<dt>Area Util:</dt>
-<dd><%= @warehouse.useful_area %> m2</dd>
-</dl>
+<div class="content" id='wh'>
+  <h1><%= @warehouse.name %> - <%= @warehouse.code %></h1>  
+  <dl>
+  <dt>Descrição:</dt>
+  <dd><%= @warehouse.description %></dd>
+  <dt>Endereço:</dt>
+  <dd><%= @warehouse.address %>-<%= @warehouse.city %>/<%= @warehouse.state %></dd>
+  <dt>CEP:</dt>
+  <dd><%= @warehouse.postal_code %></dd>
+  <dt>Area Total:</dt>
+  <dd><%= @warehouse.total_area %> m2</dd>
+  <dt>Area Util:</dt>
+  <dd><%= @warehouse.useful_area %> m2</dd>
+  </dl>
+ </div>
 
-<h2>Estoque</h2>
+  <br>
+  <br>
 
-<% @items.each_pair do |product_model, quantity| %>
-  <div id="product-<%= product_model.id %>">
-    <div>
-      <%= product_model.name %>
-    </div>
-    <div>
-      Quantidade: <%= quantity %>
-    </div>
-  </div>
-<% end %>
+<div class="content">
+  <h2>Estoque</h2>
+</div>
+ <div class="table is-striped">
+  <table>
+    <tbody>
+      <tr>
+        <% @items.each_pair do |product_model, quantity| %>
+          <div id="product-<%= product_model.id %>">
+            <td><%= product_model.name %></td>
+            <td>Quantidade: <%= quantity %></td>
+          </div>
+      </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
 
+<br>
+<br>
+<br>
 
-<h2>Entrada de Itens</h2>
-<% if @pe %> 
-  <% if @pe.errors.any? %>
-    <span>Check the fields below:</span>
-    <ul>
-    <% @pe.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+<div class="content">
+  <h2>Entrada de Itens</h2>
+  <% if @pe %> 
+    <% if @pe.errors.any? %>
+      <span>Check the fields below:</span>
+      <ul>
+      <% @pe.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
     <% end %>
-    </ul>
   <% end %>
-<% end %>
+</div>
 
 <%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |form| %>
-  <div>
-    <%= form.label :quantity, 'Quantidade' %>
-    <%= form.number_field :quantity %>
+  <div class="field">
+    <%= form.label :quantity, 'Quantidade', class: 'label' %>
+    <div class="control">
+      <%= form.number_field :quantity, class: 'input', placeholder: 'quantidade' %>
+    </div>
   </div>
-      <div>
-    <%= form.label :product_model_id, 'Produto' %>
-    <%= form.collection_select :product_model_id, @product_models, :id, :name %>
+  <div class="field">
+    <%= form.label :product_model_id, 'Produto', class: 'label' %>
+    <div class="control">
+      <div class="select">
+        <%= form.collection_select :product_model_id, @product_models, :id, :name %>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= form.submit 'Save'%>
-  </div>
+  <%= form.submit 'Save', class: 'button is-primary' %>
 <% end %>
 
-<br>
-<br>
-<br>
-<%= link_to 'Return', root_path %>
+  <br>
+  <br>
+  <br>
+
+  <%= link_to 'Return', root_path %>
+ 

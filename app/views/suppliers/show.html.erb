@@ -1,68 +1,88 @@
-<h1><%= @supplier.fantasy_name %></h1>
-<%= @supplier.legal_name %>
-<dl>
-<dt>CNPJ:</dt>
-<dd><%= @supplier.cnpj %></dd>
-<dt>Endereço:</dt>
-<dd><%= @supplier.address %>
-<dt>Email:</dt>
-<dd><%= @supplier.email %></dd>
-<dt>Telefone:</dt>
-<dd><%= @supplier.phone %></dd>
-</dl>
+<div class="content">
+  <h1><%= @supplier.fantasy_name %> - <%= @supplier.legal_name %></h1>
+  <dl>
+  <dt>CNPJ:</dt>
+  <dd><%= @supplier.cnpj %></dd>
+  <dt>Endereço:</dt>
+  <dd><%= @supplier.address %>
+  <dt>Email:</dt>
+  <dd><%= @supplier.email %></dd>
+  <dt>Telefone:</dt>
+  <dd><%= @supplier.phone %></dd>
+  </dl>
+</div>
 
-<div id='pm'>
+<br>
+<br>
+
+<div id='pm' class="content">
 <% if @supplier.product_models.empty? %>
   <h2>No registered product model</h2>
 <% else %>
   <h2>Product models from this supplier</h2>
+</div>
+<div id='pmi' class="table is-striped">
   <table>
-    <tr>
-      <th>Nome</th>
-      <th>Codigo SKU</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Codigo SKU</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
     <% @supplier.product_models.each do |pm| %>
-    <tr>
-      <td><%= link_to(pm.name, pm) %></td>
-      <% if user_signed_in? %>
-        <td><%= pm.sku %> | <%= link_to 'Edit', edit_product_model_path(pm.id), id: "edit_pm-#{pm.id}" %></td>
-      <% else %>
-        <td><%= pm.sku %></td>
-      <% end%>
-    </tr>
+        <td><%= link_to(pm.name, pm) %></td>
+        <% if user_signed_in? %>
+          <td><%= pm.sku %></td>
+          <td><%= link_to 'Edit', edit_product_model_path(pm.id), id: "edit_pm-#{pm.id}" %></td>
+        <% else %>
+          <td><%= pm.sku %></td>
+        <% end%>
+      </tr>
     <% end %>
+    </tbody>
   </table>
 <% end %>
 </div>
 
-<br/>
-<br/>
 
-<div id='pb'>
+<br>
+<br>
+
+<div id='pb' class="content">
 <% if @supplier.product_models(&:product_bundles).empty? %>
   <h2>No registered product bundle</h2>
 <% else %>
   <h2>Bundles from this supplier</h2>
+</div>
+<div id='pbi' class="table is-striped">
   <table>
-    <tr>
-      <th>Nome</th>
-      <th>Codigo SKU</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Codigo SKU</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
     <% @supplier.product_models.map(&:product_bundles).uniq { |i| i.name }.flatten.each do |pb| %>
-    <tr>
-      <td><%= link_to(pb.name, pb) %></td>
-      <% if user_signed_in? %>
-        <td><%= pb.sku %> | <%= link_to 'Edit', edit_product_bundle_path(pb.id), id: "edit_pb-#{pb.id}" %></td>
-      <% else %>
-        <td><%= pb.sku %></td>
-      <% end%>
-    </tr>
+        <td><%= link_to(pb.name, pb) %></td>
+        <% if user_signed_in? %>
+          <td><%= pb.sku %></td>
+          <td><%= link_to 'Edit', edit_product_bundle_path(pb.id), id: "edit_pb-#{pb.id}" %></td>
+        <% else %>
+          <td><%= pb.sku %></td>
+        <% end%>
+      </tr>
     <% end %>
+    </tbody>
   </table>
 <% end %>
 </div>
 
-<br/>
-<br/>
+
+<br>
+<br>
 
 <%= link_to 'Return', suppliers_path %>

@@ -1,26 +1,32 @@
-<% if product_bundle.id == nil %>
-<h1>New Product Bundle</h1>
-<% else %>
-<h1>Edit Product Bundle</h1>
-<% end %>
-<% if product_bundle.errors.any? %>
-  <span>Check the fields below:</span>
-  <ul>
-  <% product_bundle.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+<div class="content">
+  <% if product_bundle.id == nil %>
+  <h1>New Product Bundle</h1>
+  <% else %>
+  <h1>Edit Product Bundle</h1>
   <% end %>
-  </ul>
-<% end %>
+  <% if product_bundle.errors.any? %>
+    <span>Check the fields below:</span>
+    <ul>
+    <% product_bundle.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
 
 <%= form_with(model: product_bundle) do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :name, class: 'input', placeholder: 'nome do kit' %>
+    </div>
   </div>
-  <div>
-    <%= form.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name%>
+  <div class="field">
+    <%= form.label '', 'Modelos de produto', class: 'label' %>
+    <div class="control">
+        <%= form.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name%>
+    </div>
   </div>
-  <div>
-  <%= form.submit 'Save'%>
-  </div>
+
+  <%= form.submit 'Save', class: 'button is-primary' %>
 <% end %>

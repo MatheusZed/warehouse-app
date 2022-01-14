@@ -1,41 +1,55 @@
-<% if supplier.id == nil %>
-<h1>New Supplier</h1>
-<% else %>
-<h1>Edit Supplier</h1>
-<% end %>
-<% if supplier.errors.any? %>
-  <span>Check the fields below:</span>
-  <ul>
-  <% supplier.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+<div class="content">
+  <% if supplier.id == nil %>
+  <h1>New Supplier</h1>
+  <% else %>
+  <h1>Edit Supplier</h1>
   <% end %>
-  </ul>
-<% end %>
+  <% if supplier.errors.any? %>
+    <span>Check the fields below:</span>
+    <ul>
+    <% supplier.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
 
 <%= form_with(model: supplier) do |form| %>
-  <div>
-    <%= form.label :fantasy_name %>
-    <%= form.text_field :fantasy_name %>
+  <div class="field">
+    <%= form.label :fantasy_name, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :fantasy_name, class: 'input', placeholder: 'nome fantasia'  %>
+    </div>
   </div>
-  <div>
-    <%= form.label :legal_name %>
-    <%= form.text_field :legal_name %>
+  <div class="field">
+    <%= form.label :legal_name, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :legal_name, class: 'input', placeholder: 'razao social' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :cnpj %>
-    <%= form.text_field :cnpj %>
+  <div class="field">
+    <%= form.label :cnpj, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :cnpj, class: 'input', placeholder: 'cnpj' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
+  <div class="field">
+    <%= form.label :address, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :address, class: 'input', placeholder: 'endereco' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+  <div class="field">
+    <%= form.label :email, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :email, class: 'input', placeholder: 'email@ex.com' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
+  <div class="field">
+    <%= form.label :phone, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :phone, class: 'input', placeholder: 'telefone' %>
+    </div>
   </div>
-  <%= form.submit 'Save'%>
+  <%= form.submit 'Save', class: 'button is-primary' %>
 <% end %>

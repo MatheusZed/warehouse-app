@@ -1,9 +1,26 @@
-<h1><%= @product_bundle.name %></h1>
-Codigo SKU: <%= @product_bundle.sku %>
-<br/>
-<% @product_bundle.product_models.each do |p| %>
-  <%= p.name %>
-  <br/>
-<% end %>
+<div class="content">
+  <h1><%= @product_bundle.name %></h1>
+
+  Codigo SKU: <%= @product_bundle.sku %>
+</div>
+<div id='pm' class="table is-striped">
+  <table>
+    <thead>
+      <tr>
+        <th>Nome dos Produtos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <% @product_bundle.product_models.each do |p| %>
+        <td><%= p.name %><td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+<br>
 
 <%= link_to 'Return', :back %>

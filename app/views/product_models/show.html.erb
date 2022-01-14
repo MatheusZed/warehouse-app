@@ -1,24 +1,49 @@
-<h1><%= @product_model.name %></h1>
-<dl>
-<dt>Peso:</dt>
-<dd><%= @product_model.weight %></dd> gramas
-<dt>Dimensoes:</dt>
-<dd><%= @product_model.dimensions %>
-<dt>Codigo SKU:</dt>
-<dd><%= @product_model.sku %></dd>
-<dt>Fornecedor:</dt>
-<dd><%= @product_model.supplier.fantasy_name %></dd>
-<dt>Categoria de Produto:</dt>
-<dd><%= @product_model.product_category.name %></dd>
-</dl>
+<div class="content">
+  <h1><%= @product_model.name %></h1>
+  <dl>
+  <dt>Peso:</dt>
+  <dd><%= @product_model.weight %></dd> gramas
+  <dt>Dimensoes:</dt>
+  <dd><%= @product_model.dimensions %>
+  <dt>Codigo SKU:</dt>
+  <dd><%= @product_model.sku %></dd>
+  <dt>Fornecedor:</dt>
+  <dd><%= @product_model.supplier.fantasy_name %></dd>
+  <dt>Categoria de Produto:</dt>
+  <dd><%= @product_model.product_category.name %></dd>
+  </dl>
+</div>
 
-Available Warehouses
+<br>
+<br>
 
-<% @available_items.each_pair do |warehouse, quantity| %>
-  <div id="warehouse-<%= warehouse.id %>">
-    <%= warehouse.code %>: <%= quantity %>
-  </div>
-<% end %>
+<div class="content">
+  <h2>Available Warehouses<h2>
+</div>
+
+<div class="table is-striped">
+  <table>
+    <thead>
+      <tr>
+        <th>Codigo do Galpao</th>
+        <th>Quantidade</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <% @available_items.each_pair do |warehouse, quantity| %>
+        <div id="warehouse-<%= warehouse.id %>">
+          <td><%= warehouse.code %></td>
+          <td><%= quantity %></td>
+        </div>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+<br>
 
 <%# Nao posso deixar isso pq dps que eu crio quando aperto voltar ele nao acha o caminho %>
 <%= link_to 'Return', :back %>

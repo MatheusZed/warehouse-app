@@ -21,12 +21,12 @@ describe 'Visitor see product models' do
 
     # Assert
     expect(page).to have_css '#pm h2', text: 'Product models from this supplier'
-    expect(page).to have_css '#pm', text: 'Migalhas de pao'
-    expect(page).to have_css '#pm', text: pm1.sku
-    expect(page).to have_css '#pm', text: 'Osso de Frango'
-    expect(page).to have_css '#pm', text: pm2.sku
-    expect(page).to have_css '#pm', text: 'Doces'
-    expect(page).to have_css '#pm', text: pm3.sku
+    expect(page).to have_css '#pmi', text: 'Migalhas de pao'
+    expect(page).to have_css '#pmi', text: pm1.sku
+    expect(page).to have_css '#pmi', text: 'Osso de Frango'
+    expect(page).to have_css '#pmi', text: pm2.sku
+    expect(page).to have_css '#pmi', text: 'Doces'
+    expect(page).to have_css '#pmi', text: pm3.sku
   end
 
   it "and don't sees the product models details" do
@@ -48,13 +48,13 @@ describe 'Visitor see product models' do
     click_on 'Maria'
 
     # Assert
-    expect(page).not_to have_css '#pm td', text: 'Maria'
-    expect(page).not_to have_css '#pm', text: 'Peso: 1000'
-    expect(page).not_to have_css '#pm', text: 'Dimensoes: 10 x 5 x 22'
-    expect(page).not_to have_css '#pm', text: 'Peso: 5'
-    expect(page).not_to have_css '#pm', text: 'Dimensoes: 15 x 2 x 2'
-    expect(page).not_to have_css '#pm', text: 'Peso: 1100'
-    expect(page).not_to have_css '#pm', text: 'Dimensoes: 100 x 100 x 100'
+    expect(page).not_to have_css '#pm dd', text: 'Maria'
+    expect(page).not_to have_css '#pmi', text: 'Peso: 1000'
+    expect(page).not_to have_css '#pmi', text: 'Dimensoes: 10 x 5 x 22'
+    expect(page).not_to have_css '#pmi', text: 'Peso: 5'
+    expect(page).not_to have_css '#pmi', text: 'Dimensoes: 15 x 2 x 2'
+    expect(page).not_to have_css '#pmi', text: 'Peso: 1100'
+    expect(page).not_to have_css '#pmi', text: 'Dimensoes: 100 x 100 x 100'
   end
 
   it "and don't sees other supplier product models" do
@@ -81,14 +81,14 @@ describe 'Visitor see product models' do
     click_on 'Joao'
 
     # Assert
-    expect(page).to have_css '#pm', text: 'Doces'
-    expect(page).to have_css '#pm', text: pm3.sku
-    expect(page).to have_css '#pm', text: 'Casinha de Doces'
-    expect(page).to have_css '#pm', text: pm4.sku
-    expect(page).not_to have_css '#pm', text: 'Migalhas de pao'
-    expect(page).not_to have_css '#pm', text: pm1.sku
-    expect(page).not_to have_css '#pm', text: 'Osso de Frango'
-    expect(page).not_to have_css '#pm', text: pm2.sku
+    expect(page).to have_css '#pmi', text: 'Doces'
+    expect(page).to have_css '#pmi', text: pm3.sku
+    expect(page).to have_css '#pmi', text: 'Casinha de Doces'
+    expect(page).to have_css '#pmi', text: pm4.sku
+    expect(page).not_to have_css '#pmi', text: 'Migalhas de pao'
+    expect(page).not_to have_css '#pmi', text: pm1.sku
+    expect(page).not_to have_css '#pmi', text: 'Osso de Frango'
+    expect(page).not_to have_css '#pmi', text: pm2.sku
   end
 
   it "and doesn't exist any product model" do

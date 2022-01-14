@@ -1,6 +1,15 @@
-<h1>Search results</h1>
-<ul>
-  <% @warehouses.each do |wh| %>
-    <li><%= link_to(wh.name, warehouse_path(wh.id)) %>,  <%= wh.code %></li>
-  <% end %>
-</ul>
+<div class="content">
+  <h1>Search results</h1>
+</div>
+<div class="table is-striped" id="src">
+  <table>
+    <tbody>
+      <tr>
+      <% @warehouses.each do |wh| %>
+        <td><%= link_to(wh.name, warehouse_path(wh.id)) %></td>
+        <td><%= wh.code %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

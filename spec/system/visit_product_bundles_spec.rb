@@ -27,10 +27,10 @@ describe 'Visitor see product bundles' do
 
     # Assert
     expect(page).to have_css '#pb h2', text: 'Bundles from this supplier'
-    expect(page).to have_css '#pb', text: 'Kit Bruxaria'
-    expect(page).to have_css '#pb', text: pb1.sku
-    expect(page).to have_css '#pb', text: 'Kit Xariabru'
-    expect(page).to have_css '#pb', text: pb2.sku
+    expect(page).to have_css '#pbi', text: 'Kit Bruxaria'
+    expect(page).to have_css '#pbi', text: pb1.sku
+    expect(page).to have_css '#pbi', text: 'Kit Xariabru'
+    expect(page).to have_css '#pbi', text: pb2.sku
   end
 
   it "and don't sees the product bundles details" do
@@ -60,9 +60,9 @@ describe 'Visitor see product bundles' do
 
     # Assert
     expect(page).not_to have_css '#pb td', text: 'Maria'
-    expect(page).not_to have_css '#pb', text: 'Migalhas de pao'
-    expect(page).not_to have_css '#pb', text: 'Osso de Frango'
-    expect(page).not_to have_css '#pb', text: 'Doces'
+    expect(page).not_to have_css '#pbi', text: 'Migalhas de pao'
+    expect(page).not_to have_css '#pbi', text: 'Osso de Frango'
+    expect(page).not_to have_css '#pbi', text: 'Doces'
   end
 
   it "and don't sees other supplier product bundles" do
@@ -105,14 +105,14 @@ describe 'Visitor see product bundles' do
     click_on 'Joao'
 
     # Assert
-    expect(page).to have_css '#pb', text: 'Xabruria'
-    expect(page).to have_css '#pb', text: pb3.sku
-    expect(page).to have_css '#pb', text: 'Riabruxa'
-    expect(page).to have_css '#pb', text: pb4.sku
-    expect(page).not_to have_css '#pb', text: 'Bruxaria'
-    expect(page).not_to have_css '#pb', text: pb1.sku
-    expect(page).not_to have_css '#pb', text: 'Xariabru'
-    expect(page).not_to have_css '#pb', text: pb2.sku
+    expect(page).to have_css '#pbi', text: 'Xabruria'
+    expect(page).to have_css '#pbi', text: pb3.sku
+    expect(page).to have_css '#pbi', text: 'Riabruxa'
+    expect(page).to have_css '#pbi', text: pb4.sku
+    expect(page).not_to have_css '#pbi', text: 'Bruxaria'
+    expect(page).not_to have_css '#pbi', text: pb1.sku
+    expect(page).not_to have_css '#pbi', text: 'Xariabru'
+    expect(page).not_to have_css '#pbi', text: pb2.sku
   end
 
   it "and doesn't exist any product bundle" do

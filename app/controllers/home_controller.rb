@@ -5,6 +5,6 @@ class HomeController < ApplicationController
 
   def search
     @warehouses = Warehouse.where('name like ? OR code like ?',
-                                  "%#{params[:q]}", "%#{params[:q]}")
+                                  "%#{params[:q]}%", "%#{params[:q]}%")
   end
 end

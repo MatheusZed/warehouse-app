@@ -1,29 +1,39 @@
-<h1>Log batch entry</h1>
-<% if @product_entry %> 
-  <% if @product_entry.errors.any? %>
-    <span>Check the fields below:</span>
-    <ul>
-    <% @product_entry.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+<div class="content">
+  <h1>Log batch entry</h1>
+  <% if @product_entry %> 
+    <% if @product_entry.errors.any? %>
+      <span>Check the fields below:</span>
+      <ul>
+      <% @product_entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
     <% end %>
-    </ul>
   <% end %>
-<% end %>
+</div>
 
 <%= form_with(url: product_items_entry_path ) do |form| %>
-  <div>
-    <%= form.label :quantity, 'Quantidade' %>
-    <%= form.number_field :quantity %>
+  <div class="field">
+    <%= form.label :quantity, 'Quantidade', class: 'label' %>
+    <div class="control">
+      <%= form.number_field :quantity, class: 'input', placeholder: 'quantidade' %>
+    </div>
   </div>
-  <div>
+  <div class="field">
     <%= form.label :warehouse_id, 'Galpao Destino' %>
-    <%= form.collection_select :warehouse_id, @warehouses, :id, :code %>
+    <div class="control">
+      <div class="select">
+        <%= form.collection_select :warehouse_id, @warehouses, :id, :code %>
+      </div>
+    </div>
   </div>
-    <div>
-    <%= form.label :product_model_id, 'Produto' %>
-    <%= form.collection_select :product_model_id, @product_models, :id, :name %>
+  <div class="field">
+    <%= form.label :product_model_id, 'Produto', class: 'label' %>
+    <div class="control">
+      <div class="select">
+        <%= form.collection_select :product_model_id, @product_models, :id, :name %>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= form.submit 'Save'%>
-  </div>
+  <%= form.submit 'Save', class: 'button is-primary' %>
 <% end %>

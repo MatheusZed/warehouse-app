@@ -1,13 +1,22 @@
-<h1>Registered product category</h1>
+<div class="content">
+  <h1>Registered product category</h1>
 
-<% if @product_category.empty? %>
-No registered product category
-<% else %>
-  <% @product_category.each do |pm| %>
-    <%= link_to(pm.name, product_category_path(pm.id)) %>
-    <% if user_signed_in? %>
-    | <%= link_to 'Edit', edit_product_category_path(pm.id), id: "edit-#{pm.id}" %>
-    <% end%>
-    <br/>
+  <% if @product_category.empty? %>
+  No registered product category
+  <% else %>
+</div>
+<div class="table is-striped">
+  <table>
+    <tbody>
+      <tr>
+      <% @product_category.each do |pm| %>
+        <td><%= link_to(pm.name, product_category_path(pm.id)) %></td>
+        <% if user_signed_in? %>
+        <td><%= link_to 'Edit', edit_product_category_path(pm.id), id: "edit-#{pm.id}" %></td>
+        <% end%>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
   <% end %>
-<% end %>
+</div>

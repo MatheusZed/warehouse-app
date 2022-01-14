@@ -8,43 +8,71 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <nav>
-        <div style="width: 80%">
-          <%= link_to 'Home', root_path %>
-          <%= link_to 'See suppliers', suppliers_path %>
-          <%= link_to 'See product categories', product_categories_path %>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <%= link_to root_path, class: "navbar-item", id: 'icon' do %>
+            <%= image_tag("https://cdn-icons-png.flaticon.com/512/407/407826.png") %>
+          <% end %>
 
-          <% if user_signed_in? %>
-            <%= link_to 'Register new warehouse', new_warehouse_path %>
-            <%= link_to 'Register new supplier', new_supplier_path %>
-            <%= link_to 'Register new product category', new_product_category_path %>
-            <%= link_to 'Register new product model', new_product_model_path %>
-            <%= link_to 'Register new product bundle', new_product_bundle_path %>
-            <%= link_to 'Enter new items', product_items_entry_path %>
-            <span>Ola <%= current_user.email %></span> |
-            <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= link_to 'Entrar', new_user_session_path %>
-          <% end %>
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarWarehouse">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-        <div style="float: right">
+
+        <div id="navbarWarehouse" class="navbar-menu">
+          <div class="navbar-start">
+            <%= link_to 'Home', root_path, class: "navbar-item" %>
+            <%= link_to 'See suppliers', suppliers_path, class: "navbar-item" %>
+            <%= link_to 'See product categories', product_categories_path, class: "navbar-item" %>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+              <div class="navbar-dropdown">
+              <% if user_signed_in? %>
+                <span class="navbar-item">Ola <%= current_user.email%> </span>
+                <hr class="navbar-divider">
+                <%= link_to 'Register new warehouse', new_warehouse_path, class: "navbar-item" %>
+                <%= link_to 'Register new supplier', new_supplier_path, class: "navbar-item" %>
+                <%= link_to 'Register new product category', new_product_category_path, class: "navbar-item" %>
+                <%= link_to 'Register new product model', new_product_model_path, class: "navbar-item" %>
+                <%= link_to 'Register new product bundle', new_product_bundle_path, class: "navbar-item" %>
+                <%= link_to 'Enter new items', product_items_entry_path, class: "navbar-item" %>
+                <hr class="navbar-divider">
+                <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: "navbar-item" %>
+              <% else %>
+                <%= link_to 'Entrar', new_user_session_path, class: "navbar-item" %>
+              <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field has-addons">
           <%= form_with url: search_path, method: :get do %>
-            <%= label_tag :q, 'Search:' %>
-            <%= text_field_tag :q %>
-            <%= submit_tag 'Search' %>
+            <%= text_field_tag :q, nil, class: "input", placeholder: "Find a warehouse", id: 'search-input' %>
+          <div class="level-right">
+            <%= submit_tag 'Search', class: "button is-info", id: 'search-id' %>
+          </div>
           <% end %>
         </div>
+
       </nav>
     </header>
     <main>
-      <%= flash[:notice] %>
-      <%= flash[:alert] %>
-      <br/>
-      <%= yield %>
+      <div class="container">
+        <%= flash[:notice] %>
+        <%= flash[:alert] %>
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

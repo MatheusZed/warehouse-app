@@ -81,11 +81,12 @@ describe 'Visitor sees the product model' do
 
     # Assert
     expect(page).to have_content 'Available Warehouses'
+    expect(page).to have_content 'Codigo do Galpao Quantidade'
     within("div#warehouse-#{wh1.id}") do
-      expect(page).to have_content 'JRZ: 5'
+      expect(page).to have_content 'JRZ 5'
     end
     within("div#warehouse-#{wh2.id}") do
-      expect(page).to have_content 'PLN: 4'
+      expect(page).to have_content 'PLN 4'
     end
   end
 end

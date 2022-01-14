@@ -1,16 +1,25 @@
-<h1>WareHouse App</h1>
-<h3>Welcome to the Warehouse App</h3>
+<div class="content">
+  <h1>WareHouse App</h1>
+  <h3>Welcome to the Warehouse App</h3>
 
-<h2>Registered warehouses</h2>
-<% if @warehouse.empty? %>
-No registered warehouse
-<% else %>
-  <% @warehouse.each do |w| %>
-    <%= link_to(w.name, w) %>
-    <%= w.code %>
-    <% if user_signed_in? %>
-    | <%= link_to 'Edit', edit_warehouse_path(w.id), id: "edit-#{w.id}" %>
-    <% end %>
-    <br/>
+  <h2>Registered warehouses</h2>
+  <% if @warehouse.empty? %>
+  No registered warehouse
+  <% else %>
+</div>
+<div class="table is-striped">
+  <table>
+    <tbody>
+      <tr>
+      <% @warehouse.each do |w| %>
+        <td><%= link_to(w.name, w) %></td>
+        <td><%= w.code %></td>
+        <% if user_signed_in? %>
+        <td><%= link_to 'Edit', edit_warehouse_path(w.id), id: "edit-#{w.id}" %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
   <% end %>
-<% end %>
+</div>

@@ -1,21 +1,25 @@
-<% if product_category.id == nil %>
-<h1>New Product Category</h1>
-<% else %>
-<h1>Edit Product Category</h1>
-<% end %>
-<% if product_category.errors.any? %>
-  <span>Check the fields below:</span>
-  <ul>
-  <% product_category.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+<div class="content">
+  <% if product_category.id == nil %>
+  <h1>New Product Category</h1>
+  <% else %>
+  <h1>Edit Product Category</h1>
   <% end %>
-  </ul>
-<% end %>
+  <% if product_category.errors.any? %>
+    <span>Check the fields below:</span>
+    <ul>
+    <% product_category.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
 
 <%= form_with(model: product_category) do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <div class="control">
+    <%= form.text_field :name, class: 'input', placeholder: 'nome' %>
   </div>
-  <%= form.submit 'Save'%>
+</div>
+  <%= form.submit 'Save', class: 'button is-primary' %>
 <% end %>

@@ -1,9 +1,26 @@
-<h1><%= @product_category.name %></h1>
-<br/>
-<% @product_category.product_models.each do |p| %>
-  <%= p.supplier.fantasy_name %> | <%= p.name %> | <%= p.sku %>
-  <br/>
-<% end %>
+<div class="content">
+  <h1><%= @product_category.name %></h1>
+</div>
+<div class="table is-striped">
+  <table>
+    <thead>
+      <tr>
+        <th>Nome Fantasia</th>
+        <th>Nome do Product Model</th>
+        <th>Codigo SKU</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <% @product_category.product_models.each do |p| %>
+        <td><%= p.supplier.fantasy_name %></td>
+        <td><%= p.name %></td>
+        <td><%= p.sku %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br/>
 <br/>

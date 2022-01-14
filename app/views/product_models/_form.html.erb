@@ -1,45 +1,65 @@
-<% if product_model.id == nil %>
-<h1>New Product Model</h1>
-<% else %>
-<h1>Edit Product Model</h1>
-<% end %>
-<% if product_model.errors.any? %>
-  <span>Check the fields below:</span>
-  <ul>
-  <% product_model.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+<div class="content">
+  <% if product_model.id == nil %>
+  <h1>New Product Model</h1>
+  <% else %>
+  <h1>Edit Product Model</h1>
   <% end %>
-  </ul>
-<% end %>
+  <% if product_model.errors.any? %>
+    <span>Check the fields below:</span>
+    <ul>
+    <% product_model.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
 
 <%= form_with(model: product_model) do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :name, class: 'input', placeholder: 'nome' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :weight %>
-    <%= form.text_field :weight %>
+  <div class="field">
+    <%= form.label :weight, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :weight, class: 'input', placeholder: 'peso' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :height %>
-    <%= form.text_field :height %>
+  <div class="field">
+    <%= form.label :height, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :height, class: 'input', placeholder: 'altura' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :width %>
-    <%= form.text_field :width %>
+  <div class="field">
+    <%= form.label :width, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :width, class: 'input', placeholder: 'largura' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :length %>
-    <%= form.text_field :length %>
+  <div class="field">
+    <%= form.label :length, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :length, class: 'input', placeholder: 'comprimento' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :supplier_id %>
-    <%= form.collection_select(:supplier_id, @supplier, :id, :fantasy_name) %>
+  <div class="field">
+    <%= form.label :supplier_id, class: 'label' %>
+    <div class="control">
+      <div class="select">
+        <%= form.collection_select(:supplier_id, @supplier, :id, :fantasy_name) %>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= form.label :product_category_id %>
-    <%= form.collection_select(:product_category_id, @product_category, :id, :name) %>
+  <div class="field">
+    <%= form.label :product_category_id, class: 'label' %>
+    <div class="control">
+      <div class="select">
+        <%= form.collection_select(:product_category_id, @product_category, :id, :name) %>
+      </div>
+    </div>
   </div>
-  <%= form.submit 'Save'%>
+  <%= form.submit 'Save', class: 'button is-primary' %>
 <% end %>

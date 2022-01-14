@@ -1,53 +1,73 @@
-<% if warehouse.id == nil %>
-<h1>New Warehouse</h1>
-<% else %>
-<h1>Edit Warehouse</h1>
-<% end %>
-<% if warehouse.errors.any? %>
-  <span>Check the fields below:</span>
-  <ul>
-  <% warehouse.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+<div class="content">
+  <% if warehouse.id == nil %>
+  <h1>New Warehouse</h1>
+  <% else %>
+  <h1>Edit Warehouse</h1>
   <% end %>
-  </ul>
-<% end %>
+  <% if warehouse.errors.any? %>
+    <span>Check the fields below:</span>
+    <ul>
+    <% warehouse.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
 
 <%= form_with(model: warehouse) do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :name, class: 'input', placeholder: 'nome' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :code %>
-    <%= form.text_field :code %>
+  <div class="field">
+    <%= form.label :code, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :code, class: 'input', placeholder: 'codigo' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="field">
+    <%= form.label :description, class: 'label' %>
+    <div class="control">
+      <%= form.text_area :description, class: 'textarea', placeholder: 'descricao' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
+  <div class="field">
+    <%= form.label :address, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :address, class: 'input', placeholder: 'endereco' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :city %>
-    <%= form.text_field :city %>
+  <div class="field">
+    <%= form.label :city, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :city, class: 'input', placeholder: 'cidade' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :state %>
-    <%= form.text_field :state %>
+  <div class="field">
+    <%= form.label :state, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :state, class: 'input', placeholder: 'estado' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :postal_code %>
-    <%= form.text_field :postal_code %>
+  <div class="field">
+    <%= form.label :postal_code, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :postal_code, class: 'input', placeholder: 'cep' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :total_area %>
-    <%= form.number_field :total_area %>
+  <div class="field">
+    <%= form.label :total_area, class: 'label' %>
+    <div class="control">
+      <%= form.number_field :total_area, class: 'input', placeholder: 'area total' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :useful_area %>
-    <%= form.number_field :useful_area %>
+  <div class="field">
+    <%= form.label :useful_area, class: 'label' %>
+    <div class="control">
+      <%= form.number_field :useful_area, class: 'input', placeholder: 'area util' %>
+    </div>
   </div>
-  <%= form.submit 'Save'%>
+<%= form.submit 'Save', class: 'button is-primary' %>
 <% end %>
