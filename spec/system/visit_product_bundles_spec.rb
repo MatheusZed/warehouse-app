@@ -13,12 +13,8 @@ describe 'Visitor see product bundles' do
                                length: 22, supplier: s, product_category: pc)
     pm3 = ProductModel.create!(name: 'Doces', weight: 1000, height: 4, width: 17,
                                length: 22, supplier: s, product_category: pc)
-    pb1 = ProductBundle.create!(name: 'Kit Bruxaria')
-    pb2 = ProductBundle.create!(name: 'Kit Xariabru')
-    ProductBundleItem.create!(product_bundle: pb1, product_model: pm1)
-    ProductBundleItem.create!(product_bundle: pb1, product_model: pm2)
-    ProductBundleItem.create!(product_bundle: pb2, product_model: pm1)
-    ProductBundleItem.create!(product_bundle: pb2, product_model: pm3)
+    pb1 = ProductBundle.create!(name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id])
+    pb2 = ProductBundle.create!(name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id])
 
     # Act
     visit root_path
@@ -45,13 +41,8 @@ describe 'Visitor see product bundles' do
                                length: 22, supplier: s, product_category: pc)
     pm3 = ProductModel.create!(name: 'Doces', weight: 1000, height: 4, width: 17,
                                length: 22, supplier: s, product_category: pc)
-    pb1 = ProductBundle.create!(name: 'Kit Bruxaria')
-    pb2 = ProductBundle.create!(name: 'Kit Xariabru')
-    ProductBundleItem.create!(product_bundle: pb1, product_model: pm1)
-    ProductBundleItem.create!(product_bundle: pb1, product_model: pm2)
-    ProductBundleItem.create!(product_bundle: pb1, product_model: pm3)
-    ProductBundleItem.create!(product_bundle: pb2, product_model: pm1)
-    ProductBundleItem.create!(product_bundle: pb2, product_model: pm3)
+    pb1 = ProductBundle.create!(name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id, pm3.id])
+    pb2 = ProductBundle.create!(name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id])
 
     # Act
     visit root_path
@@ -86,18 +77,10 @@ describe 'Visitor see product bundles' do
                                length: 1000, supplier: s2, product_category: pc)
     pm6 = ProductModel.create!(name: 'Gaiola', weight: 4000, height: 1000, width: 1000,
                                length: 1000, supplier: s2, product_category: pc)
-    pb1 = ProductBundle.create!(name: 'Kit Bruxaria')
-    pb2 = ProductBundle.create!(name: 'Kit Xariabru')
-    pb3 = ProductBundle.create!(name: 'Kit Xabruria')
-    pb4 = ProductBundle.create!(name: 'Kit Riabruxa')
-    ProductBundleItem.create!(product_bundle: pb1, product_model: pm1)
-    ProductBundleItem.create!(product_bundle: pb1, product_model: pm2)
-    ProductBundleItem.create!(product_bundle: pb2, product_model: pm1)
-    ProductBundleItem.create!(product_bundle: pb2, product_model: pm3)
-    ProductBundleItem.create!(product_bundle: pb3, product_model: pm4)
-    ProductBundleItem.create!(product_bundle: pb3, product_model: pm5)
-    ProductBundleItem.create!(product_bundle: pb4, product_model: pm4)
-    ProductBundleItem.create!(product_bundle: pb4, product_model: pm6)
+    pb1 = ProductBundle.create!(name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id])
+    pb2 = ProductBundle.create!(name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id])
+    pb3 = ProductBundle.create!(name: 'Kit Xabruria', product_model_ids: [pm4.id, pm5.id])
+    pb4 = ProductBundle.create!(name: 'Kit Riabruxa', product_model_ids: [pm4.id, pm6.id])
     
     # Act
     visit root_path

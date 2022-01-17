@@ -4,7 +4,15 @@ RSpec.describe ProductBundle, type: :model do
   context 'should not be valid if the fields are empty' do
     it 'name' do
       # Arrage
-      pb = ProductBundle.new(name: '')
+      s = Supplier.create!(fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
+                           cnpj: '30605809000108', address: 'Av Cabernet, 100',
+                           email: 'contato@miolovinhos.com', phone: '71 91124-7753')
+      pc = ProductCategory.create!(name: 'Conservados')
+      pm1 = ProductModel.create!(name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pm2 = ProductModel.create!(name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pb = ProductBundle.new(name: '', product_model_ids: [pm1.id, pm2.id])
 
       # Act
       result = pb.valid?
@@ -15,7 +23,15 @@ RSpec.describe ProductBundle, type: :model do
 
     it 'sku' do
       # Arrage
-      pb = ProductBundle.new(name: 'Kit Panos')
+      s = Supplier.create!(fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
+                           cnpj: '30605809000108', address: 'Av Cabernet, 100',
+                           email: 'contato@miolovinhos.com', phone: '71 91124-7753')
+      pc = ProductCategory.create!(name: 'Conservados')
+      pm1 = ProductModel.create!(name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pm2 = ProductModel.create!(name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pb = ProductBundle.new(name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id])
       allow(SecureRandom).to receive(:alphanumeric).with(17).and_return ''
 
       # Act
@@ -29,8 +45,16 @@ RSpec.describe ProductBundle, type: :model do
   context 'should not be valid if the fields are duplicate' do
     it 'name' do
       # Arrage
-      ProductBundle.create!(name: 'Kit Panos')
-      pb = ProductBundle.new(name: 'Kit Panos')
+      s = Supplier.create!(fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
+                           cnpj: '30605809000108', address: 'Av Cabernet, 100',
+                           email: 'contato@miolovinhos.com', phone: '71 91124-7753')
+      pc = ProductCategory.create!(name: 'Conservados')
+      pm1 = ProductModel.create!(name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pm2 = ProductModel.create!(name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      ProductBundle.create!(name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id])
+      pb = ProductBundle.new(name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id])
 
       # Act
       result = pb.valid?
@@ -41,8 +65,16 @@ RSpec.describe ProductBundle, type: :model do
 
     it 'sku' do
       # Arrange
-      pb1 = ProductBundle.create!(name: 'Kit Sacolas')
-      pb2 = ProductBundle.new(name: 'Kit Panos')
+      s = Supplier.create!(fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
+                           cnpj: '30605809000108', address: 'Av Cabernet, 100',
+                           email: 'contato@miolovinhos.com', phone: '71 91124-7753')
+      pc = ProductCategory.create!(name: 'Conservados')
+      pm1 = ProductModel.create!(name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pm2 = ProductModel.create!(name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pb1 = ProductBundle.create!(name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id])
+      pb2 = ProductBundle.new(name: 'Kit Vinho Gurme', product_model_ids: [pm1.id, pm2.id])
       sku = pb1.sku
       allow(SecureRandom).to receive(:alphanumeric).with(17).and_return sku
       pb2.save()
@@ -57,7 +89,15 @@ RSpec.describe ProductBundle, type: :model do
 
   it 'should generate an SKU with 21 characters' do
     # Arrange
-    pb = ProductBundle.new(name: 'Kit Panos')
+    s = Supplier.create!(fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
+                         cnpj: '30605809000108', address: 'Av Cabernet, 100',
+                         email: 'contato@miolovinhos.com', phone: '71 91124-7753')
+    pc = ProductCategory.create!(name: 'Conservados')
+    pm1 = ProductModel.create!(name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
+                               length: 10, supplier: s, product_category: pc)
+    pm2 = ProductModel.create!(name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
+                               length: 10, supplier: s, product_category: pc)
+    pb = ProductBundle.create!(name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id])
 
     # Act
     pb.save()
@@ -69,7 +109,15 @@ RSpec.describe ProductBundle, type: :model do
 
   it 'should generate a random SKU' do
     # Arrange
-    pb = ProductBundle.new(name: 'Kit Panos')
+    s = Supplier.create!(fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
+                         cnpj: '30605809000108', address: 'Av Cabernet, 100',
+                         email: 'contato@miolovinhos.com', phone: '71 91124-7753')
+    pc = ProductCategory.create!(name: 'Conservados')
+    pm1 = ProductModel.create!(name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
+                               length: 10, supplier: s, product_category: pc)
+    pm2 = ProductModel.create!(name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
+                               length: 10, supplier: s, product_category: pc)
+    pb = ProductBundle.create!(name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id])
     allow(SecureRandom).to receive(:alphanumeric).with(17).and_return 'XjDED8ylT4hFzqVnl'
 
     # Act
@@ -82,7 +130,15 @@ RSpec.describe ProductBundle, type: :model do
   context 'should not be valid if sku is in wrong format' do
     it 'KSKUa4s582d4f536f4g7h4ytr' do
       # Arrange
-      pb = ProductBundle.new(name: 'Kit Panos')
+      s = Supplier.create!(fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
+                           cnpj: '30605809000108', address: 'Av Cabernet, 100',
+                           email: 'contato@miolovinhos.com', phone: '71 91124-7753')
+      pc = ProductCategory.create!(name: 'Conservados')
+      pm1 = ProductModel.create!(name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pm2 = ProductModel.create!(name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pb = ProductBundle.create!(name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id])
       allow(SecureRandom).to receive(:alphanumeric).with(17).and_return 'KSKUa4s582d4f536f4g7h4ytr'
 
       # Act
@@ -94,12 +150,20 @@ RSpec.describe ProductBundle, type: :model do
 
     it 'SKUa4s582d4f536f4g7h4' do
       # Arrange
-      pb = ProductBundle.new(name: 'Kit Panos')
+      s = Supplier.create!(fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
+                           cnpj: '30605809000108', address: 'Av Cabernet, 100',
+                           email: 'contato@miolovinhos.com', phone: '71 91124-7753')
+      pc = ProductCategory.create!(name: 'Conservados')
+      pm1 = ProductModel.create!(name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pm2 = ProductModel.create!(name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
+                                 length: 10, supplier: s, product_category: pc)
+      pb = ProductBundle.create!(name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id])
       allow(SecureRandom).to receive(:alphanumeric).with(17).and_return 'KSKUa4s582d4f536f4g7h4'
 
       # Act
       result = pb.valid?
-    
+
       # Assert
       expect(result).to eq false
     end
