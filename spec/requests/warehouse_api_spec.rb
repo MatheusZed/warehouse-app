@@ -69,4 +69,36 @@ describe 'Warehouse API' do
       expect(response.status).to eq 404
     end
   end
+
+  context 'POST /api/v1/warehouse' do
+    it 'successfully' do
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Osasco', code: 'OZC', description: 'Galpao de alto volume', address: 'Av. Santo Antonio, 200',
+                 city: 'Osasco', state: 'SP', postal_code: '06162-000', total_area: 2000, useful_area: 1900 }
+      post '/api/v1/warehouses', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response["name"]).to eq 'Osasco'
+      expect(parsed_response["code"]).to eq 'OZC'
+    end
+
+    it 'has required fields' do
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Osasco', address: 'Av. Santo Antonio, 200', city: 'Osasco',
+                 state: 'SP', total_area: 2000, useful_area: 1900 }
+      post '/api/v1/warehouses', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422 
+    end
+
+    it 'code is not unique' do
+      
+    end
+  end
 end
