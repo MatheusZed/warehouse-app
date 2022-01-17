@@ -101,6 +101,67 @@ describe 'Product Model API' do
     end
   end
 
+  context 'POST /api/v1/product_models' do
+    it 'successfully' do
+      # Arrange
+      s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e o pao',
+                           cnpj: '59201134000113', address: 'Av Fernandes China',
+                           email: 'maria.pao@yahoo.com', phone: '91124-7799')
+      pc = ProductCategory.create!(name: 'Conservados')
+
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Migalhas de pao', weight: 1000, height: 10, width: 5,
+                 length: 22, supplier_id: s.id, product_category_id: pc.id }
+      post '/api/v1/product_models', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response["name"]).to eq 'Migalhas de pao'
+      expect(parsed_response["weight"]).to eq 1000
+      expect(parsed_response.keys).to include 'sku'
+      expect(parsed_response.keys).not_to include 'created_at'
+      expect(parsed_response.keys).not_to include 'updated_at'
+    end
+    
+    it 'has required fields' do
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Migalhas de pao', height: 10, width: 5, length: 22}
+      post '/api/v1/product_models', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Fornecedor é obrigatório(a)'
+      expect(response.body).to include 'Categoria de Produto é obrigatório(a)'
+      expect(response.body).to include 'Peso não pode ficar em branco'
+    end
+
+    it "height, width, width and length can't be 0 or less" do
+      # Arrange
+      s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e o pao',
+                           cnpj: '59201134000113', address: 'Av Fernandes China',
+                           email: 'maria.pao@yahoo.com', phone: '91124-7799')
+      pc = ProductCategory.create!(name: 'Conservados')
+
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Migalhas de pao', weight: 0, height: 0, width: 0,
+                 length: 0, supplier_id: s.id, product_category_id: pc.id }
+      post '/api/v1/product_models', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Peso deve ser maior que 0'
+      expect(response.body).to include 'Altura deve ser maior que 0'
+      expect(response.body).to include 'Largura deve ser maior que 0'
+      expect(response.body).to include 'Comprimento deve ser maior que 0'
+    end    
+  end
+  
+
   it 'database error - 500' do
     # Arrange
     s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',

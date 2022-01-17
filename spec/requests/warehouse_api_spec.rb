@@ -73,7 +73,7 @@ describe 'Warehouse API' do
     end
   end
 
-  context 'POST /api/v1/warehouse' do
+  context 'POST /api/v1/warehouses' do
     it 'successfully' do
       # Act
       headers = { "Content-Type " => "application/json"}
@@ -87,6 +87,8 @@ describe 'Warehouse API' do
       expect(parsed_response["id"]).to be_a_kind_of(Integer)
       expect(parsed_response["name"]).to eq 'Osasco'
       expect(parsed_response["code"]).to eq 'OZC'
+      expect(parsed_response.keys).not_to include 'created_at'
+      expect(parsed_response.keys).not_to include 'updated_at'
     end
 
     it 'has required fields' do
@@ -103,11 +105,29 @@ describe 'Warehouse API' do
       expect(response.body).to include 'CEP não pode ficar em branco'
     end
 
-    it "code isn't unique" do
+    it "name isn't unique" do
       # Arrange
       w = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
                             address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
                             postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Alimenticio', code: 'OSC', description: 'Galpao de alto volume', address: 'Av. Santo Antonio, 200',
+                 city: 'Osasco', state: 'SP', postal_code: '06162-000', total_area: 2000, useful_area: 1900 }
+      post '/api/v1/warehouses', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Nome já está em uso'
+    end
+
+    it "code isn't unique" do
+      # Arrange
+      Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+
       # Act
       headers = { "Content-Type " => "application/json"}
       params = { name: 'Osasco', code: 'ALM', description: 'Galpao de alto volume', address: 'Av. Santo Antonio, 200',
@@ -117,6 +137,18 @@ describe 'Warehouse API' do
       # Assert
       expect(response.status).to eq 422
       expect(response.body).to include 'Codigo já está em uso'
+    end
+
+    it 'CEP in wrong format' do
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Osasco', code: 'ALM', description: 'Galpao de alto volume', address: 'Av. Santo Antonio, 200',
+                 city: 'Osasco', state: 'SP', postal_code: '061622-000', total_area: 2000, useful_area: 1900 }
+      post '/api/v1/warehouses', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'CEP não é valido, formato: 00000-000'
     end
   end
 end

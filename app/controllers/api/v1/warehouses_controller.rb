@@ -15,7 +15,7 @@ class Api::V1::WarehousesController < Api::V1::ApiController
     warehouse = Warehouse.new(warehouse_params)
     
     if warehouse.save
-      render status: 201, json: warehouse
+      render status: 201, json: warehouse.as_json(except: [:created_at, :updated_at])
     else
       render status: 422, json: warehouse.errors.full_messages
     end

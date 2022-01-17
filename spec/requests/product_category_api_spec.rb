@@ -62,4 +62,46 @@ describe 'Product Category API' do
       expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
     end
   end
+
+  context 'POST /api/v1/product_categories' do
+    it 'successfully' do
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Congelados' }
+      post '/api/v1/product_categories', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response["name"]).to eq 'Congelados'
+      expect(parsed_response.keys).not_to include 'created_at'
+      expect(parsed_response.keys).not_to include 'updated_at'
+    end
+
+    it 'has required field' do
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: '' }
+      post '/api/v1/product_categories', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Nome não pode ficar em branco'      
+    end
+    
+    it "name isn't unique" do
+      # Arrange
+      pc = ProductCategory.create!(name: 'Conservados')
+
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Conservados' }
+      post '/api/v1/product_categories', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Nome já está em uso'      
+    end    
+  end  
 end

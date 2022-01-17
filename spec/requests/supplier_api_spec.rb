@@ -78,4 +78,65 @@ describe 'Supplier API' do
       expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
     end
   end
+
+  context 'POST /api/v1/suppliers' do
+    it 'successfully' do
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { fantasy_name: 'Joao', legal_name: 'Joao Doceria', cnpj: '79885381000193',
+                 address: 'Av. Santo Antonio, 200', email: 'joao@doceria.com', phone: '944875214' }
+      post '/api/v1/suppliers', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response["fantasy_name"]).to eq 'Joao'
+      expect(parsed_response["cnpj"]).to eq '79885381000193'
+      expect(parsed_response.keys).not_to include 'created_at'
+      expect(parsed_response.keys).not_to include 'updated_at'
+    end
+    
+    it 'has required fields' do
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { cnpj: '79885381000193', address: 'Av. Santo Antonio, 200',
+                 email: 'joao@doceria.com', phone: '944875214' }
+      post '/api/v1/suppliers', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Nome Fantasia não pode ficar em branco'
+      expect(response.body).to include 'Razao Social não pode ficar em branco'
+    end
+
+    it "CNPJ isn't unique" do
+      # Arrange
+      Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao e os doces',
+                       cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
+                       email: 'joao.doceria@yahoo.com', phone: '91124-2854')
+
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { fantasy_name: 'Joao', legal_name: 'Joao Doceria', cnpj: '22416076000135',
+                 address: 'Av. Santo Antonio, 200', email: 'joao@doceria.com', phone: '944875214' }
+      post '/api/v1/suppliers', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'CNPJ já está em uso'
+    end
+
+    it 'CNPJ in wrong format' do
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { fantasy_name: 'Joao', legal_name: 'Joao Doceria', cnpj: '2241607000135',
+                 address: 'Av. Santo Antonio, 200', email: 'joao@doceria.com', phone: '944875214' }
+      post '/api/v1/suppliers', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'CNPJ não é valido, precisa conter 14 digitos'
+    end
+  end  
 end
