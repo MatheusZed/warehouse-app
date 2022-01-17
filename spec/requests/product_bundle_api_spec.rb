@@ -30,7 +30,12 @@ describe 'Product Bundle API' do
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
       expect(parsed_response[0]["name"]).to eq 'Kit Bruxaria'
+      expect(parsed_response[0]["product_bundle_items"][0]["product_model_id"]).to eq pm1.id
+      expect(parsed_response[0]["product_bundle_items"][1]["product_model_id"]).to eq pm2.id
+      expect(parsed_response[0]["product_bundle_items"][2]["product_model_id"]).to eq pm3.id
       expect(parsed_response[1]["name"]).to eq 'Kit Xariabru'
+      expect(parsed_response[1]["product_bundle_items"][0]["product_model_id"]).to eq pm1.id
+      expect(parsed_response[1]["product_bundle_items"][1]["product_model_id"]).to eq pm3.id
       expect(parsed_response[0].keys).not_to include 'created_at'
       expect(parsed_response[0].keys).not_to include 'updated_at'
       expect(parsed_response[1].keys).not_to include 'created_at'
@@ -75,6 +80,9 @@ describe 'Product Bundle API' do
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
       expect(parsed_response["name"]).to eq 'Kit Bruxaria'
+      expect(parsed_response["product_bundle_items"][0]["product_model_id"]).to eq pm1.id
+      expect(parsed_response["product_bundle_items"][1]["product_model_id"]).to eq pm2.id
+      expect(parsed_response["product_bundle_items"][2]["product_model_id"]).to eq pm3.id
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
