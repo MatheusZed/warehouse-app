@@ -57,6 +57,9 @@ describe 'Product Category API' do
       
       # Assert
       expect(response.status).to eq 404
+      expect(response.content_type).to include 'application/json'
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
     end
   end
 end

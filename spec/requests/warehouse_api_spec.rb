@@ -67,6 +67,9 @@ describe 'Warehouse API' do
       
       # Assert
       expect(response.status).to eq 404
+      expect(response.content_type).to include 'application/json'
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
     end
   end
 
@@ -94,11 +97,26 @@ describe 'Warehouse API' do
       post '/api/v1/warehouses', params: params, headers: headers
 
       # Assert
-      expect(response.status).to eq 422 
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Codigo não pode ficar em branco'
+      expect(response.body).to include 'Descricao não pode ficar em branco'
+      expect(response.body).to include 'CEP não pode ficar em branco'
     end
 
-    it 'code is not unique' do
-      
+    it "code isn't unique" do
+      # Arrange
+      w = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+                            address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+                            postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Osasco', code: 'ALM', description: 'Galpao de alto volume', address: 'Av. Santo Antonio, 200',
+                 city: 'Osasco', state: 'SP', postal_code: '06162-000', total_area: 2000, useful_area: 1900 }
+      post '/api/v1/warehouses', params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include 'Codigo já está em uso'
     end
   end
 end

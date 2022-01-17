@@ -91,10 +91,33 @@ describe 'Product Model API' do
     
     it "product model doesn't exist" do
       # Act
-      get '/api/v1/warehouses/999'
+      get '/api/v1/product_models/999'
     
       # Assert
       expect(response.status).to eq 404
+      expect(response.content_type).to include 'application/json'
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
     end
+  end
+
+  it 'database error - 500' do
+    # Arrange
+    s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
+                         cnpj: '30605809000108', address: 'Av Fernandes Lima',
+                         email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+    pc = ProductCategory.create!(name: 'Conservados')
+    pm = ProductModel.create!(name: 'Saco de Feijao', weight: 1000, height: 4, width: 17,
+                              length: 22, supplier: s, product_category: pc)
+    allow(ProductModel).to receive(:find).with(pm.id.to_s).and_raise ActiveRecord::ConnectionNotEstablished
+    
+    # Act
+    get "/api/v1/product_models/#{pm.id}"
+
+    # Assert
+    expect(response.status).to eq 500
+    expect(response.content_type).to include 'application/json'
+    parsed_response = JSON.parse(response.body)
+    expect(parsed_response["error"]).to eq 'Nao foi possivel conectar ao banco de dados'
   end
 end
