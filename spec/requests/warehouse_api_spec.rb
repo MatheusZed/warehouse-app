@@ -151,4 +151,38 @@ describe 'Warehouse API' do
       expect(response.body).to include 'CEP não é valido, formato: 00000-000'
     end
   end
+
+  context 'PUT /api/v1/warehouses/:id' do
+    it 'successfully' do
+      # Arrange
+      w = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+                            address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+                            postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: 'Osasco', code: 'OZC' }
+      put "/api/v1/warehouses/#{w.id}", params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response["name"]).to eq 'Osasco'
+      expect(parsed_response["code"]).to eq 'OZC'
+      expect(parsed_response.keys).not_to include 'created_at'
+      expect(parsed_response.keys).not_to include 'updated_at'      
+    end
+  
+    it "warehouse doesn't exist" do
+      # Act
+      put '/api/v1/warehouses/999'
+      
+      # Assert
+      expect(response.status).to eq 404
+      expect(response.content_type).to include 'application/json'
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+    end
+  end  
 end
