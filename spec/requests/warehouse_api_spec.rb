@@ -4,16 +4,20 @@ describe 'Warehouse API' do
   context 'GET api/v1/warehouses' do
     it 'successfuly' do
       # Arrange
-      Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-      Warehouse.create!(name: 'Roupas', code: 'RUP', description: 'Otimo galpao com precos baixos',
-                        address: 'Av Fernandes Cronus', city: 'Maceio', state: 'AL',
-                        postal_code:'57051-000', total_area: 10000, useful_area: 8000)
-                      
+      Warehouse.create!(
+        name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
+      Warehouse.create!(
+        name: 'Roupas', code: 'RUP', description: 'Otimo galpao com precos baixos',
+        address: 'Av Fernandes Cronus', city: 'Maceio', state: 'AL',
+        postal_code:'57051-000', total_area: 10000, useful_area: 8000
+      )
+
       # Act
       get '/api/v1/warehouses'
-      
+
       # Assert
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
@@ -27,11 +31,11 @@ describe 'Warehouse API' do
       expect(parsed_response[1].keys).not_to include 'created_at'
       expect(parsed_response[1].keys).not_to include 'updated_at'
     end
-    
+
     it 'empty response' do
       # Act
       get '/api/v1/warehouses'
-      
+
       # Assert
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
@@ -43,9 +47,11 @@ describe 'Warehouse API' do
   context 'GET /api/v1/warehouses/:id' do
     it 'successfully' do
       # Arrange
-      w = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                            address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                            postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+      w = Warehouse.create!(
+        name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
 
       # Act
       get "/api/v1/warehouses/#{w.id}"
@@ -64,7 +70,7 @@ describe 'Warehouse API' do
     it "warehouse doesn't exist" do
       # Act
       get '/api/v1/warehouses/999'
-      
+
       # Assert
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
@@ -107,9 +113,11 @@ describe 'Warehouse API' do
 
     it "name isn't unique" do
       # Arrange
-      w = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                            address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                            postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+      Warehouse.create!(
+        name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
 
       # Act
       headers = { "Content-Type " => "application/json"}
@@ -124,9 +132,11 @@ describe 'Warehouse API' do
 
     it "code isn't unique" do
       # Arrange
-      Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+      Warehouse.create!(
+        name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
 
       # Act
       headers = { "Content-Type " => "application/json"}
@@ -155,9 +165,11 @@ describe 'Warehouse API' do
   context 'PUT /api/v1/warehouses/:id' do
     it 'successfully' do
       # Arrange
-      w = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                            address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                            postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+      w = Warehouse.create!(
+        name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
 
       # Act
       headers = { "Content-Type " => "application/json"}
@@ -171,18 +183,36 @@ describe 'Warehouse API' do
       expect(parsed_response["name"]).to eq 'Osasco'
       expect(parsed_response["code"]).to eq 'OZC'
       expect(parsed_response.keys).not_to include 'created_at'
-      expect(parsed_response.keys).not_to include 'updated_at'      
+      expect(parsed_response.keys).not_to include 'updated_at'
     end
-  
+
+    it "and can't edit" do
+      # Arrange
+      w = Warehouse.create!(
+        name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
+
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { name: '' }
+      put "/api/v1/warehouses/#{w.id}", params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include "Nome não pode ficar em branco"
+    end
+
     it "warehouse doesn't exist" do
       # Act
       put '/api/v1/warehouses/999'
-      
+
       # Assert
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
       expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
     end
-  end  
+  end
 end

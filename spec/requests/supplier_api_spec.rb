@@ -4,17 +4,20 @@ describe 'Supplier API' do
   context 'GET api/v1/suppliers' do
     it 'successfuly' do
       # Arrange
-      Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao e os doces',
-                       cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
-                       email: 'joao.doceria@yahoo.com', phone: '91124-2854')
-      Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-                       cnpj: '22416076000138', address: 'Rua Benedito Spinardi',
-                       email: 'maria.doceria@yahoo.com', phone: '91125-2854')
-                           
-                          
+      Supplier.create!(
+        fantasy_name: 'Joao', legal_name: 'Joao e os doces',
+        cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
+        email: 'joao.doceria@yahoo.com', phone: '91124-2854'
+      )
+      Supplier.create!(
+        fantasy_name: 'Maria', legal_name: 'Maria e os doces',
+        cnpj: '22416076000138', address: 'Rua Benedito Spinardi',
+        email: 'maria.doceria@yahoo.com', phone: '91125-2854'
+      )
+
       # Act
       get '/api/v1/suppliers'
-          
+
       # Assert
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
@@ -32,11 +35,11 @@ describe 'Supplier API' do
       expect(parsed_response[1].keys).not_to include 'cnpj'
       expect(parsed_response[1].keys).not_to include 'address'
     end
-    
+
     it 'empty response' do
       # Act
       get '/api/v1/suppliers'
-      
+
       # Assert
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
@@ -48,9 +51,11 @@ describe 'Supplier API' do
   context 'GET /api/v1/suppliers/:id' do
     it 'successfully' do
       # Arrange
-      s = Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao e os doces',
-                           cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
-                           email: 'joao.doceria@yahoo.com', phone: '91124-2854')
+      s = Supplier.create!(
+        fantasy_name: 'Joao', legal_name: 'Joao e os doces',
+        cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
+        email: 'joao.doceria@yahoo.com', phone: '91124-2854'
+      )
 
       # Act
       get "/api/v1/suppliers/#{s.id}"
@@ -70,7 +75,7 @@ describe 'Supplier API' do
     it "warehouse doesn't exist" do
       # Act
       get '/api/v1/suppliers/999'
-      
+
       # Assert
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
@@ -96,7 +101,7 @@ describe 'Supplier API' do
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
-    
+
     it 'has required fields' do
       # Act
       headers = { "Content-Type " => "application/json"}
@@ -112,9 +117,11 @@ describe 'Supplier API' do
 
     it "CNPJ isn't unique" do
       # Arrange
-      Supplier.create!(fantasy_name: 'Joao', legal_name: 'Joao e os doces',
-                       cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
-                       email: 'joao.doceria@yahoo.com', phone: '91124-2854')
+      Supplier.create!(
+        fantasy_name: 'Joao', legal_name: 'Joao e os doces',
+        cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
+        email: 'joao.doceria@yahoo.com', phone: '91124-2854'
+      )
 
       # Act
       headers = { "Content-Type " => "application/json"}
@@ -138,5 +145,59 @@ describe 'Supplier API' do
       expect(response.status).to eq 422
       expect(response.body).to include 'CNPJ não é valido, precisa conter 14 digitos'
     end
-  end  
+  end
+
+  context 'PUT /api/v1/suppliers/:id' do
+    it 'successfully' do
+      # Arrange
+      s = Supplier.create!(
+        fantasy_name: 'Joao', legal_name: 'Joao e os doces',
+        cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
+        email: 'joao.doceria@yahoo.com', phone: '91124-2854'
+      )
+
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { fantasy_name: 'Maria', cnpj: '22416076000134' }
+      put "/api/v1/suppliers/#{s.id}", params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 201
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response["fantasy_name"]).to eq 'Maria'
+      expect(parsed_response["cnpj"]).to eq '22416076000134'
+      expect(parsed_response.keys).not_to include 'created_at'
+      expect(parsed_response.keys).not_to include 'updated_at'
+    end
+
+    it "and can't edit" do
+      # Arrange
+      s = Supplier.create!(
+        fantasy_name: 'Joao', legal_name: 'Joao e os doces',
+        cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
+        email: 'joao.doceria@yahoo.com', phone: '91124-2854'
+      )
+
+      # Act
+      headers = { "Content-Type " => "application/json"}
+      params = { fantasy_name: '' }
+      put "/api/v1/suppliers/#{s.id}", params: params, headers: headers
+
+      # Assert
+      expect(response.status).to eq 422
+      expect(response.body).to include "Nome Fantasia não pode ficar em branco"
+    end
+
+    it "warehouse doesn't exist" do
+      # Act
+      put '/api/v1/suppliers/999'
+
+      # Assert
+      expect(response.status).to eq 404
+      expect(response.content_type).to include 'application/json'
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+    end
+  end
 end

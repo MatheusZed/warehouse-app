@@ -14,11 +14,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :warehouses,         only: [:index, :show, :create, :update]
-      resources :suppliers,          only: [:index, :show, :create]
-      resources :product_models,     only: [:index, :show, :create]
-      resources :product_bundles,    only: [:index, :show, :create]
-      resources :product_categories, only: [:index, :show, :create]
+      resources :warehouses,         except: %i[new edit destroy]
+      resources :suppliers,          except: %i[new edit destroy]
+      resources :product_models,     except: %i[new edit destroy]
+      resources :product_bundles,    except: %i[new edit destroy]
+      resources :product_categories, except: %i[new edit destroy]
     end
   end
 end
