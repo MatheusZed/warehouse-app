@@ -1,9 +1,9 @@
 class WarehousesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :product_entry]
+  before_action :set_warehouse, only: %i[show edit update]
+  before_action :set_params, only: %i[create update]
 
   def show
-    id = params[:id]
-    @warehouse = Warehouse.find(id)
     @product_models = ProductModel.all
     @items = @warehouse.product_items.group(:product_model).count
   end
@@ -13,14 +13,10 @@ class WarehousesController < ApplicationController
   end
 
   def create
-    warehouse_params = params.require(:warehouse).permit(:name, :code, :description,
-                                                         :address, :state, :city,
-                                                         :postal_code, :total_area,
-                                                         :useful_area)
-    @warehouse = Warehouse.new(warehouse_params)
+    @warehouse = Warehouse.new(@warehouse_params)
 
     if @warehouse.save()
-    #flash[:notice] = 'Galpao registrado com sucesso'
+      #flash[:notice] = 'Galpao registrado com sucesso'
       redirect_to warehouse_path(@warehouse.id), notice: 'Successfully registered warehouse'
     else
       flash.now[:alert] = "It wasn't possible to record the warehouse"
@@ -29,23 +25,14 @@ class WarehousesController < ApplicationController
   end
 
   def edit
-    id = params[:id]
-    @warehouse = Warehouse.find(id)
   end
 
   def update
-    id = params[:id]
-    @warehouse = Warehouse.find(id)
-    warehouse_params = params.require(:warehouse).permit(:name, :code, :description,
-                                                         :address, :state, :city,
-                                                         :postal_code, :total_area,
-                                                         :useful_area)
-
-    if @warehouse.update(warehouse_params)
+    if @warehouse.update(@warehouse_params)
       redirect_to warehouse_path(@warehouse.id), notice: 'Successfully edited warehouse'
-      else
-        flash.now[:alert] = "It wasn't possible to edit the warehouse"
-        render 'new'
+    else
+      flash.now[:alert] = "It wasn't possible to edit the warehouse"
+      render 'new'
     end
   end
 
@@ -60,5 +47,19 @@ class WarehousesController < ApplicationController
       flash.now[:alert] = "It wasn't possible to record the items"
       render warehouse_path(@pe.warehouse_id), locals: { pe: @product_entry }
     end
+  end
+
+
+  private
+
+  def set_warehouse
+    @warehouse = Warehouse.find(params[:id])
+  end
+
+  def set_params
+    @warehouse_params = params.require(:warehouse).permit(
+      :name, :code, :description, :address, :state, :city,
+      :postal_code, :total_area, :useful_area
+    )
   end
 end

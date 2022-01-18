@@ -1,9 +1,9 @@
 class ProductBundlesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: %i[new create edit update]
+  before_action :set_product_bundle, only: %i[show edit update]
+  before_action :set_params, only: %i[create update]
   
   def show
-    id = params[:id]
-    @product_bundle = ProductBundle.find(id)
   end
 
   def new
@@ -12,32 +12,38 @@ class ProductBundlesController < ApplicationController
   end
 
   def create
-    bundle_params = params.require(:product_bundle).permit(:name, :sku, product_model_ids: [])
-    @product_bundle = ProductBundle.new(bundle_params)
+    @product_bundle = ProductBundle.new(@product_bundle_params )
 
     if @product_bundle.save()
       redirect_to product_bundle_path(@product_bundle.id), notice: 'Successfully registered product bundle'
-      else
+    else
       flash.now[:alert] = "It wasn't possible to record the product bundle"
       render 'new'
     end
   end
 
   def edit
-    id = params[:id]
-    @product_bundle = ProductBundle.find(id)
   end
 
   def update
-    id = params[:id]
-    @product_bundle = ProductBundle.find(id)
-    product_bundle_params = params.require(:product_bundle).permit(:name, :sku, product_model_ids: [])
-
-    if @product_bundle.update(product_bundle_params)
+    if @product_bundle.update(@product_bundle_params)
       redirect_to product_bundle_path(@product_bundle.id), notice: 'Successfully edited product bundle'
     else
       flash.now[:alert] = "It wasn't possible to edit the product bundle"
       render 'new'
     end
+  end
+
+
+  private
+
+  def set_product_bundle
+    @product_bundle = ProductBundle.find(params[:id])
+  end
+
+  def set_params
+    @product_bundle_params = params.require(:product_bundle).permit(
+      :name, :sku, product_model_ids: []
+    )
   end
 end
