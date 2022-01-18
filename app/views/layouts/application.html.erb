@@ -75,4 +75,20 @@
       </div>
     </main>
   </body>
+
+  <script>
+    $(function(){
+      if($("#search-input").val() == "") {
+        $("#search-id").attr("disabled", true);
+      }
+      $("#search-input").keyup(function() {
+        if($("#search-input").val() != "") {
+          $("#search-id").attr("disabled", false);
+        } else {
+          $("#search-id").attr("disabled", true);
+        }
+      })
+    })
+  </script>
+  
 </html>

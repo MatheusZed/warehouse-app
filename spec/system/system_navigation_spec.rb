@@ -163,11 +163,11 @@ describe 'User navigates' do
 
       # Act
       login_as(user, scope: :user)
-      visit suppliers_path
-      click_on 'Search'
+      visit root_path
 
       # Assert
-      expect(current_path).to eq suppliers_path
+      disabled = page.evaluate_script("$('#search-id').attr('disabled');")
+      disabled.should == 'disabled'
     end
   end
 end
