@@ -28,7 +28,6 @@ describe 'User navigates' do
     expect(page).to have_css 'nav a', text: 'Register new product bundle'
     expect(page).to have_css 'nav a', text: 'Enter new items'
 
-
     # Assert 2
     within 'nav' do
       expect(page).to have_link 'Home', href: root_path
@@ -54,19 +53,25 @@ describe 'User navigates' do
     expect(page).to have_field 'search-input'
     expect(page).to have_button 'Search'
   end
-  
+
   context 'and search for warehouse' do  
     it 'successfully by name' do
       # Arrange
-      Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-      Warehouse.create!(name: 'Salgados', code: 'SLG', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-      Warehouse.create!(name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)                      
+      Warehouse.create!(
+        name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
+      Warehouse.create!(
+        name: 'Salgados', code: 'SLG', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
+      Warehouse.create!(
+        name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
       user = User.create!(email: 'joao@email.com', password: 'admino')
 
       # Act
@@ -87,15 +92,21 @@ describe 'User navigates' do
 
     it 'successfully by code' do
       # Arrange
-      Warehouse.create!(name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-      Warehouse.create!(name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-      Warehouse.create!(name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)                      
+      Warehouse.create!(
+        name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
+      Warehouse.create!(
+        name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
+      Warehouse.create!(
+        name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
       user = User.create!(email: 'joao@email.com', password: 'admino')
 
       # Act
@@ -103,7 +114,7 @@ describe 'User navigates' do
       visit suppliers_path
       fill_in 'search-input',	with: 'LO'
       click_on 'Search'
-      
+
       # Assert
       expect(page).to have_css 'h1', text: 'Search results'
       expect(page).to have_css '#src', text: 'Alimenticio'
@@ -116,12 +127,16 @@ describe 'User navigates' do
 
     it 'and can go to warehouse trought the link in name' do
       # Arrange
-      Warehouse.create!(name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa cidade tranquila',
-                        address: 'Av Calsadao', city: 'Osasco', state: 'SP',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-      Warehouse.create!(name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidadee',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57051-000', total_area: 1000, useful_area: 800)
+      Warehouse.create!(
+        name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa cidade tranquila',
+        address: 'Av Calsadao', city: 'Osasco', state: 'SP',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
+      Warehouse.create!(
+        name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidadee',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57051-000', total_area: 1000, useful_area: 800
+      )
       user = User.create!(email: 'joao@email.com', password: 'admino')
 
       # Act
@@ -150,15 +165,21 @@ describe 'User navigates' do
 
     pending "and can't search if label is empty" do
       # Arrange
-      Warehouse.create!(name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-      Warehouse.create!(name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-      Warehouse.create!(name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade',
-                        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                        postal_code:'57050-000', total_area: 10000, useful_area: 8000)                      
+      Warehouse.create!(
+        name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
+      Warehouse.create!(
+        name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )
+      Warehouse.create!(
+        name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      )                      
       user = User.create!(email: 'joao@email.com', password: 'admino')
 
       # Act

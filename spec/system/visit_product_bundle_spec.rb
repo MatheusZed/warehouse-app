@@ -3,18 +3,32 @@ require 'rails_helper'
 describe 'Visitor sees the product model' do
   it 'and sees all registered data' do
     # Arrange
-    s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-                         cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-                         email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.create!(name: 'Conservados')
-    pm1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-                               length: 22, supplier: s, product_category: pc)
-    pm2 = ProductModel.create!(name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-                               length: 22, supplier: s, product_category: pc)
-    pm3 = ProductModel.create!(name: 'Doces', weight: 1000, height: 4, width: 17,
-                               length: 22, supplier: s, product_category: pc)
-    pb1 = ProductBundle.create!(name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id, pm3.id])
-    pb2 = ProductBundle.create!(name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id])
+    s = Supplier.create!(
+      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
+      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
+      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
+    )
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
+    pm1 = ProductModel.create!(
+      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
+    pm2 = ProductModel.create!(
+      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
+    pm3 = ProductModel.create!(
+      name: 'Doces', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
+    pb1 = ProductBundle.create!(
+      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id, pm3.id]
+    )
+    pb2 = ProductBundle.create!(
+      name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id]
+    )
 
     # Act
     visit root_path
@@ -32,18 +46,32 @@ describe 'Visitor sees the product model' do
 
   it 'and can return to supplier page' do
     # Arrange
-    s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-                         cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-                         email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.create!(name: 'Conservados')
-    pm1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-                               length: 22, supplier: s, product_category: pc)
-    pm2 = ProductModel.create!(name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-                               length: 22, supplier: s, product_category: pc)
-    pm3 = ProductModel.create!(name: 'Doces', weight: 1000, height: 4, width: 17,
-                               length: 22, supplier: s, product_category: pc)
-    pb1 = ProductBundle.create!(name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id, pm3.id])
-    pb2 = ProductBundle.create!(name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id])
+    s = Supplier.create!(
+      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
+      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
+      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
+    )
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
+    pm1 = ProductModel.create!(
+      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
+    pm2 = ProductModel.create!(
+      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
+    pm3 = ProductModel.create!(
+      name: 'Doces', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
+    pb1 = ProductBundle.create!(
+      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id, pm3.id]
+    )
+    pb2 = ProductBundle.create!(
+      name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id]
+    )
 
     # Act
     visit root_path

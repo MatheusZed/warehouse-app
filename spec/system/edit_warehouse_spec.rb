@@ -3,9 +3,11 @@ require 'rails_helper'
 describe 'User edits warehouse' do
   it 'Visitor not sees the menu' do
     # Arrange
-    wh = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                           address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                           postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+    wh = Warehouse.create!(
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+    )
 
     # Act
     visit root_path
@@ -16,9 +18,11 @@ describe 'User edits warehouse' do
 
   it "Visitor don't access the form directly" do
     # Arrange
-    wh = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                           address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                           postal_code:'57050-000', total_area: 10000, useful_area: 8000)
+    wh = Warehouse.create!(
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+    )
 
     # Act
     visit edit_warehouse_path(wh.id)
@@ -30,14 +34,17 @@ describe 'User edits warehouse' do
 
   it 'through the list screen' do
     # Arrange
-    wh1 = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                            address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                            postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-    wh2 = Warehouse.create!(name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas',
-                            address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP',
-                            postal_code:'57051-000', total_area: 10000, useful_area: 8000)
+    wh1 = Warehouse.create!(
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+    )
+    wh2 = Warehouse.create!(
+      name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas',
+      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP',
+      postal_code:'57051-000', total_area: 10000, useful_area: 8000
+    )
     user = User.create!(email: 'joao@email.com', password: 'admino')
-
 
     # Act
     login_as(user, scope: :user)
@@ -52,14 +59,17 @@ describe 'User edits warehouse' do
 
   it 'successfully' do
     # Arrange
-    wh1 = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                            address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                            postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-    wh2 = Warehouse.create!(name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas',
-                            address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP',
-                            postal_code:'57051-000', total_area: 10000, useful_area: 8000)
+    wh1 = Warehouse.create!(
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+    )
+    wh2 = Warehouse.create!(
+      name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas',
+      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP',
+      postal_code:'57051-000', total_area: 10000, useful_area: 8000
+    )
     user = User.create!(email: 'joao@email.com', password: 'admino')
-
 
     # Act
     login_as(user, scope: :user)
@@ -76,14 +86,17 @@ describe 'User edits warehouse' do
 
   it "and can't edit" do
     # Arrange
-    wh1 = Warehouse.create!(name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-                            address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-                            postal_code:'57050-000', total_area: 10000, useful_area: 8000)
-    wh2 = Warehouse.create!(name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas',
-                            address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP',
-                            postal_code:'57051-000', total_area: 10000, useful_area: 8000)
+    wh1 = Warehouse.create!(
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+    )
+    wh2 = Warehouse.create!(
+      name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas',
+      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP',
+      postal_code:'57051-000', total_area: 10000, useful_area: 8000
+    )
     user = User.create!(email: 'joao@email.com', password: 'admino')
-
 
     # Act
     login_as(user, scope: :user)

@@ -53,7 +53,7 @@ describe 'User register suppliers' do
     fill_in 'Email', with: 'cleberbritadeiras@gmail.com'
     fill_in 'Telefone', with: '99991-4488'
     click_on 'Save'
-    
+
     # Assert
     expect(page).to have_content 'Successfully registered supplier' 
     expect(page).to have_content 'Cleber'

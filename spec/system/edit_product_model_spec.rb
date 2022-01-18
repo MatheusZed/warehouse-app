@@ -3,12 +3,18 @@ require 'rails_helper'
 describe 'User edits product model' do
   it 'Visitor not sees the menu' do
     # Arrange
-    s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-                         cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-                         email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.create!(name: 'Conservados')
-    ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-                         length: 22, supplier: s, product_category: pc)
+    s = Supplier.create!(
+      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
+      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
+      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
+    )
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
+    ProductModel.create!(
+      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
 
     # Act
     visit root_path
@@ -21,12 +27,18 @@ describe 'User edits product model' do
 
   it "Visitor don't access the form directly" do
     # Arrange
-    s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-                         cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-                         email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.create!(name: 'Conservados')
-    ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-                         length: 22, supplier: s, product_category: pc)
+    s = Supplier.create!(
+      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
+      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
+      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
+    )
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
+    ProductModel.create!(
+      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
 
     # Act
     visit edit_product_model_path(s.id)
@@ -38,14 +50,22 @@ describe 'User edits product model' do
 
   it 'through the list screen' do
     # Arrange
-    s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-                         cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-                         email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.create!(name: 'Conservados')
-    p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-                              length: 22, supplier: s, product_category: pc)
-    p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
-                              length: 5, supplier: s, product_category: pc)
+    s = Supplier.create!(
+      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
+      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
+      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
+    )
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
+    p1 = ProductModel.create!(
+      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
+    p2 = ProductModel.create!(
+      name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
+      length: 5, supplier: s, product_category: pc
+    )
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -62,14 +82,22 @@ describe 'User edits product model' do
 
   it 'successfully' do
     # Arrange
-    s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-                         cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-                         email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.create!(name: 'Conservados')
-    p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-                              length: 22, supplier: s, product_category: pc)
-    p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
-                              length: 5, supplier: s, product_category: pc)
+    s = Supplier.create!(
+      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
+      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
+      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
+    )
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
+    p1 = ProductModel.create!(
+      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
+    p2 = ProductModel.create!(
+      name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
+      length: 5, supplier: s, product_category: pc
+    )
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -91,14 +119,22 @@ describe 'User edits product model' do
 
   it "and can't edit" do
     # Arrange
-    s = Supplier.create!(fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-                         cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-                         email: 'maria.doceria@yahoo.com', phone: '91124-2855')
-    pc = ProductCategory.create!(name: 'Conservados')
-    p1 = ProductModel.create!(name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-                              length: 22, supplier: s, product_category: pc)
-    p2 = ProductModel.create!(name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
-                              length: 5, supplier: s, product_category: pc)
+    s = Supplier.create!(
+      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
+      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
+      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
+    )
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
+    p1 = ProductModel.create!(
+      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
+      length: 22, supplier: s, product_category: pc
+    )
+    p2 = ProductModel.create!(
+      name: 'Osso de Galinha', weight: 20, height: 4, width: 5,
+      length: 5, supplier: s, product_category: pc
+    )
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act

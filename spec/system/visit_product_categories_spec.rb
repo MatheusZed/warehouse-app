@@ -7,7 +7,7 @@ describe 'Visitor view homepage' do
     ProductCategory.create!(name: 'Congelados')
     ProductCategory.create!(name: 'Industrial')
     ProductCategory.create!(name: 'Quentes')
-    
+
     # Act
     visit root_path
     click_on 'See product categories'

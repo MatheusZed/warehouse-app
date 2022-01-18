@@ -50,7 +50,6 @@ describe 'User edits product category' do
     pc2 = ProductCategory.create!(name: 'Congelados')
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-
     # Act
     login_as(user, scope: :user)
     visit root_path
@@ -70,7 +69,6 @@ describe 'User edits product category' do
     pc1 = ProductCategory.create!(name: 'Enlatados')
     pc2 = ProductCategory.create!(name: 'Congelados')
     user = User.create!(email: 'joao@email.com', password: 'admino')
-
 
     # Act
     login_as(user, scope: :user)
