@@ -3,18 +3,18 @@ require 'rails_helper'
 RSpec.describe ProductItem, type: :model do
   it 'should generate an SKU with 20 characters' do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh = Warehouse.create!(
-      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
       cnpj: '59201134000113', address: 'Av Fernandes China',
       email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
     )
     pm = ProductModel.create!(
       name: 'Doces', weight: 1100, height: 100, width: 100,
@@ -34,18 +34,18 @@ RSpec.describe ProductItem, type: :model do
 
   it 'should generate a random SKU' do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh = Warehouse.create!(
-      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
       cnpj: '59201134000113', address: 'Av Fernandes China',
       email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
     )
     pm = ProductModel.create!(
       name: 'Doces', weight: 1100, height: 100, width: 100,
@@ -65,18 +65,18 @@ RSpec.describe ProductItem, type: :model do
 
   it 'should generate unique SKU' do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh = Warehouse.create!(
-      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
       cnpj: '59201134000113', address: 'Av Fernandes China',
       email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
     )
     pm = ProductModel.create!(
       name: 'Doces', weight: 1100, height: 100, width: 100,
@@ -101,18 +101,18 @@ RSpec.describe ProductItem, type: :model do
 
   it 'should not be valid if the sku is empty' do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh = Warehouse.create!(
-      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
       cnpj: '59201134000113', address: 'Av Fernandes China',
       email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
     )
     pm = ProductModel.create!(
       name: 'Doces', weight: 1100, height: 100, width: 100,
@@ -133,18 +133,18 @@ RSpec.describe ProductItem, type: :model do
   context 'should not be valid if sku is in wrong format' do
     it 'SKUa4s582d4f536f4g7h4ytr' do
       # Arrange
+      pc = ProductCategory.create!(
+        name: 'Conservados'
+      )
       wh = Warehouse.create!(
-        name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+        name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
       )
       s = Supplier.create!(
         fantasy_name: 'Maria', legal_name: 'Maria e o pao',
         cnpj: '59201134000113', address: 'Av Fernandes China',
         email: 'maria.pao@yahoo.com', phone: '91124-7799'
-      )
-      pc = ProductCategory.create!(
-        name: 'Conservados'
       )
       pm = ProductModel.create!(
         name: 'Doces', weight: 1100, height: 100, width: 100,
@@ -164,18 +164,18 @@ RSpec.describe ProductItem, type: :model do
 
     it 'SKUa4s582d4f536f4g7h4' do
       # Arrange
+      pc = ProductCategory.create!(
+        name: 'Conservados'
+      )
       wh = Warehouse.create!(
-        name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+        name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
       )
       s = Supplier.create!(
         fantasy_name: 'Maria', legal_name: 'Maria e o pao',
         cnpj: '59201134000113', address: 'Av Fernandes China',
         email: 'maria.pao@yahoo.com', phone: '91124-7799'
-      )
-      pc = ProductCategory.create!(
-        name: 'Conservados'
       )
       pm = ProductModel.create!(
         name: 'Doces', weight: 1100, height: 100, width: 100,
@@ -196,18 +196,18 @@ RSpec.describe ProductItem, type: :model do
 
   it 'should not update SKU' do    
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh = Warehouse.create!(
-      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
       cnpj: '59201134000113', address: 'Av Fernandes China',
       email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
     )
     pm = ProductModel.create!(
       name: 'Doces', weight: 1100, height: 100, width: 100,

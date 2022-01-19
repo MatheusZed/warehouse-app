@@ -57,20 +57,23 @@ describe 'User navigates' do
   context 'and search for warehouse' do  
     it 'successfully by name' do
       # Arrange
-      Warehouse.create!(
-        name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      pc = ProductCategory.create!(
+        name: 'Conservados'
       )
       Warehouse.create!(
-        name: 'Salgados', code: 'SLG', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+        name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
       )
       Warehouse.create!(
-        name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+        name: 'Salgados', code: 'SLG', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      )
+      Warehouse.create!(
+        name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
       )
       user = User.create!(email: 'joao@email.com', password: 'admino')
 
@@ -92,20 +95,23 @@ describe 'User navigates' do
 
     it 'successfully by code' do
       # Arrange
-      Warehouse.create!(
-        name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      pc = ProductCategory.create!(
+        name: 'Conservados'
       )
       Warehouse.create!(
-        name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+        name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
       )
       Warehouse.create!(
-        name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+        name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      )
+      Warehouse.create!(
+        name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
       )
       user = User.create!(email: 'joao@email.com', password: 'admino')
 
@@ -127,15 +133,18 @@ describe 'User navigates' do
 
     it 'and can go to warehouse trought the link in name' do
       # Arrange
-      Warehouse.create!(
-        name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa cidade tranquila',
-        address: 'Av Calsadao', city: 'Osasco', state: 'SP',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      pc = ProductCategory.create!(
+        name: 'Conservados'
       )
       Warehouse.create!(
-        name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidadee',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57051-000', total_area: 1000, useful_area: 800
+        name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa cidade tranquila',
+        address: 'Av Calsadao', city: 'Osasco', state: 'SP', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      )
+      Warehouse.create!(
+        name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidadee com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57051-000',
+        total_area: 1000, useful_area: 800, product_category_ids: [pc.id]
       )
       user = User.create!(email: 'joao@email.com', password: 'admino')
 
@@ -154,6 +163,8 @@ describe 'User navigates' do
       expect(page).to have_content 'CEP: 57051-000'
       expect(page).to have_content 'Area Total: 1000'
       expect(page).to have_content 'Area Util: 800'
+      expect(page).to have_content 'Categorias aceitas no galpao'
+      expect(page).to have_content 'Conservados' 
       expect(page).not_to have_css 'h1', text: 'Alimenticio'
       expect(page).not_to have_css 'h1', text: 'ALO'
       expect(page).not_to have_content 'Descrição: Otimo galpao numa cidade tranquila'
@@ -165,20 +176,23 @@ describe 'User navigates' do
 
     pending "and can't search if label is empty" do
       # Arrange
-      Warehouse.create!(
-        name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      pc = ProductCategory.create!(
+        name: 'Conservados'
       )
       Warehouse.create!(
-        name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+        name: 'Alimenticio', code: 'ALO', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
       )
       Warehouse.create!(
-        name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-        postal_code:'57050-000', total_area: 10000, useful_area: 8000
+        name: 'Salgados', code: 'SLO', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      )
+      Warehouse.create!(
+        name: 'Refrigerados', code: 'RFG', description: 'Otimo galpao numa linda cidade com luzes',
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
       )                      
       user = User.create!(email: 'joao@email.com', password: 'admino')
 

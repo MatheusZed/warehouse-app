@@ -1,7 +1,8 @@
 class WarehousesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :product_entry]
+  before_action :authenticate_user!, only: %i[new create edit update product_entry]
   before_action :set_warehouse, only: %i[show edit update]
   before_action :set_params, only: %i[create update]
+  before_action :set_all, only: %i[new create edit update]
 
   def show
     @product_models = ProductModel.all
@@ -57,8 +58,12 @@ class WarehousesController < ApplicationController
 
   def set_params
     @warehouse_params = params.require(:warehouse).permit(
-      :name, :code, :description, :address, :state, :city,
-      :postal_code, :total_area, :useful_area
+      :name, :code, :description, :address, :state, :city, :postal_code,
+      :total_area, :useful_area, product_category_ids: []
     )
+  end
+
+  def set_all
+    @product_categories = ProductCategory.all
   end
 end

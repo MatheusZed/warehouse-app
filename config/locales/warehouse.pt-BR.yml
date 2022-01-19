@@ -17,6 +17,7 @@ pt-BR:
         postal_code: CEP
         total_area: Area Total
         useful_area: Area Util
+        product_category_ids: Categorias de Produto
       supplier:
         fantasy_name: Nome Fantasia
         legal_name: Razao Social

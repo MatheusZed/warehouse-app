@@ -69,5 +69,11 @@
       <%= form.number_field :useful_area, class: 'input', placeholder: 'area util' %>
     </div>
   </div>
+  <div class="field">
+    <%= form.label '', 'Categorias de produto', class: 'label' %>
+    <div class="control">
+        <%= form.collection_check_boxes :product_category_ids, @product_categories, :id, :name%>
+    </div>
+  </div>
 <%= form.submit 'Save', class: 'button is-primary' %>
 <% end %>

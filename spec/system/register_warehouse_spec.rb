@@ -38,11 +38,13 @@ describe 'User register warehouse' do
     expect(page).to have_field 'CEP'
     expect(page).to have_field 'Area Total'
     expect(page).to have_field 'Area Util'
+    expect(page).to have_content 'Categorias de produto'
     expect(page).to have_button 'Save'
   end
 
   it 'successfully' do
     # Arrange
+    ProductCategory.create!(name: 'Conservados')
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     #Act
@@ -58,6 +60,7 @@ describe 'User register warehouse' do
     fill_in 'CEP', with: '36000-000'
     fill_in 'Area Total', with: '5000'
     fill_in 'Area Util', with: '3000'
+    check 'Conservados'
     click_on 'Save'
 
     # Assert
@@ -69,6 +72,8 @@ describe 'User register warehouse' do
     expect(page).to have_content 'CEP: 36000-000'
     expect(page).to have_content 'Area Total: 5000 m2'
     expect(page).to have_content 'Area Util: 3000 m2'
+    expect(page).to have_content 'Categorias aceitas no galpao'
+    expect(page).to have_content 'Conservados'    
   end
 
   it 'and all fields are required' do
@@ -96,5 +101,6 @@ describe 'User register warehouse' do
     expect(page).to have_content 'CEP não pode ficar em branco'
     expect(page).to have_content 'Area Total não pode ficar em branco'
     expect(page).to have_content 'Area Util não pode ficar em branco'
+    expect(page).to have_content 'Categorias de Produto : é necessario selecionar no minimo 1'    
   end
 end

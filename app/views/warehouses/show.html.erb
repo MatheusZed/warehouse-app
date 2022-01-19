@@ -12,6 +12,20 @@
   <dt>Area Util:</dt>
   <dd><%= @warehouse.useful_area %> m2</dd>
   </dl>
+  <table>
+    <thead>
+      <tr>
+        <th>Categorias aceitas no galpao</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <% @warehouse.product_categories.each do |c| %>
+        <td><%= c.name %><td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
  </div>
 
   <br>

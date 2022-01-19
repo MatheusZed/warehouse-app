@@ -59,23 +59,23 @@ describe 'Visitor sees the product model' do
 
   it 'and sees the available warehouses' do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh1 = Warehouse.create!(
-      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     wh2 = Warehouse.create!(
-      name: 'Plancton', code: 'PLN', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57011-000', total_area: 10000, useful_area: 8000
+      name: 'Plancton', code: 'PLN', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57011-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
       cnpj: '59201134000113', address: 'Av Fernandes China',
       email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
     )
     pm1 = ProductModel.create!(
       name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,

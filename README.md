@@ -35,7 +35,12 @@ Status: 200(OK)
     "state": "SP",
     "postal_code": "06162-000",
     "total_area": 2000,
-    "useful_area": 1900
+    "useful_area": 1900,
+    "product_category_warehouses": [
+      {
+        "product_category_id": 1
+      }
+    ]
   }
 ]
 ```
@@ -53,19 +58,22 @@ GET /api/v1/warehouses/:id
 Status: 200(OK)
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Osasco",
-    "code": "OZC",
-    "description": "Galpao de alto volume",
-    "city": "Osasco",
-    "state": "SP",
-    "postal_code": "06162-000",
-    "total_area": 2000,
-    "useful_area": 1900
-  }
-]
+{
+  "id": 1,
+  "name": "Osasco",
+  "code": "OZC",
+  "description": "Galpao de alto volume",
+  "city": "Osasco",
+  "state": "SP",
+  "postal_code": "06162-000",
+  "total_area": 2000,
+  "useful_area": 1900,
+  "product_category_warehouses": [
+    {
+      "product_category_id": 1
+    }
+  ]
+}
 ```
 
 #### Criar um galpão
@@ -88,7 +96,15 @@ POST /api/v1/warehouses
   "state": "SP",
   "postal_code": "06162-000",
   "total_area": 2000,
-  "useful_area": 1900
+  "useful_area": 1900,
+  "product_category_warehouses": [
+    {
+      "product_category_id": 1
+    }
+    {
+      "product_category_id": 2
+    }
+  ]
 }
 ```
 
@@ -107,7 +123,15 @@ Status: 201(CREATED)
   "state": "SP",
   "postal_code": "06162-000",
   "total_area": 2000,
-  "useful_area": 1900
+  "useful_area": 1900,
+  "product_category_warehouses": [
+    {
+      "product_category_id": 1
+    }
+    {
+      "product_category_id": 2
+    }
+  ]
 }
 ```
 
@@ -131,7 +155,15 @@ PUT /api/v1/warehouses/:id
   "state": "SP",
   "postal_code": "06162-000",
   "total_area": 2000,
-  "useful_area": 1900
+  "useful_area": 1900,
+  "product_category_warehouses": [
+    {
+      "product_category_id": 1
+    }
+    {
+      "product_category_id": 2
+    }
+  ]
 }
 ```
 
@@ -150,7 +182,15 @@ Status: 201(CREATED)
   "state": "SP",
   "postal_code": "06162-000",
   "total_area": 2000,
-  "useful_area": 1900
+  "useful_area": 1900,
+  "product_category_warehouses": [
+    {
+      "product_category_id": 1
+    }
+    {
+      "product_category_id": 2
+    }
+  ]
 }
 ```
 
@@ -193,15 +233,13 @@ GET /api/v1/suppliers/:id
 Status: 200(OK)
 
 ```json
-[
-  {
-    "id": 2,
-    "fantasy_name": "Joao",
-    "legal_name": "Joao e o Feijao",
-    "email": "joao@feijao.com",
-    "phone": "99999-9999"
-  }
-]
+{
+  "id": 2,
+  "fantasy_name": "Joao",
+  "legal_name": "Joao e o Feijao",
+  "email": "joao@feijao.com",
+  "phone": "99999-9999"
+}
 ```
 
 #### Criar um fornecedor
@@ -314,12 +352,10 @@ GET /api/v1/product_categories/:id
 Status: 200(OK)
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Alimenticio"
-  }
-]
+{
+  "id": 1,
+  "name": "Alimenticio"
+}
 ```
 
 #### Criar uma categoria de produto
@@ -431,29 +467,27 @@ GET /api/v1/product_models/:id
 Status: 200(OK)
 
 ```json
-[
-  {
+{
+  "id": 1,
+  "name": "Feijao",
+  "weight": 1000,
+  "height": 4,
+  "width": 17,
+  "length": 22,
+  "sku": "SKUAOdnmSfo6Jr3VJiy8",
+  "dimensions": "4 x 17 x 22",
+  "supplier": {
+    "id": 2,
+    "fantasy_name": "Joao",
+    "legal_name": "Joao e o Feijao",
+    "email": "joao@feijao.com",
+    "phone": "99999-9999"
+  },
+  "product_category": {
     "id": 1,
-    "name": "Feijao",
-    "weight": 1000,
-    "height": 4,
-    "width": 17,
-    "length": 22,
-    "sku": "SKUAOdnmSfo6Jr3VJiy8",
-    "dimensions": "4 x 17 x 22",
-    "supplier": {
-      "id": 2,
-      "fantasy_name": "Joao",
-      "legal_name": "Joao e o Feijao",
-      "email": "joao@feijao.com",
-      "phone": "99999-9999"
-    },
-    "product_category": {
-      "id": 1,
-      "name": "Alimenticio"
-    }
+    "name": "Alimenticio"
   }
-]
+}
 ```
 
 #### Criar um modelo de produto
@@ -581,21 +615,19 @@ GET /api/v1/product_bundles/:id
 Status: 200(OK)
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Kit de Vinhos",
-    "sku": "KSKUJn4OqGL08eEa1Yle4",
-    "product_bundle_items": [
-      {
-        "product_model_id": 1
-      },
-      {
-        "product_model_id": 2
-      }
-    ]
-  }
-]
+{
+  "id": 1,
+  "name": "Kit de Vinhos",
+  "sku": "KSKUJn4OqGL08eEa1Yle4",
+  "product_bundle_items": [
+    {
+      "product_model_id": 1
+    },
+    {
+      "product_model_id": 2
+    }
+  ]
+}
 ```
 
 #### Criar um kit de produto

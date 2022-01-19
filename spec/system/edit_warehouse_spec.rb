@@ -3,10 +3,13 @@ require 'rails_helper'
 describe 'User edits warehouse' do
   it 'Visitor not sees the menu' do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
 
     # Act
@@ -18,10 +21,13 @@ describe 'User edits warehouse' do
 
   it "Visitor don't access the form directly" do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
 
     # Act
@@ -34,15 +40,18 @@ describe 'User edits warehouse' do
 
   it 'through the list screen' do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh1 = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     wh2 = Warehouse.create!(
-      name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas',
-      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP',
-      postal_code:'57051-000', total_area: 10000, useful_area: 8000
+      name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas com luzes',
+      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP', postal_code:'57051-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
@@ -59,15 +68,18 @@ describe 'User edits warehouse' do
 
   it 'successfully' do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh1 = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     wh2 = Warehouse.create!(
-      name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas',
-      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP',
-      postal_code:'57051-000', total_area: 10000, useful_area: 8000
+      name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas muito doce',
+      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP', postal_code:'57051-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
@@ -86,15 +98,18 @@ describe 'User edits warehouse' do
 
   it "and can't edit" do
     # Arrange
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
     wh1 = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
-      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     wh2 = Warehouse.create!(
-      name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas',
-      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP',
-      postal_code:'57051-000', total_area: 10000, useful_area: 8000
+      name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas muito doce',
+      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP', postal_code:'57051-000',
+      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
     )
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
