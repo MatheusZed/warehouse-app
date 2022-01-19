@@ -33,7 +33,7 @@ class Api::V1::ProductCategoriesController < Api::V1::ApiController
   private
 
   def set_product_category
-    @product_category ||= ProductCategory.find(params[:id])
+    @product_category = ProductCategory.find(params[:id])
   end
 
   def set_params

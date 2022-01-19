@@ -33,7 +33,7 @@ class Api::V1::SuppliersController < Api::V1::ApiController
   private
 
   def set_supplier
-    @supplier ||= Supplier.find(params[:id])
+    @supplier = Supplier.find(params[:id])
   end
   
   def set_params

@@ -45,7 +45,7 @@ class Api::V1::ProductBundlesController < Api::V1::ApiController
   private
 
   def set_product_bundle
-    @product_bundle ||= ProductBundle.find(params[:id])
+    @product_bundle = ProductBundle.find(params[:id])
   end
 
   def set_params

@@ -43,7 +43,7 @@ class Api::V1::ProductModelsController < Api::V1::ApiController
   private
 
   def set_product_model
-    @product_model ||= ProductModel.find(params[:id])
+    @product_model = ProductModel.find(params[:id])
   end
 
   def set_params
