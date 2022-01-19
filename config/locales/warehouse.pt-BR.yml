@@ -38,5 +38,6 @@ pt-BR:
       product_bundle:
         name: Nome
         sku: Codigo SKU
+        product_model_ids: Modelo de Produto
       product_category:
         name: Nome

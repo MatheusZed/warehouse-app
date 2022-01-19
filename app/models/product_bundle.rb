@@ -4,8 +4,9 @@ class ProductBundle < ApplicationRecord
   validates :name, :sku, presence: true
   validates :name, :sku, uniqueness: true
   validates :sku, format: { with: /(^[A-Z]{4}.{17}$)/, message: "não é valido, precisa conter 21 digitos"}
+  validates :product_model_ids, length: { minimum: 2 , message: ": é necessario selecionar no minimo 2" }
 
-  before_validation :generate_ksku
+  before_validation :generate_ksku, on: :create
 
   private
   
