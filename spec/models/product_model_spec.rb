@@ -348,7 +348,7 @@ RSpec.describe ProductModel, type: :model do
     expect(result).to eq false
   end
 
-  pending 'should not update SKU' do    
+  it 'should not update SKU' do    
     # Arrange
     s = Supplier.create!(
       fantasy_name: 'Cleber', legal_name: 'Cleber FUNCIONA POR FAVOR',
@@ -358,11 +358,10 @@ RSpec.describe ProductModel, type: :model do
     pc = ProductCategory.create!(
       name: 'Enlatados'
     )
-    p = ProductModel.new(
+    p = ProductModel.create!(
       name: 'Saco de Feijao', weight: 1000, height: 4, width: 17,
       length: 22, supplier: s, product_category: pc
     )
-    p.save()
     sku = p.sku
 
     # Act

@@ -193,4 +193,39 @@ RSpec.describe ProductItem, type: :model do
       expect(result).to eq false
     end
   end
+
+  it 'should not update SKU' do    
+    # Arrange
+    wh = Warehouse.create!(
+      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade',
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL',
+      postal_code:'57050-000', total_area: 10000, useful_area: 8000
+    )
+    s = Supplier.create!(
+      fantasy_name: 'Maria', legal_name: 'Maria e o pao',
+      cnpj: '59201134000113', address: 'Av Fernandes China',
+      email: 'maria.pao@yahoo.com', phone: '91124-7799'
+    )
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
+    pm = ProductModel.create!(
+      name: 'Doces', weight: 1100, height: 100, width: 100,
+      length: 100, supplier: s, product_category: pc
+    )
+    pm2 = ProductModel.create!(
+      name: 'Chocolate', weight: 100, height: 100, width: 100,
+      length: 100, supplier: s, product_category: pc
+    )
+    pi = ProductItem.create!(
+      warehouse: wh, product_model: pm
+    )
+    sku = pi.sku
+
+    # Act
+    pi.update(warehouse: wh, product_model: pm2)
+
+    # Assert
+    expect(pi.sku).to eq sku
+  end
 end

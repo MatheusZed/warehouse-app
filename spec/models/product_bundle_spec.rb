@@ -170,13 +170,13 @@ RSpec.describe ProductBundle, type: :model do
     pb = ProductBundle.create!(
       name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id]
     )
-    allow(SecureRandom).to receive(:alphanumeric).with(17).and_return 'XjDED8ylT4hFzqVnl'
 
     # Act
     pb.save()
 
     # Assert
-    expect(pb.sku).to eq 'KSKUXjDED8ylT4hFzqVnl'
+    expect(pb.sku).to be_present
+    expect(pb.sku.size).to eq(21)
   end
 
   context 'should not be valid if sku is in wrong format' do
@@ -201,7 +201,7 @@ RSpec.describe ProductBundle, type: :model do
       pb = ProductBundle.create!(
         name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id]
       )
-      allow(SecureRandom).to receive(:alphanumeric).with(17).and_return 'KSKUa4s582d4f536f4g7h4ytr'
+      pb.update(sku: 'KSKUa4s582d4f536f4g7h4ytr')
 
       # Act
       result = pb.valid?
@@ -231,7 +231,7 @@ RSpec.describe ProductBundle, type: :model do
       pb = ProductBundle.create!(
         name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id]
       )
-      allow(SecureRandom).to receive(:alphanumeric).with(17).and_return 'KSKUa4s582d4f536f4g7h4'
+      pb.update(sku: 'KSKUa4s582d4f536f4g7h4ytr')
 
       # Act
       result = pb.valid?
@@ -239,5 +239,36 @@ RSpec.describe ProductBundle, type: :model do
       # Assert
       expect(result).to eq false
     end
+  end
+
+  it 'should not update SKU' do    
+    # Arrange
+    s = Supplier.create!(
+      fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
+      cnpj: '30605809000108', address: 'Av Cabernet, 100',
+      email: 'contato@miolovinhos.com', phone: '71 91124-7753'
+    )
+    pc = ProductCategory.create!(
+      name: 'Conservados'
+    )
+    pm1 = ProductModel.create!(
+      name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
+      length: 10, supplier: s, product_category: pc
+    )
+    pm2 = ProductModel.create!(
+      name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
+      length: 10, supplier: s, product_category: pc
+    )
+    pb = ProductBundle.create!(
+      name: 'Kit Vinho', product_model_ids: [pm1.id, pm2.id]
+    )
+    sku = pb.sku
+
+    # Act
+    pb.update(name: 'Kit Vinheto')
+
+    # Assert
+    expect(pb.name).to eq 'Kit Vinheto'
+    expect(pb.sku).to eq sku
   end
 end
