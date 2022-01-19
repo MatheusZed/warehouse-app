@@ -69,8 +69,15 @@
     </header>
     <main>
       <div class="container">
-        <%= flash[:notice] %>
-        <%= flash[:alert] %>
+      <% if flash[:notice] %>
+        <div class="notification is-success">
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="notification is-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
         <%= yield %>
       </div>
     </main>
