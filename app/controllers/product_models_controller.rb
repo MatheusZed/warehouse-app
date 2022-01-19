@@ -23,8 +23,7 @@ class ProductModelsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product_model.update(@product_model_params)

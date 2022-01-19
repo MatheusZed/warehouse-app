@@ -3,8 +3,7 @@ class ProductBundlesController < ApplicationController
   before_action :set_product_bundle, only: %i[show edit update]
   before_action :set_params, only: %i[create update]
   
-  def show
-  end
+  def show; end
 
   def new
     @product_bundle = ProductBundle.new
@@ -22,8 +21,7 @@ class ProductBundlesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product_bundle.update(@product_bundle_params)

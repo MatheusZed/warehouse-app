@@ -7,8 +7,7 @@ class ProductCategoriesController < ApplicationController
     @product_category = ProductCategory.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @product_category = ProductCategory.new
@@ -25,8 +24,7 @@ class ProductCategoriesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product_category.update(@product_category_params)

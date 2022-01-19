@@ -7,8 +7,7 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @supplier = Supplier.new
@@ -25,8 +24,7 @@ class SuppliersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @supplier.update(@supplier_params)
