@@ -7,11 +7,12 @@ class ProductBundlesController < ApplicationController
 
   def new
     @product_bundle = ProductBundle.new
-    @supplier = Supplier.all
+    @product_models = ProductModel.all
   end
 
   def create
     @product_bundle = ProductBundle.new(@product_bundle_params )
+    @product_models = ProductModel.all
 
     if @product_bundle.save()
       redirect_to product_bundle_path(@product_bundle.id), notice: 'Successfully registered product bundle'
@@ -21,9 +22,13 @@ class ProductBundlesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @product_models = ProductModel.all
+  end
 
   def update
+    @product_models = ProductModel.all
+
     if @product_bundle.update(@product_bundle_params)
       redirect_to product_bundle_path(@product_bundle.id), notice: 'Successfully edited product bundle'
     else

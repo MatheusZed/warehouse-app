@@ -24,7 +24,7 @@
   <div class="field">
     <%= form.label '', 'Modelos de produto', class: 'label' %>
     <div class="control">
-        <%= form.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name%>
+        <%= form.collection_check_boxes :product_model_ids, @product_models, :id, :name%>
     </div>
   </div>
 
