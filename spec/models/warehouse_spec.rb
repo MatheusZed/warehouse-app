@@ -9,7 +9,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: '', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code:'70510-000', total_area: 10000,
+        city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: 10_000,
         useful_area: 8000, product_category_ids: [pc.id]
       )
 
@@ -27,7 +27,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Amazonas', code: '', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code:'70510-000', total_area: 10000,
+        city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: 10_000,
         useful_area: 8000, product_category_ids: [pc.id]
       )
 
@@ -45,7 +45,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Amazonas', code: 'AMZ', description: '', address: 'Av Amazonas 5000',
-        city: 'Amazonas', state: 'AM', postal_code:'70510-000', total_area: 10000,
+        city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: 10_000,
         useful_area: 8000, product_category_ids: [pc.id]
       )
 
@@ -63,7 +63,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: '', city: 'Amazonas',
-        state: 'AM', postal_code:'70510-000', total_area: 10000, useful_area: 8000,
+        state: 'AM', postal_code: '70510-000', total_area: 10_000, useful_area: 8000,
         product_category_ids: [pc.id]
       )
 
@@ -81,7 +81,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: '', state: 'AM', postal_code:'70510-000', total_area: 10000,
+        city: '', state: 'AM', postal_code: '70510-000', total_area: 10_000,
         useful_area: 8000, product_category_ids: [pc.id]
       )
 
@@ -99,7 +99,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: '', postal_code:'70510-000', total_area: 10000,
+        city: 'Amazonas', state: '', postal_code: '70510-000', total_area: 10_000,
         useful_area: 8000, product_category_ids: [pc.id]
       )
 
@@ -117,7 +117,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code:'', total_area: 10000,
+        city: 'Amazonas', state: 'AM', postal_code: '', total_area: 10_000,
         useful_area: 8000, product_category_ids: [pc.id]
       )
 
@@ -135,7 +135,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code:'70510-000', total_area: '',
+        city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: '',
         useful_area: 8000, product_category_ids: [pc.id]
       )
 
@@ -153,7 +153,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code:'705100-000', total_area: 10000,
+        city: 'Amazonas', state: 'AM', postal_code: '705100-000', total_area: 10_000,
         useful_area: '', product_category_ids: [pc.id]
       )
 
@@ -171,7 +171,7 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code:'705100-000', total_area: 10000,
+        city: 'Amazonas', state: 'AM', postal_code: '705100-000', total_area: 10_000,
         useful_area: 8000, product_category_ids: []
       )
 
@@ -190,14 +190,14 @@ RSpec.describe Warehouse, type: :model do
     )
     wh1 = Warehouse.create!(
       name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-      city: 'Amazonas', state: 'AM', postal_code:'70510-000', total_area: 10000,
+      city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: 10_000,
       useful_area: 8000, product_category_ids: [pc.id]
     )
 
     wh2 = Warehouse.new(
       name: 'Amazonas', code: 'AMA', description: 'Otimo galpao mas frio', address: 'Av Amazonas',
-      city: 'Amazonas', state: 'AM', postal_code:'70500-000', total_area: 15000,
-      useful_area: 12000, product_category_ids: [pc.id]
+      city: 'Amazonas', state: 'AM', postal_code: '70500-000', total_area: 15_000,
+      useful_area: 12_000, product_category_ids: [pc.id]
     )
 
     # Act
@@ -214,14 +214,14 @@ RSpec.describe Warehouse, type: :model do
     )
     wh1 = Warehouse.create!(
       name: 'Vitoria', code: 'VIX', description: 'Codigo legal', address: 'Av Vitoria',
-      city: 'Vitoria', state: 'ES', postal_code:'55000-000', total_area: 10000,
+      city: 'Vitoria', state: 'ES', postal_code: '55000-000', total_area: 10_000,
       useful_area: 8000, product_category_ids: [pc.id]
     )
 
     wh2 = Warehouse.new(
       name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-      city: 'Curitiba', state: 'PR', postal_code:'70500-000', total_area: 15000,
-      useful_area: 12000, product_category_ids: [pc.id]
+      city: 'Curitiba', state: 'PR', postal_code: '70500-000', total_area: 15_000,
+      useful_area: 12_000, product_category_ids: [pc.id]
     )
 
     # Act
@@ -231,7 +231,7 @@ RSpec.describe Warehouse, type: :model do
     expect(result).to eq false
   end
 
-  context "should not be valid if cep is in wrong format" do
+  context 'should not be valid if cep is in wrong format' do
     it 'cep eq 705' do
       # Arrange
       pc = ProductCategory.create!(
@@ -239,13 +239,13 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code:'705', total_area: 15000,
-        useful_area: 12000, product_category_ids: [pc.id]
+        city: 'Curitiba', state: 'PR', postal_code: '705', total_area: 15_000,
+        useful_area: 12_000, product_category_ids: [pc.id]
       )
 
       # Act
       result = wh.valid?
-    
+
       # Assert
       expect(result).to eq false
     end
@@ -257,8 +257,8 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code:'700000-00', total_area: 15000,
-        useful_area: 12000, product_category_ids: [pc.id]
+        city: 'Curitiba', state: 'PR', postal_code: '700000-00', total_area: 15_000,
+        useful_area: 12_000, product_category_ids: [pc.id]
       )
 
       # Act
@@ -275,8 +275,8 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code:'aaaaa-aaa', total_area: 15000,
-        useful_area: 12000, product_category_ids: [pc.id]
+        city: 'Curitiba', state: 'PR', postal_code: 'aaaaa-aaa', total_area: 15_000,
+        useful_area: 12_000, product_category_ids: [pc.id]
       )
 
       # Act
@@ -293,13 +293,13 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code:'111112-111', total_area: 15000,
-        useful_area: 12000, product_category_ids: [pc.id]
+        city: 'Curitiba', state: 'PR', postal_code: '111112-111', total_area: 15_000,
+        useful_area: 12_000, product_category_ids: [pc.id]
       )
 
       # Act
       result = wh.valid?
-      
+
       # Assert
       expect(result).to eq false
     end
@@ -311,8 +311,8 @@ RSpec.describe Warehouse, type: :model do
       )
       wh = Warehouse.new(
         name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code:'11111-1112', total_area: 15000,
-        useful_area: 12000, product_category_ids: [pc.id]
+        city: 'Curitiba', state: 'PR', postal_code: '11111-1112', total_area: 15_000,
+        useful_area: 12_000, product_category_ids: [pc.id]
       )
 
       # Act

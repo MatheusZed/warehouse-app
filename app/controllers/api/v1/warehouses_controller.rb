@@ -5,15 +5,15 @@ class Api::V1::WarehousesController < Api::V1::ApiController
   def index
     warehouses = Warehouse.all
     render status: 200, json: warehouses.as_json(
-      except: [:address, :created_at, :updated_at],
-      include: {product_category_warehouses: {only: :product_category_id}}
+      except: %i[address created_at updated_at],
+      include: { product_category_warehouses: { only: :product_category_id } }
     )
   end
 
   def show
     render status: 200, json: @warehouse.as_json(
-      except: [:address, :created_at, :updated_at],
-      include: {product_category_warehouses: {only: :product_category_id}}
+      except: %i[address created_at updated_at],
+      include: { product_category_warehouses: { only: :product_category_id } }
     )
   end
 
@@ -22,9 +22,9 @@ class Api::V1::WarehousesController < Api::V1::ApiController
 
     if warehouse.save
       render status: 201, json: warehouse.as_json(
-        except: [:created_at, :updated_at],
-        include: {product_category_warehouses: {only: :product_category_id}}
-      ) 
+        except: %i[created_at updated_at],
+        include: { product_category_warehouses: { only: :product_category_id } }
+      )
     else
       render status: 422, json: warehouse.errors.full_messages
     end
@@ -33,25 +33,24 @@ class Api::V1::WarehousesController < Api::V1::ApiController
   def update
     if @warehouse.update(@warehouse_params)
       render status: 201, json: @warehouse.as_json(
-        except: [:created_at, :updated_at],
-        include: {product_category_warehouses: {only: :product_category_id}}
+        except: %i[created_at updated_at],
+        include: { product_category_warehouses: { only: :product_category_id } }
       )
     else
       render status: 422, json: @warehouse.errors.full_messages
     end
   end
 
-
   private
 
   def set_warehouse
     @warehouse = Warehouse.find(params[:id])
   end
-  
+
   def set_params
     @warehouse_params = params.permit(
       :name, :code, :description, :address, :city, :state, :postal_code,
       :total_area, :useful_area, product_category_ids: []
-    )  
+    )
   end
 end

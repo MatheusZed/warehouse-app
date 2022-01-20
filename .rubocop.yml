@@ -1,0 +1,15 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'spec/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'

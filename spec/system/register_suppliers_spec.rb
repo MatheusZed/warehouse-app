@@ -22,7 +22,7 @@ describe 'User register suppliers' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    #Act
+    # Act
     login_as(user, scope: :user)
     visit root_path
     click_on 'Register new supplier'
@@ -42,20 +42,20 @@ describe 'User register suppliers' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    #Act
+    # Act
     login_as(user, scope: :user)
     visit root_path
     click_on 'Register new supplier'
     fill_in 'Nome Fantasia', with: 'Cleber'
     fill_in 'Razao Social', with: 'Cleber Britadeiras'
-    fill_in 'CNPJ',  with: '06952413000152'
+    fill_in 'CNPJ', with: '06952413000152'
     fill_in 'Endereco', with: 'Av Rio Branco'
     fill_in 'Email', with: 'cleberbritadeiras@gmail.com'
     fill_in 'Telefone', with: '99991-4488'
     click_on 'Save'
 
     # Assert
-    expect(page).to have_content 'Successfully registered supplier' 
+    expect(page).to have_content 'Successfully registered supplier'
     expect(page).to have_content 'Cleber'
     expect(page).to have_content 'Cleber Britadeiras'
     expect(page).to have_content 'CNPJ: 06952413000152'
@@ -68,7 +68,7 @@ describe 'User register suppliers' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    #Act
+    # Act
     login_as(user, scope: :user)
     visit root_path
     click_on 'Register new supplier'
@@ -91,7 +91,7 @@ describe 'User register suppliers' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    #Act
+    # Act
     login_as(user, scope: :user)
     visit root_path
     click_on 'Register new supplier'

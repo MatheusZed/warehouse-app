@@ -32,7 +32,6 @@ describe 'User edits product category' do
     pc2 = ProductCategory.create!(name: 'Congelados')
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-
     # Act
     login_as(user, scope: :user)
     visit root_path
@@ -82,5 +81,5 @@ describe 'User edits product category' do
     expect(page).not_to have_content 'Successfully edited product category'
     expect(page).to have_content "It wasn't possible to edit the product category"
     expect(page).to have_content 'Nome não pode ficar em branco'
-    end
+  end
 end

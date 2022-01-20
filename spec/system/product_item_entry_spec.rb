@@ -22,7 +22,7 @@ describe 'User enter new items' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    #Act
+    # Act
     login_as(user, scope: :user)
     visit root_path
     click_on 'Enter new items'
@@ -42,8 +42,8 @@ describe 'User enter new items' do
     )
     wh = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -80,7 +80,7 @@ describe 'User enter new items' do
     within("div#product-#{pm3.id}") do
       expect(page).to have_content('Doces')
       expect(page).to have_content('Quantidade: 100')
-    end 
+    end
   end
 
   it 'Successfully throught the warehouse screen' do
@@ -90,8 +90,8 @@ describe 'User enter new items' do
     )
     wh = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -126,7 +126,7 @@ describe 'User enter new items' do
     within("div#product-#{pm3.id}") do
       expect(page).to have_content('Doces')
       expect(page).to have_content('Quantidade: 100')
-    end 
+    end
   end
 
   it "and quantity can't be less than 0" do
@@ -136,8 +136,8 @@ describe 'User enter new items' do
     )
     wh = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -180,8 +180,8 @@ describe 'User enter new items' do
     )
     wh = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -226,8 +226,8 @@ describe 'User enter new items' do
     )
     wh = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc2.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc2.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',

@@ -107,7 +107,7 @@ describe 'User edits product model' do
     click_on 'Maria'
     click_on 'Edit', id: "edit_pm-#{p1.id}"
     fill_in 'Nome',	with: 'Ossos de galinha'
-    fill_in 'Peso',	with: '100' 
+    fill_in 'Peso',	with: '100'
     click_on 'Save'
 
     # Assert
@@ -145,7 +145,7 @@ describe 'User edits product model' do
     click_on 'Maria'
     click_on 'Edit', id: "edit_pm-#{p1.id}"
     fill_in 'Nome',	with: ''
-    fill_in 'Peso',	with: '0' 
+    fill_in 'Peso',	with: '0'
     click_on 'Save'
 
     # Assert

@@ -22,10 +22,10 @@ describe 'Supplier API' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response[0]["fantasy_name"]).to eq 'Joao'
-      expect(parsed_response[0]["legal_name"]).to eq 'Joao e os doces'
-      expect(parsed_response[1]["fantasy_name"]).to eq 'Maria'
-      expect(parsed_response[1]["legal_name"]).to eq 'Maria e os doces'
+      expect(parsed_response[0]['fantasy_name']).to eq 'Joao'
+      expect(parsed_response[0]['legal_name']).to eq 'Joao e os doces'
+      expect(parsed_response[1]['fantasy_name']).to eq 'Maria'
+      expect(parsed_response[1]['legal_name']).to eq 'Maria e os doces'
       expect(parsed_response[0].keys).not_to include 'created_at'
       expect(parsed_response[0].keys).not_to include 'updated_at'
       expect(parsed_response[0].keys).not_to include 'cnpj'
@@ -64,8 +64,8 @@ describe 'Supplier API' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["fantasy_name"]).to eq 'Joao'
-      expect(parsed_response["legal_name"]).to eq 'Joao e os doces'
+      expect(parsed_response['fantasy_name']).to eq 'Joao'
+      expect(parsed_response['legal_name']).to eq 'Joao e os doces'
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
       expect(parsed_response.keys).not_to include 'cnpj'
@@ -80,14 +80,14 @@ describe 'Supplier API' do
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+      expect(parsed_response['error']).to eq 'Objeto nao encontrado'
     end
   end
 
   context 'POST /api/v1/suppliers' do
     it 'successfully' do
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { fantasy_name: 'Joao', legal_name: 'Joao Doceria', cnpj: '79885381000193',
                  address: 'Av. Santo Antonio, 200', email: 'joao@doceria.com', phone: '944875214' }
       post '/api/v1/suppliers', params: params, headers: headers
@@ -95,16 +95,16 @@ describe 'Supplier API' do
       # Assert
       expect(response.status).to eq 201
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["id"]).to be_a_kind_of(Integer)
-      expect(parsed_response["fantasy_name"]).to eq 'Joao'
-      expect(parsed_response["cnpj"]).to eq '79885381000193'
+      expect(parsed_response['id']).to be_a_kind_of(Integer)
+      expect(parsed_response['fantasy_name']).to eq 'Joao'
+      expect(parsed_response['cnpj']).to eq '79885381000193'
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
 
     it 'has required fields' do
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { cnpj: '79885381000193', address: 'Av. Santo Antonio, 200',
                  email: 'joao@doceria.com', phone: '944875214' }
       post '/api/v1/suppliers', params: params, headers: headers
@@ -124,7 +124,7 @@ describe 'Supplier API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { fantasy_name: 'Joao', legal_name: 'Joao Doceria', cnpj: '22416076000135',
                  address: 'Av. Santo Antonio, 200', email: 'joao@doceria.com', phone: '944875214' }
       post '/api/v1/suppliers', params: params, headers: headers
@@ -136,7 +136,7 @@ describe 'Supplier API' do
 
     it 'CNPJ in wrong format' do
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { fantasy_name: 'Joao', legal_name: 'Joao Doceria', cnpj: '2241607000135',
                  address: 'Av. Santo Antonio, 200', email: 'joao@doceria.com', phone: '944875214' }
       post '/api/v1/suppliers', params: params, headers: headers
@@ -157,16 +157,16 @@ describe 'Supplier API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { fantasy_name: 'Maria', cnpj: '22416076000134' }
       put "/api/v1/suppliers/#{s.id}", params: params, headers: headers
 
       # Assert
       expect(response.status).to eq 201
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["id"]).to be_a_kind_of(Integer)
-      expect(parsed_response["fantasy_name"]).to eq 'Maria'
-      expect(parsed_response["cnpj"]).to eq '22416076000134'
+      expect(parsed_response['id']).to be_a_kind_of(Integer)
+      expect(parsed_response['fantasy_name']).to eq 'Maria'
+      expect(parsed_response['cnpj']).to eq '22416076000134'
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
@@ -180,13 +180,13 @@ describe 'Supplier API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { fantasy_name: '' }
       put "/api/v1/suppliers/#{s.id}", params: params, headers: headers
 
       # Assert
       expect(response.status).to eq 422
-      expect(response.body).to include "Nome Fantasia não pode ficar em branco"
+      expect(response.body).to include 'Nome Fantasia não pode ficar em branco'
     end
 
     it "warehouse doesn't exist" do
@@ -197,7 +197,7 @@ describe 'Supplier API' do
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+      expect(parsed_response['error']).to eq 'Objeto nao encontrado'
     end
   end
 end

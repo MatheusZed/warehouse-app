@@ -67,12 +67,12 @@ RSpec.describe Supplier, type: :model do
     # Arrange
     sp1 = Supplier.create!(
       fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-      cnpj: '30605809000108', address: 'Av Gigante', 
+      cnpj: '30605809000108', address: 'Av Gigante',
       email: 'joao.feijao@yahoo.com', phone: '91124-7753'
     )
     sp2 = Supplier.new(
-      fantasy_name: 'Joao', legal_name: 'Joao e o doce', 
-      cnpj: '30605809000108', address: 'Av Casa da Bruxa', 
+      fantasy_name: 'Joao', legal_name: 'Joao e o doce',
+      cnpj: '30605809000108', address: 'Av Casa da Bruxa',
       email: 'joao.doceria@yahoo.com', phone: '91124-7753'
     )
 
@@ -88,7 +88,7 @@ RSpec.describe Supplier, type: :model do
       # Arrange
       sp = Supplier.new(
         fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-        cnpj: '30605809000', address: 'Av Gigante', 
+        cnpj: '30605809000', address: 'Av Gigante',
         email: 'joao.feijao@yahoo.com', phone: '91124-7753'
       )
 
@@ -103,7 +103,7 @@ RSpec.describe Supplier, type: :model do
       # Arrange
       sp = Supplier.new(
         fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-        cnpj: '306058090001089', address: 'Av Gigante', 
+        cnpj: '306058090001089', address: 'Av Gigante',
         email: 'joao.feijao@yahoo.com', phone: '91124-7753'
       )
 
@@ -118,15 +118,15 @@ RSpec.describe Supplier, type: :model do
       # Arrange
       sp = Supplier.new(
         fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-        cnpj: 'aaaaaaaaaaaaa', address: 'Av Gigante', 
+        cnpj: 'aaaaaaaaaaaaa', address: 'Av Gigante',
         email: 'joao.feijao@yahoo.com', phone: '91124-7753'
       )
-      
+
       # Act
       result = sp.valid?
 
       # Assert
       expect(result).to eq false
     end
-  end  
+  end
 end

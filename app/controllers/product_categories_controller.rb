@@ -16,7 +16,7 @@ class ProductCategoriesController < ApplicationController
   def create
     @product_category = ProductCategory.new(@product_category_params)
 
-    if @product_category.save()
+    if @product_category.save
       redirect_to product_categories_path, notice: 'Successfully registered product category'
     else
       flash.now[:alert] = "It wasn't possible to record the product category"
@@ -34,7 +34,6 @@ class ProductCategoriesController < ApplicationController
       render 'new'
     end
   end
-
 
   private
 

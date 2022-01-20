@@ -6,8 +6,8 @@ RSpec.describe ProductModel, type: :model do
     p = ProductModel.new(height: '14', width: '10', length: '12')
 
     # Act
-    result = p.dimensions()
-    
+    result = p.dimensions
+
     # Assert
     expect(result).to eq '14 x 10 x 12'
   end
@@ -24,7 +24,7 @@ RSpec.describe ProductModel, type: :model do
         name: 'Enlatados'
       )
       pm = ProductModel.new(
-        name: '', weight: 1000, height: 4, width: 17, 
+        name: '', weight: 1000, height: 4, width: 17,
         length: 22, supplier: s, product_category: pc
       )
 
@@ -46,7 +46,7 @@ RSpec.describe ProductModel, type: :model do
         name: 'Enlatados'
       )
       pm = ProductModel.new(
-        name: 'Saco de Feijao', weight: '', height: 4, width: 17, 
+        name: 'Saco de Feijao', weight: '', height: 4, width: 17,
         length: 22, supplier: s, product_category: pc
       )
 
@@ -217,7 +217,7 @@ RSpec.describe ProductModel, type: :model do
         name: 'Enlatados'
       )
       pm = ProductModel.new(
-        name: 'Vaca', weight: 100000, height: 0, width: 143,
+        name: 'Vaca', weight: 100_000, height: 0, width: 143,
         length: 138, supplier: s, product_category: pc
       )
 
@@ -239,7 +239,7 @@ RSpec.describe ProductModel, type: :model do
         name: 'Enlatados'
       )
       pm = ProductModel.new(
-        name: 'Vaca', weight: 100000, height: 140, width: 0,
+        name: 'Vaca', weight: 100_000, height: 140, width: 0,
         length: 138, supplier: s, product_category: pc
       )
 
@@ -261,7 +261,7 @@ RSpec.describe ProductModel, type: :model do
         name: 'Enlatados'
       )
       pm = ProductModel.new(
-        name: 'Vaca', weight: 100000, height: 140, width: 143,
+        name: 'Vaca', weight: 100_000, height: 140, width: 143,
         length: 0, supplier: s, product_category: pc
       )
 
@@ -289,7 +289,7 @@ RSpec.describe ProductModel, type: :model do
     )
 
     # Act
-    p.save()
+    p.save
 
     # Assert
     expect(p.sku).not_to eq nil
@@ -313,7 +313,7 @@ RSpec.describe ProductModel, type: :model do
     allow(SecureRandom).to receive(:alphanumeric).with(17).and_return 'XjDED8ylT4hFzqVnl'
 
     # Act
-    p.save()
+    p.save
 
     # Assert
     expect(p.sku).to eq 'SKUXjDED8ylT4hFzqVnl'
@@ -339,7 +339,7 @@ RSpec.describe ProductModel, type: :model do
     )
     sku = p1.sku
     allow(SecureRandom).to receive(:alphanumeric).with(17).and_return sku
-    p2.save()
+    p2.save
 
     # Act
     result = p2.valid?
@@ -348,7 +348,7 @@ RSpec.describe ProductModel, type: :model do
     expect(result).to eq false
   end
 
-  it 'should not update SKU' do    
+  it 'should not update SKU' do
     # Arrange
     s = Supplier.create!(
       fantasy_name: 'Cleber', legal_name: 'Cleber FUNCIONA POR FAVOR',

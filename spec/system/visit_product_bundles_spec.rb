@@ -108,11 +108,11 @@ describe 'Visitor see product bundles' do
       length: 2, supplier: s1, product_category: pc
     )
     pm3 = ProductModel.create!(
-      name: 'Caldeirao', weight: 10000, height: 2000, width: 2000,
+      name: 'Caldeirao', weight: 10_000, height: 2000, width: 2000,
       length: 2000, supplier: s1, product_category: pc
     )
     pm4 = ProductModel.create!(
-      name: 'Doces', weight: 1100, height: 100,  width: 100,
+      name: 'Doces', weight: 1100, height: 100, width: 100,
       length: 100, supplier: s2, product_category: pc
     )
     pm5 = ProductModel.create!(

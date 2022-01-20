@@ -1,5 +1,5 @@
 class SuppliersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: %i[new create edit update]
   before_action :set_supplier, only: %i[show edit update]
   before_action :set_params, only: %i[create update]
 
@@ -16,7 +16,7 @@ class SuppliersController < ApplicationController
   def create
     @supplier = Supplier.new(@supplier_params)
 
-    if @supplier.save()
+    if @supplier.save
       redirect_to supplier_path(@supplier.id), notice: 'Successfully registered supplier'
     else
       flash.now[:alert] = "It wasn't possible to record the supplier"
@@ -34,7 +34,6 @@ class SuppliersController < ApplicationController
       render 'new'
     end
   end
-
 
   private
 

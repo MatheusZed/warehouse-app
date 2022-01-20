@@ -5,25 +5,25 @@ class Api::V1::ProductBundlesController < Api::V1::ApiController
   def index
     product_bundles = ProductBundle.all
     render status: 200, json: product_bundles.as_json(
-      except:  [:created_at, :updated_at],
-      include: {product_bundle_items: {only: :product_model_id}}
+      except: %i[created_at updated_at],
+      include: { product_bundle_items: { only: :product_model_id } }
     )
   end
 
   def show
     render status: 200, json: @product_bundle.as_json(
-      except:  [:created_at, :updated_at],
-      include: {product_bundle_items: {only: :product_model_id}}
+      except: %i[created_at updated_at],
+      include: { product_bundle_items: { only: :product_model_id } }
     )
   end
 
   def create
     product_bundle = ProductBundle.new(@product_bundle_params)
-    
+
     if product_bundle.save
       render status: 201, json: product_bundle.as_json(
-        except: [:created_at, :updated_at],
-        include: {product_bundle_items: {only: :product_model_id}}
+        except: %i[created_at updated_at],
+        include: { product_bundle_items: { only: :product_model_id } }
       )
     else
       render status: 422, json: product_bundle.errors.full_messages
@@ -33,14 +33,13 @@ class Api::V1::ProductBundlesController < Api::V1::ApiController
   def update
     if @product_bundle.update(@product_bundle_params)
       render status: 201, json: @product_bundle.as_json(
-        except: [:created_at, :updated_at],
-        include: {product_bundle_items: {only: :product_model_id}}
+        except: %i[created_at updated_at],
+        include: { product_bundle_items: { only: :product_model_id } }
       )
     else
       render status: 422, json: @product_bundle.errors.full_messages
-    end 
+    end
   end
-
 
   private
 

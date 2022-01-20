@@ -64,13 +64,13 @@ describe 'Visitor sees the product model' do
     )
     wh1 = Warehouse.create!(
       name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     wh2 = Warehouse.create!(
       name: 'Plancton', code: 'PLN', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57011-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57011-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',

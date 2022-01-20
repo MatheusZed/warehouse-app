@@ -3,7 +3,7 @@ class ProductModelsController < ApplicationController
   before_action :set_product_model, only: %i[show edit update]
   before_action :set_params, only: %i[create update]
   before_action :set_all, only: %i[new create edit update]
-  
+
   def show
     @available_items = @product_model.product_items.group(:warehouse).count
   end
@@ -15,7 +15,7 @@ class ProductModelsController < ApplicationController
   def create
     @product_model = ProductModel.new(@product_model_params)
 
-    if @product_model.save()
+    if @product_model.save
       redirect_to product_model_path(@product_model.id), notice: 'Successfully registered product model'
     else
       flash.now[:alert] = "It wasn't possible to record the product model"
@@ -33,7 +33,6 @@ class ProductModelsController < ApplicationController
       render 'new'
     end
   end
-
 
   private
 

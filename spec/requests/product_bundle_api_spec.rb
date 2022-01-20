@@ -38,13 +38,13 @@ describe 'Product Bundle API' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response[0]["name"]).to eq 'Kit Bruxaria'
-      expect(parsed_response[0]["product_bundle_items"][0]["product_model_id"]).to eq pm1.id
-      expect(parsed_response[0]["product_bundle_items"][1]["product_model_id"]).to eq pm2.id
-      expect(parsed_response[0]["product_bundle_items"][2]["product_model_id"]).to eq pm3.id
-      expect(parsed_response[1]["name"]).to eq 'Kit Xariabru'
-      expect(parsed_response[1]["product_bundle_items"][0]["product_model_id"]).to eq pm1.id
-      expect(parsed_response[1]["product_bundle_items"][1]["product_model_id"]).to eq pm3.id
+      expect(parsed_response[0]['name']).to eq 'Kit Bruxaria'
+      expect(parsed_response[0]['product_bundle_items'][0]['product_model_id']).to eq pm1.id
+      expect(parsed_response[0]['product_bundle_items'][1]['product_model_id']).to eq pm2.id
+      expect(parsed_response[0]['product_bundle_items'][2]['product_model_id']).to eq pm3.id
+      expect(parsed_response[1]['name']).to eq 'Kit Xariabru'
+      expect(parsed_response[1]['product_bundle_items'][0]['product_model_id']).to eq pm1.id
+      expect(parsed_response[1]['product_bundle_items'][1]['product_model_id']).to eq pm3.id
       expect(parsed_response[0].keys).not_to include 'created_at'
       expect(parsed_response[0].keys).not_to include 'updated_at'
       expect(parsed_response[1].keys).not_to include 'created_at'
@@ -71,8 +71,7 @@ describe 'Product Bundle API' do
         cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
         email: 'maria.doceria@yahoo.com', phone: '91124-2855'
       )
-      pc = ProductCategory.create!(name: 'Conservados'
-      )
+      pc = ProductCategory.create!(name: 'Conservados')
       pm1 = ProductModel.create!(
         name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
         length: 22, supplier: s, product_category: pc
@@ -96,10 +95,10 @@ describe 'Product Bundle API' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["name"]).to eq 'Kit Bruxaria'
-      expect(parsed_response["product_bundle_items"][0]["product_model_id"]).to eq pm1.id
-      expect(parsed_response["product_bundle_items"][1]["product_model_id"]).to eq pm2.id
-      expect(parsed_response["product_bundle_items"][2]["product_model_id"]).to eq pm3.id
+      expect(parsed_response['name']).to eq 'Kit Bruxaria'
+      expect(parsed_response['product_bundle_items'][0]['product_model_id']).to eq pm1.id
+      expect(parsed_response['product_bundle_items'][1]['product_model_id']).to eq pm2.id
+      expect(parsed_response['product_bundle_items'][2]['product_model_id']).to eq pm3.id
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
@@ -107,12 +106,12 @@ describe 'Product Bundle API' do
     it "warehouse doesn't exist" do
       # Act
       get '/api/v1/product_bundles/999'
-      
+
       # Assert
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+      expect(parsed_response['error']).to eq 'Objeto nao encontrado'
     end
   end
 
@@ -137,17 +136,17 @@ describe 'Product Bundle API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
-      params = { name: 'Kit Vinho Fim de ano', product_model_ids: [pm1.id, pm2.id]}
+      headers = { 'Content-Type ' => 'application/json' }
+      params = { name: 'Kit Vinho Fim de ano', product_model_ids: [pm1.id, pm2.id] }
       post '/api/v1/product_bundles', params: params, headers: headers
 
       # Assert
       expect(response.status).to eq 201
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["id"]).to be_a_kind_of(Integer)      
-      expect(parsed_response["name"]).to eq 'Kit Vinho Fim de ano'
-      expect(parsed_response["product_bundle_items"][0]["product_model_id"]).to eq pm1.id
-      expect(parsed_response["product_bundle_items"][1]["product_model_id"]).to eq pm2.id
+      expect(parsed_response['id']).to be_a_kind_of(Integer)
+      expect(parsed_response['name']).to eq 'Kit Vinho Fim de ano'
+      expect(parsed_response['product_bundle_items'][0]['product_model_id']).to eq pm1.id
+      expect(parsed_response['product_bundle_items'][1]['product_model_id']).to eq pm2.id
       expect(parsed_response.keys).to include 'sku'
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
@@ -173,8 +172,8 @@ describe 'Product Bundle API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
-      params = { product_model_ids: [pm1.id, pm2.id]}
+      headers = { 'Content-Type ' => 'application/json' }
+      params = { product_model_ids: [pm1.id, pm2.id] }
       post '/api/v1/product_bundles', params: params, headers: headers
 
       # Assert
@@ -201,11 +200,11 @@ describe 'Product Bundle API' do
         length: 10, supplier: s, product_category: pc
       )
       ProductBundle.create!(
-        name: 'Kit Panos', product_model_ids:[pm1.id, pm2.id]
+        name: 'Kit Panos', product_model_ids: [pm1.id, pm2.id]
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { name: 'Kit Panos', product_model_ids: [pm1.id, pm2.id] }
       post '/api/v1/product_bundles', params: params, headers: headers
 
@@ -239,21 +238,21 @@ describe 'Product Bundle API' do
         length: 22, supplier: s, product_category: pc
       )
       pb = ProductBundle.create!(
-        name: 'Kit Panos', product_model_ids:[pm1.id, pm2.id]
+        name: 'Kit Panos', product_model_ids: [pm1.id, pm2.id]
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
-      params = { name: 'Kit Bruxaria', product_model_ids:[pm1.id, pm3.id] }
+      headers = { 'Content-Type ' => 'application/json' }
+      params = { name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm3.id] }
       put "/api/v1/product_bundles/#{pb.id}", params: params, headers: headers
 
       # Assert
       expect(response.status).to eq 201
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["id"]).to be_a_kind_of(Integer)
-      expect(parsed_response["name"]).to eq 'Kit Bruxaria'
-      expect(parsed_response["product_bundle_items"][0]["product_model_id"]).to eq pm1.id
-      expect(parsed_response["product_bundle_items"][1]["product_model_id"]).to eq pm3.id
+      expect(parsed_response['id']).to be_a_kind_of(Integer)
+      expect(parsed_response['name']).to eq 'Kit Bruxaria'
+      expect(parsed_response['product_bundle_items'][0]['product_model_id']).to eq pm1.id
+      expect(parsed_response['product_bundle_items'][1]['product_model_id']).to eq pm3.id
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
@@ -281,17 +280,17 @@ describe 'Product Bundle API' do
         length: 22, supplier: s, product_category: pc
       )
       pb = ProductBundle.create!(
-        name: 'Kit Panos', product_model_ids:[pm1.id, pm2.id]
+        name: 'Kit Panos', product_model_ids: [pm1.id, pm2.id]
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { name: '' }
       put "/api/v1/product_bundles/#{pb.id}", params: params, headers: headers
 
       # Assert
       expect(response.status).to eq 422
-      expect(response.body).to include "Nome não pode ficar em branco"
+      expect(response.body).to include 'Nome não pode ficar em branco'
     end
 
     it "warehouse doesn't exist" do
@@ -302,7 +301,7 @@ describe 'Product Bundle API' do
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+      expect(parsed_response['error']).to eq 'Objeto nao encontrado'
     end
   end
 end

@@ -9,19 +9,13 @@ class ProductItemsController < ApplicationController
   end
 
   def process_entry
-    if @warehouse.product_categories.include? @product_model.product_category
-      if @product_entry.process()
-        redirect_to warehouse_path(@product_entry.warehouse_id), notice: 'Successfully registered items'
-      else
-        flash.now[:alert] = "It wasn't possible to record the items"
-        render 'new_entry', locals: { pe: @product_entry }
-      end
+    if @product_entry.process
+      redirect_to warehouse_path(@product_entry.warehouse_id), notice: 'Successfully registered items'
     else
-      flash.now[:alert] = "Nao foi possivel salvar estoque, categoria de modelo de produto incompativel com categoria de galpao"
+      flash.now[:alert] = "It wasn't possible to record the items"
       render 'new_entry', locals: { pe: @product_entry }
     end
   end
-
 
   private
 

@@ -6,7 +6,8 @@ describe 'Visitor see suppliers' do
     Supplier.create!(
       fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
       cnpj: '30605809000108', address: 'Av Fernandes Lima',
-      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      email: 'joao.feijao@yahoo.com', phone: '91124-7753'
+    )
     Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
       cnpj: '59201134000113', address: 'Av Fernandes China',

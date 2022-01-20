@@ -1,8 +1,9 @@
 class WarehousesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update product_entry]
+  before_action :authenticate_user!, except: %i[show]
   before_action :set_warehouse, only: %i[show edit update]
   before_action :set_params, only: %i[create update]
-  before_action :set_all, only: %i[new create edit update]
+  before_action :set_models_and_categories, except: %i[show]
+  before_action :product_entry_service, only: %i[product_entry]
 
   def show
     @product_models = ProductModel.all
@@ -16,8 +17,8 @@ class WarehousesController < ApplicationController
   def create
     @warehouse = Warehouse.new(@warehouse_params)
 
-    if @warehouse.save()
-      #flash[:notice] = 'Galpao registrado com sucesso'
+    if @warehouse.save
+      # flash[:notice] = 'Galpao registrado com sucesso'
       redirect_to warehouse_path(@warehouse.id), notice: 'Successfully registered warehouse'
     else
       flash.now[:alert] = "It wasn't possible to record the warehouse"
@@ -37,18 +38,13 @@ class WarehousesController < ApplicationController
   end
 
   def product_entry
-    @pe = ProductEntryService.new(quantity: params[:quantity], product_model_id: params[:product_model_id],
-                                  warehouse_id: params[:id], sku: params[:sku])
-    @product_models = ProductModel.all
-    
-    if @pe.process()
+    if @pe.process
       redirect_to warehouse_path(@pe.warehouse_id), notice: 'Successfully registered items'
     else
       flash.now[:alert] = "It wasn't possible to record the items"
       render warehouse_path(@pe.warehouse_id), locals: { pe: @product_entry }
     end
   end
-
 
   private
 
@@ -63,7 +59,15 @@ class WarehousesController < ApplicationController
     )
   end
 
-  def set_all
+  def product_entry_service
+    @pe = ProductEntryService.new(
+      quantity: params[:quantity], product_model_id: params[:product_model_id],
+      warehouse_id: params[:id], sku: params[:sku]
+    )
+  end
+
+  def set_models_and_categories
     @product_categories = ProductCategory.all
+    @product_models = ProductModel.all
   end
 end

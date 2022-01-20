@@ -3,7 +3,7 @@ class ProductBundlesController < ApplicationController
   before_action :set_product_bundle, only: %i[show edit update]
   before_action :set_params, only: %i[create update]
   before_action :set_all, only: %i[new create edit update]
-  
+
   def show; end
 
   def new
@@ -11,9 +11,9 @@ class ProductBundlesController < ApplicationController
   end
 
   def create
-    @product_bundle = ProductBundle.new(@product_bundle_params )
+    @product_bundle = ProductBundle.new(@product_bundle_params)
 
-    if @product_bundle.save()
+    if @product_bundle.save
       redirect_to product_bundle_path(@product_bundle.id), notice: 'Successfully registered product bundle'
     else
       flash.now[:alert] = "It wasn't possible to record the product bundle"
@@ -31,7 +31,6 @@ class ProductBundlesController < ApplicationController
       render 'new'
     end
   end
-
 
   private
 

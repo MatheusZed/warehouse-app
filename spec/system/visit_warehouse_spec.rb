@@ -8,8 +8,8 @@ describe 'Visitor sees the warehouse' do
     )
     Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
 
     # Act
@@ -25,18 +25,18 @@ describe 'Visitor sees the warehouse' do
     expect(page).to have_content 'Area Total: 10000 m2'
     expect(page).to have_content 'Area Util: 8000 m2'
     expect(page).to have_content 'Categorias aceitas no galpao'
-    expect(page).to have_content 'Conservados' 
+    expect(page).to have_content 'Conservados'
   end
 
-  it 'and can return to home page' do 
+  it 'and can return to home page' do
     # Arrange
     pc = ProductCategory.create!(
       name: 'Conservados'
     )
     Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
 
     # Act

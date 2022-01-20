@@ -4,18 +4,18 @@ class Api::V1::ProductCategoriesController < Api::V1::ApiController
 
   def index
     product_categories = ProductCategory.all
-    render status: 200, json: product_categories.as_json(except: [:created_at, :updated_at])
+    render status: 200, json: product_categories.as_json(except: %i[created_at updated_at])
   end
 
   def show
-    render status: 200, json: @product_category.as_json(except: [:created_at, :updated_at])
+    render status: 200, json: @product_category.as_json(except: %i[created_at updated_at])
   end
 
   def create
     product_category = ProductCategory.new(@product_category_params)
-    
+
     if product_category.save
-      render status: 201, json: product_category.as_json(except: [:created_at, :updated_at])
+      render status: 201, json: product_category.as_json(except: %i[created_at updated_at])
     else
       render status: 422, json: product_category.errors.full_messages
     end
@@ -23,12 +23,11 @@ class Api::V1::ProductCategoriesController < Api::V1::ApiController
 
   def update
     if @product_category.update(@product_category_params)
-      render status: 201, json: @product_category.as_json(except: [:created_at, :updated_at])
+      render status: 201, json: @product_category.as_json(except: %i[created_at updated_at])
     else
       render status: 422, json: @product_category.errors.full_messages
-    end 
+    end
   end
-
 
   private
 

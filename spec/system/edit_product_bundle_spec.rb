@@ -12,15 +12,15 @@ describe 'User edits product bundle' do
       name: 'Conservados'
     )
     pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17, 
+      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
       length: 22, supplier: s, product_category: pc
     )
     pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17, 
+      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
       length: 22, supplier: s, product_category: pc
     )
     pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17, 
+      name: 'Doces', weight: 1000, height: 4, width: 17,
       length: 22, supplier: s, product_category: pc
     )
     pb = ProductBundle.create!(
@@ -197,7 +197,7 @@ describe 'User edits product bundle' do
     click_on 'See suppliers'
     click_on 'Maria'
     click_on 'Edit', id: "edit_pb-#{pb1.id}"
-    fill_in 'Nome',	with: '' 
+    fill_in 'Nome',	with: ''
     click_on 'Save'
 
     # Assert

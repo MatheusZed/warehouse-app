@@ -22,7 +22,7 @@ describe 'User register warehouse' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    #Act
+    # Act
     login_as(user, scope: :user)
     visit root_path
     click_on 'Register new warehouse'
@@ -47,7 +47,7 @@ describe 'User register warehouse' do
     ProductCategory.create!(name: 'Conservados')
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    #Act
+    # Act
     login_as(user, scope: :user)
     visit root_path
     click_on 'Register new warehouse'
@@ -73,14 +73,14 @@ describe 'User register warehouse' do
     expect(page).to have_content 'Area Total: 5000 m2'
     expect(page).to have_content 'Area Util: 3000 m2'
     expect(page).to have_content 'Categorias aceitas no galpao'
-    expect(page).to have_content 'Conservados'    
+    expect(page).to have_content 'Conservados'
   end
 
   it 'and all fields are required' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    #Act
+    # Act
     login_as(user, scope: :user)
     visit root_path
     click_on 'Register new warehouse'
@@ -101,6 +101,6 @@ describe 'User register warehouse' do
     expect(page).to have_content 'CEP não pode ficar em branco'
     expect(page).to have_content 'Area Total não pode ficar em branco'
     expect(page).to have_content 'Area Util não pode ficar em branco'
-    expect(page).to have_content 'Categorias de Produto : é necessario selecionar no minimo 1'    
+    expect(page).to have_content 'Categorias de Produto : é necessario selecionar no minimo 1'
   end
 end

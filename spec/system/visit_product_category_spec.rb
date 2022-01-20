@@ -6,7 +6,8 @@ describe 'Visitor sees the product category' do
     s = Supplier.create!(
       fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
       cnpj: '30605809000108', address: 'Av Fernandes Lima',
-      email: 'joao.feijao@yahoo.com', phone: '91124-7753')
+      email: 'joao.feijao@yahoo.com', phone: '91124-7753'
+    )
     pc = ProductCategory.create!(
       name: 'Conservados'
     )

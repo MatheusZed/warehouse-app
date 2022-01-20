@@ -8,8 +8,8 @@ describe 'User edits warehouse' do
     )
     wh = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
 
     # Act
@@ -26,8 +26,8 @@ describe 'User edits warehouse' do
     )
     wh = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
 
     # Act
@@ -45,20 +45,20 @@ describe 'User edits warehouse' do
     )
     wh1 = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     wh2 = Warehouse.create!(
       name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas com luzes',
-      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP', postal_code:'57051-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP', postal_code: '57051-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
     login_as(user, scope: :user)
     visit root_path
-    #find("edit-#{wh1.id}").click
+    # find("edit-#{wh1.id}").click
     click_on 'Edit', id: "edit-#{wh1.id}"
 
     # Assert
@@ -73,13 +73,13 @@ describe 'User edits warehouse' do
     )
     wh1 = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     wh2 = Warehouse.create!(
       name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas muito doce',
-      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP', postal_code:'57051-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP', postal_code: '57051-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
@@ -103,13 +103,13 @@ describe 'User edits warehouse' do
     )
     wh1 = Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     wh2 = Warehouse.create!(
       name: 'Doces', code: 'DCS', description: 'Otimo galpao numa cheio de guloseimas muito doce',
-      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP', postal_code:'57051-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Doces', city: 'Sao Paulo', state: 'SP', postal_code: '57051-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
@@ -124,5 +124,5 @@ describe 'User edits warehouse' do
     expect(page).not_to have_content 'Successfully edited warehouse'
     expect(page).to have_content "It wasn't possible to edit the warehouse"
     expect(page).to have_content 'CEP não é valido, formato: 00000-000'
-    end
+  end
 end

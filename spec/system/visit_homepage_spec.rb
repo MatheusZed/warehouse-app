@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Visitor view homepage' do
-
   it 'and see a welcome message' do
     visit root_path
 
@@ -21,22 +20,22 @@ describe 'Visitor view homepage' do
     )
     Warehouse.create!(
       name: 'Guarulhos', code: 'GRU', description: 'Aeroporto', address: 'Av Guarulhos',
-      city: 'Sao Paulo', state: 'SP', postal_code:'55000-000', total_area: 10000,
+      city: 'Sao Paulo', state: 'SP', postal_code: '55000-000', total_area: 10_000,
       useful_area: 8000, product_category_ids: [pc.id]
     )
     Warehouse.create!(
       name: 'Porto Alegre', code: 'POA', description: 'Lugar bonito', address: 'Av Porto Alegre',
-      city: 'Porto Alegre', state: 'RS', postal_code:'55000-000', total_area: 10000,
+      city: 'Porto Alegre', state: 'RS', postal_code: '55000-000', total_area: 10_000,
       useful_area: 8000, product_category_ids: [pc.id]
     )
     Warehouse.create!(
       name: 'Sao Luiz', code: 'SLZ', description: 'Nao Sei', address: 'Av Sao Luiz',
-      city: 'Sao Luiz', state: 'MA', postal_code:'55000-000', total_area: 10000,
+      city: 'Sao Luiz', state: 'MA', postal_code: '55000-000', total_area: 10_000,
       useful_area: 8000, product_category_ids: [pc.id]
     )
     Warehouse.create!(
       name: 'Vitoria', code: 'VIX', description: 'Codigo legal', address: 'Av Vitoria',
-      city: 'Vitoria', state: 'ES', postal_code:'55000-000', total_area: 10000,
+      city: 'Vitoria', state: 'ES', postal_code: '55000-000', total_area: 10_000,
       useful_area: 8000, product_category_ids: [pc.id]
     )
 
@@ -61,8 +60,8 @@ describe 'Visitor view homepage' do
     )
     Warehouse.create!(
       name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
 
     # Act
@@ -76,7 +75,7 @@ describe 'Visitor view homepage' do
     expect(page).not_to have_content 'Area Total: 10000 m2'
     expect(page).not_to have_content 'Area Util: 8000 m2'
     expect(page).not_to have_content 'Categorias aceitas no galpao'
-    expect(page).not_to have_content 'Conservados' 
+    expect(page).not_to have_content 'Conservados'
   end
 
   it "and doesn't exist any warehouse" do

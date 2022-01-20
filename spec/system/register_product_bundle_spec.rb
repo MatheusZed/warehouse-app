@@ -22,7 +22,7 @@ describe 'User registers a bundle' do
     # Arrange
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
-    #Act
+    # Act
     login_as(user, scope: :user)
     visit root_path
     click_on 'Register new product bundle'
@@ -171,5 +171,5 @@ describe 'User registers a bundle' do
     expect(page).not_to have_content 'Vinho Tinto Miolo'
     expect(page).not_to have_content 'Taça para vinho tinto'
     expect(page).not_to have_content 'Vinho Rose'
-  end  
+  end
 end

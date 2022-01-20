@@ -28,30 +28,30 @@ describe 'Product Model API' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response[0]["name"]).to eq 'Saco de Feijao'
-      expect(parsed_response[0]["dimensions"]).to eq '4 x 17 x 22'
-      expect(parsed_response[0]["supplier"]["fantasy_name"]).to eq 'Joao'
-      expect(parsed_response[0]["product_category"]["name"]).to eq 'Conservados'
-      expect(parsed_response[1]["name"]).to eq 'Osso de Frango'
-      expect(parsed_response[1]["dimensions"]).to eq '15 x 2 x 2'
-      expect(parsed_response[1]["supplier"]["fantasy_name"]).to eq 'Joao'
-      expect(parsed_response[1]["product_category"]["name"]).to eq 'Conservados'
+      expect(parsed_response[0]['name']).to eq 'Saco de Feijao'
+      expect(parsed_response[0]['dimensions']).to eq '4 x 17 x 22'
+      expect(parsed_response[0]['supplier']['fantasy_name']).to eq 'Joao'
+      expect(parsed_response[0]['product_category']['name']).to eq 'Conservados'
+      expect(parsed_response[1]['name']).to eq 'Osso de Frango'
+      expect(parsed_response[1]['dimensions']).to eq '15 x 2 x 2'
+      expect(parsed_response[1]['supplier']['fantasy_name']).to eq 'Joao'
+      expect(parsed_response[1]['product_category']['name']).to eq 'Conservados'
       expect(parsed_response[0].keys).not_to include 'created_at'
       expect(parsed_response[0].keys).not_to include 'updated_at'
-      expect(parsed_response[0]["supplier"].keys).not_to include 'created_at'
-      expect(parsed_response[0]["supplier"].keys).not_to include 'updated_at'
-      expect(parsed_response[0]["supplier"].keys).not_to include 'cnpj'
-      expect(parsed_response[0]["supplier"].keys).not_to include 'address'
-      expect(parsed_response[0]["product_category"].keys).not_to include 'created_at'
-      expect(parsed_response[0]["product_category"].keys).not_to include 'updated_at'
+      expect(parsed_response[0]['supplier'].keys).not_to include 'created_at'
+      expect(parsed_response[0]['supplier'].keys).not_to include 'updated_at'
+      expect(parsed_response[0]['supplier'].keys).not_to include 'cnpj'
+      expect(parsed_response[0]['supplier'].keys).not_to include 'address'
+      expect(parsed_response[0]['product_category'].keys).not_to include 'created_at'
+      expect(parsed_response[0]['product_category'].keys).not_to include 'updated_at'
       expect(parsed_response[1].keys).not_to include 'created_at'
       expect(parsed_response[1].keys).not_to include 'updated_at'
-      expect(parsed_response[1]["supplier"].keys).not_to include 'created_at'
-      expect(parsed_response[1]["supplier"].keys).not_to include 'updated_at'
-      expect(parsed_response[1]["supplier"].keys).not_to include 'cnpj'
-      expect(parsed_response[1]["supplier"].keys).not_to include 'address'
-      expect(parsed_response[1]["product_category"].keys).not_to include 'created_at'
-      expect(parsed_response[1]["product_category"].keys).not_to include 'updated_at'
+      expect(parsed_response[1]['supplier'].keys).not_to include 'created_at'
+      expect(parsed_response[1]['supplier'].keys).not_to include 'updated_at'
+      expect(parsed_response[1]['supplier'].keys).not_to include 'cnpj'
+      expect(parsed_response[1]['supplier'].keys).not_to include 'address'
+      expect(parsed_response[1]['product_category'].keys).not_to include 'created_at'
+      expect(parsed_response[1]['product_category'].keys).not_to include 'updated_at'
     end
 
     it 'empty response' do
@@ -89,18 +89,18 @@ describe 'Product Model API' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["name"]).to eq 'Saco de Feijao'
-      expect(parsed_response["dimensions"]).to eq '4 x 17 x 22'
-      expect(parsed_response["supplier"]["fantasy_name"]).to eq 'Joao'
-      expect(parsed_response["product_category"]["name"]).to eq 'Conservados'
+      expect(parsed_response['name']).to eq 'Saco de Feijao'
+      expect(parsed_response['dimensions']).to eq '4 x 17 x 22'
+      expect(parsed_response['supplier']['fantasy_name']).to eq 'Joao'
+      expect(parsed_response['product_category']['name']).to eq 'Conservados'
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
-      expect(parsed_response["supplier"].keys).not_to include 'created_at'
-      expect(parsed_response["supplier"].keys).not_to include 'updated_at'
-      expect(parsed_response["supplier"].keys).not_to include 'cnpj'
-      expect(parsed_response["supplier"].keys).not_to include 'address'
-      expect(parsed_response["product_category"].keys).not_to include 'created_at'
-      expect(parsed_response["product_category"].keys).not_to include 'updated_at'
+      expect(parsed_response['supplier'].keys).not_to include 'created_at'
+      expect(parsed_response['supplier'].keys).not_to include 'updated_at'
+      expect(parsed_response['supplier'].keys).not_to include 'cnpj'
+      expect(parsed_response['supplier'].keys).not_to include 'address'
+      expect(parsed_response['product_category'].keys).not_to include 'created_at'
+      expect(parsed_response['product_category'].keys).not_to include 'updated_at'
     end
 
     it "product model doesn't exist" do
@@ -111,7 +111,7 @@ describe 'Product Model API' do
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+      expect(parsed_response['error']).to eq 'Objeto nao encontrado'
     end
   end
 
@@ -128,7 +128,7 @@ describe 'Product Model API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { name: 'Migalhas de pao', weight: 1000, height: 10, width: 5,
                  length: 22, supplier_id: s.id, product_category_id: pc.id }
       post '/api/v1/product_models', params: params, headers: headers
@@ -136,9 +136,9 @@ describe 'Product Model API' do
       # Assert
       expect(response.status).to eq 201
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["id"]).to be_a_kind_of(Integer)
-      expect(parsed_response["name"]).to eq 'Migalhas de pao'
-      expect(parsed_response["weight"]).to eq 1000
+      expect(parsed_response['id']).to be_a_kind_of(Integer)
+      expect(parsed_response['name']).to eq 'Migalhas de pao'
+      expect(parsed_response['weight']).to eq 1000
       expect(parsed_response.keys).to include 'sku'
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
@@ -146,8 +146,8 @@ describe 'Product Model API' do
 
     it 'has required fields' do
       # Act
-      headers = { "Content-Type " => "application/json"}
-      params = { name: 'Migalhas de pao', height: 10, width: 5, length: 22}
+      headers = { 'Content-Type ' => 'application/json' }
+      params = { name: 'Migalhas de pao', height: 10, width: 5, length: 22 }
       post '/api/v1/product_models', params: params, headers: headers
 
       # Assert
@@ -169,7 +169,7 @@ describe 'Product Model API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { name: 'Migalhas de pao', weight: 0, height: 0, width: 0,
                  length: 0, supplier_id: s.id, product_category_id: pc.id }
       post '/api/v1/product_models', params: params, headers: headers
@@ -182,7 +182,6 @@ describe 'Product Model API' do
       expect(response.body).to include 'Comprimento deve ser maior que 0'
     end
   end
-
 
   it 'database error - 500' do
     # Arrange
@@ -207,7 +206,7 @@ describe 'Product Model API' do
     expect(response.status).to eq 500
     expect(response.content_type).to include 'application/json'
     parsed_response = JSON.parse(response.body)
-    expect(parsed_response["error"]).to eq 'Nao foi possivel conectar ao banco de dados'
+    expect(parsed_response['error']).to eq 'Nao foi possivel conectar ao banco de dados'
   end
 
   context 'PUT /api/v1/product_models/:id' do
@@ -227,16 +226,16 @@ describe 'Product Model API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { name: 'Saco de Arroz', weight: 1100 }
       put "/api/v1/product_models/#{pm.id}", params: params, headers: headers
 
       # Assert
       expect(response.status).to eq 201
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["id"]).to be_a_kind_of(Integer)
-      expect(parsed_response["name"]).to eq 'Saco de Arroz'
-      expect(parsed_response["weight"]).to eq 1100
+      expect(parsed_response['id']).to be_a_kind_of(Integer)
+      expect(parsed_response['name']).to eq 'Saco de Arroz'
+      expect(parsed_response['weight']).to eq 1100
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
@@ -257,13 +256,13 @@ describe 'Product Model API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { name: '' }
       put "/api/v1/product_models/#{pm.id}", params: params, headers: headers
 
       # Assert
       expect(response.status).to eq 422
-      expect(response.body).to include "Nome não pode ficar em branco"
+      expect(response.body).to include 'Nome não pode ficar em branco'
     end
 
     it "warehouse doesn't exist" do
@@ -274,7 +273,7 @@ describe 'Product Model API' do
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+      expect(parsed_response['error']).to eq 'Objeto nao encontrado'
     end
   end
 end

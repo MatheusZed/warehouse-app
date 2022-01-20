@@ -58,7 +58,7 @@ RSpec.describe ProductBundle, type: :model do
       result = pb.valid?
 
       # Assert
-      expect(result).to eq false    
+      expect(result).to eq false
     end
   end
 
@@ -109,7 +109,7 @@ RSpec.describe ProductBundle, type: :model do
       pb2 = ProductBundle.new(name: 'Kit Vinho Gurme', product_model_ids: [pm1.id, pm2.id])
       sku = pb1.sku
       allow(SecureRandom).to receive(:alphanumeric).with(17).and_return sku
-      pb2.save()
+      pb2.save
 
       # Act
       result = pb2.valid?
@@ -142,7 +142,7 @@ RSpec.describe ProductBundle, type: :model do
     )
 
     # Act
-    pb.save()
+    pb.save
 
     # Assert
     expect(pb.sku).not_to eq nil
@@ -172,7 +172,7 @@ RSpec.describe ProductBundle, type: :model do
     )
 
     # Act
-    pb.save()
+    pb.save
 
     # Assert
     expect(pb.sku).to be_present
@@ -241,7 +241,7 @@ RSpec.describe ProductBundle, type: :model do
     end
   end
 
-  it 'should not update SKU' do    
+  it 'should not update SKU' do
     # Arrange
     s = Supplier.create!(
       fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',

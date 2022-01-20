@@ -8,8 +8,8 @@ RSpec.describe ProductItem, type: :model do
     )
     wh = Warehouse.create!(
       name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -25,7 +25,7 @@ RSpec.describe ProductItem, type: :model do
     )
 
     # Act
-    pi.save()
+    pi.save
 
     # Assert
     expect(pi.sku).not_to eq nil
@@ -39,8 +39,8 @@ RSpec.describe ProductItem, type: :model do
     )
     wh = Warehouse.create!(
       name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -57,7 +57,7 @@ RSpec.describe ProductItem, type: :model do
     allow(SecureRandom).to receive(:alphanumeric).with(17).and_return 'XjDED8ylT4hFzqVnl'
 
     # Act
-    pi.save()
+    pi.save
 
     # Assert
     expect(pi.sku).to eq 'SKUXjDED8ylT4hFzqVnl'
@@ -70,8 +70,8 @@ RSpec.describe ProductItem, type: :model do
     )
     wh = Warehouse.create!(
       name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -90,7 +90,7 @@ RSpec.describe ProductItem, type: :model do
     )
     sku = pi1.sku
     allow(SecureRandom).to receive(:alphanumeric).with(17).and_return sku
-    pi2.save()
+    pi2.save
 
     # Act
     result = pi2.valid?
@@ -106,8 +106,8 @@ RSpec.describe ProductItem, type: :model do
     )
     wh = Warehouse.create!(
       name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -127,7 +127,7 @@ RSpec.describe ProductItem, type: :model do
     result = pi.valid?
 
     # Assert
-    expect(result).to eq false    
+    expect(result).to eq false
   end
 
   context 'should not be valid if sku is in wrong format' do
@@ -138,8 +138,8 @@ RSpec.describe ProductItem, type: :model do
       )
       wh = Warehouse.create!(
         name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+        total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
       )
       s = Supplier.create!(
         fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -169,8 +169,8 @@ RSpec.describe ProductItem, type: :model do
       )
       wh = Warehouse.create!(
         name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+        total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
       )
       s = Supplier.create!(
         fantasy_name: 'Maria', legal_name: 'Maria e o pao',
@@ -194,15 +194,15 @@ RSpec.describe ProductItem, type: :model do
     end
   end
 
-  it 'should not update SKU' do    
+  it 'should not update SKU' do
     # Arrange
     pc = ProductCategory.create!(
       name: 'Conservados'
     )
     wh = Warehouse.create!(
       name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-      total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
     )
     s = Supplier.create!(
       fantasy_name: 'Maria', legal_name: 'Maria e o pao',

@@ -9,13 +9,13 @@ describe 'Warehouse API' do
       )
       Warehouse.create!(
         name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade', state: 'AL',
-        address: 'Av Fernandes Lima', city: 'Maceio', postal_code:'57050-000',
-        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+        address: 'Av Fernandes Lima', city: 'Maceio', postal_code: '57050-000',
+        total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
       )
       Warehouse.create!(
         name: 'Roupas', code: 'RUP', description: 'Otimo galpao com precos baixos', state: 'AL',
-        address: 'Av Fernandes Cronus', city: 'Maceio', postal_code:'57051-000',
-        total_area: 10000, useful_area: 8000 , product_category_ids: [pc.id]
+        address: 'Av Fernandes Cronus', city: 'Maceio', postal_code: '57051-000',
+        total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
       )
 
       # Act
@@ -25,12 +25,12 @@ describe 'Warehouse API' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response[0]["name"]).to eq 'Alimenticio'
-      expect(parsed_response[1]["name"]).to eq 'Roupas'
+      expect(parsed_response[0]['name']).to eq 'Alimenticio'
+      expect(parsed_response[1]['name']).to eq 'Roupas'
       expect(response.body).not_to include 'Av Fernandes Lima'
-      expect(parsed_response[0]["product_category_warehouses"][0]["product_category_id"]).to eq pc.id
+      expect(parsed_response[0]['product_category_warehouses'][0]['product_category_id']).to eq pc.id
       expect(response.body).not_to include 'Av Fernandes Cronus'
-      expect(parsed_response[1]["product_category_warehouses"][0]["product_category_id"]).to eq pc.id
+      expect(parsed_response[1]['product_category_warehouses'][0]['product_category_id']).to eq pc.id
       expect(parsed_response[0].keys).not_to include 'created_at'
       expect(parsed_response[0].keys).not_to include 'updated_at'
       expect(parsed_response[1].keys).not_to include 'created_at'
@@ -57,8 +57,8 @@ describe 'Warehouse API' do
       )
       w = Warehouse.create!(
         name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao', state: 'AL',
-        address: 'Av Fernandes Lima', city: 'Maceio', postal_code:'57050-000',
-        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+        address: 'Av Fernandes Lima', city: 'Maceio', postal_code: '57050-000',
+        total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
       )
 
       # Act
@@ -68,10 +68,10 @@ describe 'Warehouse API' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["name"]).to eq 'Alimenticio'
-      expect(parsed_response["code"]).to eq 'ALM'
-      expect(parsed_response["city"]).to eq 'Maceio'
-      expect(parsed_response["product_category_warehouses"][0]["product_category_id"]).to eq pc.id
+      expect(parsed_response['name']).to eq 'Alimenticio'
+      expect(parsed_response['code']).to eq 'ALM'
+      expect(parsed_response['city']).to eq 'Maceio'
+      expect(parsed_response['product_category_warehouses'][0]['product_category_id']).to eq pc.id
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
@@ -84,7 +84,7 @@ describe 'Warehouse API' do
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+      expect(parsed_response['error']).to eq 'Objeto nao encontrado'
     end
   end
 
@@ -96,8 +96,8 @@ describe 'Warehouse API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
-      params = { 
+      headers = { 'Content-Type ' => 'application/json' }
+      params = {
         name: 'Osasco', code: 'OZC', description: 'Galpao de alto volume',
         address: 'Av. Santo Antonio, 200', city: 'Osasco', state: 'SP',
         postal_code: '06162-000', total_area: 2000, useful_area: 1900,
@@ -108,17 +108,17 @@ describe 'Warehouse API' do
       # Assert
       expect(response.status).to eq 201
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["id"]).to be_a_kind_of(Integer)
-      expect(parsed_response["name"]).to eq 'Osasco'
-      expect(parsed_response["code"]).to eq 'OZC'
-      expect(parsed_response["product_category_warehouses"][0]["product_category_id"]).to eq pc.id
+      expect(parsed_response['id']).to be_a_kind_of(Integer)
+      expect(parsed_response['name']).to eq 'Osasco'
+      expect(parsed_response['code']).to eq 'OZC'
+      expect(parsed_response['product_category_warehouses'][0]['product_category_id']).to eq pc.id
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
 
     it 'has required fields' do
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { name: 'Osasco', address: 'Av. Santo Antonio, 200', city: 'Osasco',
                  state: 'SP', total_area: 2000, useful_area: 1900 }
       post '/api/v1/warehouses', params: params, headers: headers
@@ -138,17 +138,17 @@ describe 'Warehouse API' do
       )
       Warehouse.create!(
         name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id] 
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+        total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
-      params = { 
+      headers = { 'Content-Type ' => 'application/json' }
+      params = {
         name: 'Alimenticio', code: 'OSC', description: 'Galpao de alto volume',
-        address: 'Av. Santo Antonio, 200', city: 'Osasco', state: 'SP', 
+        address: 'Av. Santo Antonio, 200', city: 'Osasco', state: 'SP',
         postal_code: '06162-000', total_area: 2000, useful_area: 1900,
-        product_category_ids: [pc.id] 
+        product_category_ids: [pc.id]
       }
       post '/api/v1/warehouses', params: params, headers: headers
 
@@ -164,17 +164,17 @@ describe 'Warehouse API' do
       )
       Warehouse.create!(
         name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id] 
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+        total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
-      params = { 
+      headers = { 'Content-Type ' => 'application/json' }
+      params = {
         name: 'Osasco', code: 'ALM', description: 'Galpao de alto volume',
         address: 'Av. Santo Antonio, 200', city: 'Osasco', state: 'SP',
         postal_code: '06162-000', total_area: 2000, useful_area: 1900,
-        product_category_ids: [pc.id] 
+        product_category_ids: [pc.id]
       }
       post '/api/v1/warehouses', params: params, headers: headers
 
@@ -190,8 +190,8 @@ describe 'Warehouse API' do
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
-      params = { 
+      headers = { 'Content-Type ' => 'application/json' }
+      params = {
         name: 'Osasco', code: 'ALM', description: 'Galpao de alto volume',
         address: 'Av. Santo Antonio, 200', city: 'Osasco', state: 'SP',
         postal_code: '061622-000', total_area: 2000, useful_area: 1900,
@@ -213,22 +213,22 @@ describe 'Warehouse API' do
       )
       w = Warehouse.create!(
         name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+        total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { name: 'Osasco', code: 'OZC' }
       put "/api/v1/warehouses/#{w.id}", params: params, headers: headers
 
       # Assert
       expect(response.status).to eq 201
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["id"]).to be_a_kind_of(Integer)
-      expect(parsed_response["name"]).to eq 'Osasco'
-      expect(parsed_response["code"]).to eq 'OZC'
-      expect(parsed_response["product_category_warehouses"][0]["product_category_id"]).to eq pc.id
+      expect(parsed_response['id']).to be_a_kind_of(Integer)
+      expect(parsed_response['name']).to eq 'Osasco'
+      expect(parsed_response['code']).to eq 'OZC'
+      expect(parsed_response['product_category_warehouses'][0]['product_category_id']).to eq pc.id
       expect(parsed_response.keys).not_to include 'created_at'
       expect(parsed_response.keys).not_to include 'updated_at'
     end
@@ -240,18 +240,18 @@ describe 'Warehouse API' do
       )
       w = Warehouse.create!(
         name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code:'57050-000',
-        total_area: 10000, useful_area: 8000, product_category_ids: [pc.id]
+        address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
+        total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
       )
 
       # Act
-      headers = { "Content-Type " => "application/json"}
+      headers = { 'Content-Type ' => 'application/json' }
       params = { name: '' }
       put "/api/v1/warehouses/#{w.id}", params: params, headers: headers
 
       # Assert
       expect(response.status).to eq 422
-      expect(response.body).to include "Nome não pode ficar em branco"
+      expect(response.body).to include 'Nome não pode ficar em branco'
     end
 
     it "warehouse doesn't exist" do
@@ -262,7 +262,7 @@ describe 'Warehouse API' do
       expect(response.status).to eq 404
       expect(response.content_type).to include 'application/json'
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response["error"]).to eq 'Objeto nao encontrado'
+      expect(parsed_response['error']).to eq 'Objeto nao encontrado'
     end
   end
 end
