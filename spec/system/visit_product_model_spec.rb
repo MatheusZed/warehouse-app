@@ -1,19 +1,13 @@
 require 'rails_helper'
 
 describe 'Visitor sees the product model' do
+  let(:supplier) { create(:supplier, fantasy_name: "Joao") }
+
   it 'and sees all registered data' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-      email: 'joao.feijao@yahoo.com', phone: '91124-7753'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm = ProductModel.create!(
-      name: 'Saco de Feijao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
+    pm = create(
+      :product_model, name: "Saco de Feijao", weight: 1000, height: 4, width: 17,
+      length: 22, supplier: supplier
     )
 
     # Act
@@ -33,18 +27,7 @@ describe 'Visitor sees the product model' do
 
   it 'and can return to supplier page' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-      email: 'joao.feijao@yahoo.com', phone: '91124-7753'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    ProductModel.create!(
-      name: 'Saco de Feijao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
+    create(:product_model, name: "Saco de Feijao", supplier: supplier)
 
     # Act
     visit root_path
@@ -54,55 +37,23 @@ describe 'Visitor sees the product model' do
     click_on 'Return'
 
     # Assert
-    expect(current_path).to eq supplier_path(s.id)
+    expect(current_path).to eq supplier_path(supplier.id)
   end
 
   it 'and sees the available warehouses' do
     # Arrange
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    wh1 = Warehouse.create!(
-      name: 'Juarez', code: 'JRZ', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
-      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
-    )
-    wh2 = Warehouse.create!(
-      name: 'Plancton', code: 'PLN', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57011-000',
-      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
-    )
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e o pao',
-      cnpj: '59201134000113', address: 'Av Fernandes China',
-      email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 5, height: 15, width: 2,
-      length: 2, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1100, height: 100, width: 100,
-      length: 100, supplier: s, product_category: pc
-    )
-    ProductItem.create!(warehouse: wh1, product_model: pm3)
-    ProductItem.create!(warehouse: wh1, product_model: pm3)
-    ProductItem.create!(warehouse: wh1, product_model: pm3)
-    ProductItem.create!(warehouse: wh1, product_model: pm3)
-    ProductItem.create!(warehouse: wh1, product_model: pm3)
-    ProductItem.create!(warehouse: wh2, product_model: pm3)
-    ProductItem.create!(warehouse: wh2, product_model: pm3)
-    ProductItem.create!(warehouse: wh2, product_model: pm3)
-    ProductItem.create!(warehouse: wh2, product_model: pm3)
+    pc = create(:product_category)
+    wh1 = create(:warehouse, code: "JRZ", product_category_ids: [pc.id])
+    wh2 = create(:warehouse, code: "PLN", product_category_ids: [pc.id])
+    pm1 = create(:product_model,name: "Saco de Feijao", supplier: supplier, product_category: pc)
+    pm2 = create(:product_model,name: "Doces", supplier: supplier, product_category: pc)
+    create_list(:product_item, 5, warehouse: wh1, product_model: pm2)
+    create_list(:product_item, 4, warehouse: wh2, product_model: pm2)
 
     # Act
     visit root_path
     click_on 'See suppliers'
-    click_on 'Maria'
+    click_on 'Joao'
     click_on 'Doces'
 
     # Assert

@@ -1,34 +1,15 @@
 require 'rails_helper'
 
 describe 'Visitor sees the product model' do
+  let(:supplier) { create(:supplier, fantasy_name: "Maria") }
+  
   it 'and sees all registered data' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pb1 = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id, pm3.id]
-    )
-    pb2 = ProductBundle.create!(
-      name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id]
-    )
+    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier)
+    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier)
+    pm3 = create(:product_model, name: "Docerias", supplier: supplier)
+    pb1 = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id, pm3.id])
+    pb2 = create(:product_bundle, name: "Kit Xariabru", product_model_ids: [pm1.id, pm3.id])
 
     # Act
     visit root_path
@@ -41,37 +22,16 @@ describe 'Visitor sees the product model' do
     expect(page).to have_content "Codigo SKU: #{pb1.sku}"
     expect(page).to have_content 'Migalhas de pao'
     expect(page).to have_content 'Osso de Frango'
-    expect(page).to have_content 'Doces'
+    expect(page).to have_content 'Docerias'
   end
 
   it 'and can return to supplier page' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pb1 = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id, pm3.id]
-    )
-    pb2 = ProductBundle.create!(
-      name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id]
-    )
+    pm1 = create(:product_model, supplier: supplier)
+    pm2 = create(:product_model, supplier: supplier)
+    pm3 = create(:product_model, supplier: supplier)
+    pb1 = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id, pm3.id])
+    pb2 = create(:product_bundle, name: "Kit Xariabru", product_model_ids: [pm1.id, pm3.id])
 
     # Act
     visit root_path
@@ -81,6 +41,6 @@ describe 'Visitor sees the product model' do
     click_on 'Return'
 
     # Assert
-    expect(current_path).to eq supplier_path(s.id)
+    expect(current_path).to eq supplier_path(supplier.id)
   end
 end

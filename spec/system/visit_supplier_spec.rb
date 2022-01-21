@@ -3,10 +3,10 @@ require 'rails_helper'
 describe 'Visitor sees the supplier' do
   it 'and sees all registered data' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Joao', legal_name: 'Joao e os doces',
-      cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
-      email: 'joao.doceria@yahoo.com', phone: '91124-2854'
+    s = create(
+      :supplier, fantasy_name: "Joao", legal_name: "Joao e os doces",
+      cnpj: "22416076000135", address: "Rua Benedito Spinardi",
+      email: "joao.doceria@yahoo.com", phone: "91124-2854"
     )
 
     # Act
@@ -25,11 +25,7 @@ describe 'Visitor sees the supplier' do
 
   it 'and can return to suppliers page' do
     # Arrange
-    Supplier.create!(
-      fantasy_name: 'Joao', legal_name: 'Joao e os doces',
-      cnpj: '22416076000135', address: 'Rua Benedito Spinardi',
-      email: 'joao.doceria@yahoo.com', phone: '91124-2854'
-    )
+    create(:supplier, fantasy_name: "Joao")
 
     # Act
     visit root_path

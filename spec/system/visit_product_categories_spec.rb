@@ -3,10 +3,10 @@ require 'rails_helper'
 describe 'Visitor view homepage' do
   it 'and see the the registred product categories' do
     # Arrange
-    ProductCategory.create!(name: 'Conservados')
-    ProductCategory.create!(name: 'Congelados')
-    ProductCategory.create!(name: 'Industrial')
-    ProductCategory.create!(name: 'Quentes')
+    create(:product_category, name: "Conservados")
+    create(:product_category, name: "Congelados")
+    create(:product_category, name: "Industrial")
+    create(:product_category, name: "Quentes")
 
     # Act
     visit root_path

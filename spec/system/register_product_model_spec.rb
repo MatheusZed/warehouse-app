@@ -41,22 +41,10 @@ describe 'User register product model' do
 
   it 'successfully' do
     # Arrange
-    Supplier.create!(
-      fantasy_name: 'POP', legal_name: 'POP FUNKO',
-      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-      email: 'pop@funko.com', phone: '91124-7753'
-    )
-    Supplier.create!(
-      fantasy_name: 'Souls Geek', legal_name: 'Souls Geek',
-      cnpj: '64765467000105', address: 'Av Fernandes Lima',
-      email: 'souls@geek.com', phone: '92854-8955'
-    )
-    ProductCategory.create!(
-      name: 'Enlatados'
-    )
-    ProductCategory.create!(
-      name: 'Action Figure'
-    )
+    create(:supplier, fantasy_name: "POP")
+    create(:supplier, fantasy_name: "Souls Geek")
+    create(:product_category, name: "Enlatados")
+    create(:product_category, name: "Action Figure")
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -85,22 +73,10 @@ describe 'User register product model' do
 
   it 'successfully with another supplier' do
     # Arrange
-    Supplier.create!(
-      fantasy_name: 'POP', legal_name: 'POP FUNKO',
-      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-      email: 'pop@funko.com', phone: '91124-7753'
-    )
-    Supplier.create!(
-      fantasy_name: 'Souls Geek', legal_name: 'Souls Geek',
-      cnpj: '64765467000105', address: 'Av Fernandes Lima',
-      email: 'souls@geek.com', phone: '92854-8955'
-    )
-    ProductCategory.create!(
-      name: 'Figure Action'
-    )
-    ProductCategory.create!(
-      name: 'Action Figure'
-    )
+    create(:supplier, fantasy_name: "POP")
+    create(:supplier, fantasy_name: "Souls Geek")
+    create(:product_category, name: "Enlatados")
+    create(:product_category, name: "Figure Action")
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act

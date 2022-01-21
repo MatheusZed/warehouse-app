@@ -1,34 +1,15 @@
 require 'rails_helper'
 
 describe 'Visitor see product bundles' do
+  let!(:supplier) { create(:supplier, fantasy_name: "Maria") }
+
   it 'and sees the resgistered product bundles' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pb1 = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id]
-    )
-    pb2 = ProductBundle.create!(
-      name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id]
-    )
+    pm1 = create(:product_model, supplier: supplier)
+    pm2 = create(:product_model, supplier: supplier)
+    pm3 = create(:product_model, supplier: supplier)
+    pb1 = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id])
+    pb2 = create(:product_bundle, name: "Kit Xariabru", product_model_ids: [pm1.id, pm3.id])
 
     # Act
     visit root_path
@@ -45,32 +26,11 @@ describe 'Visitor see product bundles' do
 
   it "and don't sees the product bundles details" do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pb1 = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id, pm3.id]
-    )
-    pb2 = ProductBundle.create!(
-      name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id]
-    )
+    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier)
+    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier)
+    pm3 = create(:product_model, name: "Doces", supplier: supplier)
+    pb1 = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id, pm3.id])
+    pb2 = create(:product_bundle, name: "Kit Xariabru", product_model_ids: [pm1.id, pm3.id])
 
     # Act
     visit root_path
@@ -86,55 +46,17 @@ describe 'Visitor see product bundles' do
 
   it "and don't sees other supplier product bundles" do
     # Arrange
-    s1 = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    s2 = Supplier.create!(
-      fantasy_name: 'Joao', legal_name: 'Joao e a bruxa',
-      cnpj: '59201134000114', address: 'Av Fernandes Bruxas',
-      email: 'joao.bruxa@yahoo.com', phone: '91124-7199'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 10, width: 5,
-      length: 22, supplier: s1, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frang0', weight: 5, height: 15, width: 2,
-      length: 2, supplier: s1, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Caldeirao', weight: 10_000, height: 2000, width: 2000,
-      length: 2000, supplier: s1, product_category: pc
-    )
-    pm4 = ProductModel.create!(
-      name: 'Doces', weight: 1100, height: 100, width: 100,
-      length: 100, supplier: s2, product_category: pc
-    )
-    pm5 = ProductModel.create!(
-      name: 'Casinha de Doces', weight: 5000, height: 1000, width: 1000,
-      length: 1000, supplier: s2, product_category: pc
-    )
-    pm6 = ProductModel.create!(
-      name: 'Gaiola', weight: 4000, height: 1000, width: 1000,
-      length: 1000, supplier: s2, product_category: pc
-    )
-    pb1 = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id]
-    )
-    pb2 = ProductBundle.create!(
-      name: 'Kit Xariabru', product_model_ids: [pm1.id, pm3.id]
-    )
-    pb3 = ProductBundle.create!(
-      name: 'Kit Xabruria', product_model_ids: [pm4.id, pm5.id]
-    )
-    pb4 = ProductBundle.create!(
-      name: 'Kit Riabruxa', product_model_ids: [pm4.id, pm6.id]
-    )
+    supplier2 = create(:supplier, fantasy_name: "Joao")
+    pm1 = create(:product_model, supplier: supplier)
+    pm2 = create(:product_model, supplier: supplier)
+    pm3 = create(:product_model, supplier: supplier)
+    pm4 = create(:product_model, supplier: supplier2)
+    pm5 = create(:product_model, supplier: supplier2)
+    pm6 = create(:product_model, supplier: supplier2)
+    pb1 = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id])
+    pb2 = create(:product_bundle, name: "Kit Xariabru", product_model_ids: [pm1.id, pm3.id])
+    pb3 = create(:product_bundle, name: "Kit Xabruria", product_model_ids: [pm4.id, pm5.id])
+    pb4 = create(:product_bundle, name: "Kit Riabruxa", product_model_ids: [pm4.id, pm6.id])
 
     # Act
     visit root_path
@@ -153,13 +75,6 @@ describe 'Visitor see product bundles' do
   end
 
   it "and doesn't exist any product bundle" do
-    # Arrange
-    Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e o pao',
-      cnpj: '59201134000113', address: 'Av Fernandes China',
-      email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-
     # Act
     visit root_path
     click_on 'See suppliers'

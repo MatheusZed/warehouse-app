@@ -1,31 +1,14 @@
 require 'rails_helper'
 
 describe 'User edits product bundle' do
+  let(:supplier) { create(:supplier, fantasy_name: "Maria") }
+  
   it 'Visitor not sees the menu' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pb = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id]
-    )
+    pm1 = create(:product_model, supplier: supplier)
+    pm2 = create(:product_model, supplier: supplier)
+    pm3 = create(:product_model, supplier: supplier)
+    pb = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id])    
 
     # Act
     visit root_path
@@ -38,32 +21,13 @@ describe 'User edits product bundle' do
 
   it "Visitor don't access the form directly" do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pb = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id]
-    )
+    pm1 = create(:product_model, supplier: supplier)
+    pm2 = create(:product_model, supplier: supplier)
+    pm3 = create(:product_model, supplier: supplier)
+    pb = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id])
 
     # Act
-    visit edit_product_bundle_path(s.id)
+    visit edit_product_bundle_path(supplier.id)
 
     # Assert
     expect(current_path).to eq new_user_session_path
@@ -72,32 +36,11 @@ describe 'User edits product bundle' do
 
   it 'through the list screen' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pb1 = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id]
-    )
-    pb2 = ProductBundle.create!(
-      name: 'Kit Xariabru', product_model_ids: [pm2.id, pm3.id]
-    )
+    pm1 = create(:product_model, supplier: supplier)
+    pm2 = create(:product_model, supplier: supplier)
+    pm3 = create(:product_model, supplier: supplier)
+    pb1 = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id])
+    pb2 = create(:product_bundle, name: "Kit Xariabru", product_model_ids: [pm2.id, pm3.id])
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -114,32 +57,11 @@ describe 'User edits product bundle' do
 
   it 'successfully' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pb1 = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id]
-    )
-    pb2 = ProductBundle.create!(
-      name: 'Kit Xariabru', product_model_ids: [pm2.id, pm3.id]
-    )
+    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier)
+    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier)
+    pm3 = create(:product_model, name: "Doces", supplier: supplier)
+    pb1 = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id])
+    pb2 = create(:product_bundle, name: "Kit Xariabru", product_model_ids: [pm2.id, pm3.id])
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -163,32 +85,11 @@ describe 'User edits product bundle' do
 
   it "and can't edit" do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pb1 = ProductBundle.create!(
-      name: 'Kit Bruxaria', product_model_ids: [pm1.id, pm2.id]
-    )
-    pb2 = ProductBundle.create!(
-      name: 'Kit Xariabru', product_model_ids: [pm2.id, pm3.id]
-    )
+    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier)
+    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier)
+    pm3 = create(:product_model, name: "Doces", supplier: supplier)
+    pb1 = create(:product_bundle, name: "Kit Bruxaria", product_model_ids: [pm1.id, pm2.id])
+    pb2 = create(:product_bundle, name: "Kit Xariabru", product_model_ids: [pm2.id, pm3.id])
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -198,11 +99,13 @@ describe 'User edits product bundle' do
     click_on 'Maria'
     click_on 'Edit', id: "edit_pb-#{pb1.id}"
     fill_in 'Nome',	with: ''
+    uncheck 'Osso de Frango'
     click_on 'Save'
 
     # Assert
     expect(page).not_to have_content 'Successfully edited product bundle'
     expect(page).to have_content "It wasn't possible to edit the product bundle"
     expect(page).to have_content 'Nome não pode ficar em branco'
+    expect(page).to have_content 'Modelo de Produto : é necessario selecionar no minimo 2'
   end
 end

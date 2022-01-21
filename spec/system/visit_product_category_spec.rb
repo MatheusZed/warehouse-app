@@ -1,20 +1,12 @@
 require 'rails_helper'
 
 describe 'Visitor sees the product category' do
+  let(:supplier) { create(:supplier, fantasy_name: "Joao") }
+
   it 'and sees all registered data' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-      email: 'joao.feijao@yahoo.com', phone: '91124-7753'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm = ProductModel.create!(
-      name: 'Saco de Feijao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
+    pc = create(:product_category, name: "Conservados")
+    pm = create(:product_model, name: "Saco de Feijao", supplier: supplier, product_category: pc)
 
     # Act
     visit root_path
@@ -30,18 +22,8 @@ describe 'Visitor sees the product category' do
 
   it 'and can return to product categories page' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Joao', legal_name: 'Joao pe de feijao',
-      cnpj: '30605809000108', address: 'Av Fernandes Lima',
-      email: 'joao.feijao@yahoo.com', phone: '91124-7753'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    ProductModel.create!(
-      name: 'Saco de Feijao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
+    pc = create(:product_category, name: "Conservados")
+    pm = create(:product_model, name: "Saco de Feijao", supplier: supplier, product_category: pc)
 
     # Act
     visit root_path

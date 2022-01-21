@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe 'User enter new items' do
+  let!(:supplier) { create(:supplier) }
+  let!(:pc) { create(:product_category, name: "Conservados") }
+  let!(:warehouse) { create(:warehouse, name: "Alimenticio", code: "ALM", product_category_ids: [pc.id]) }
+
   it 'Visitor not sees the menu' do
     # Act
     visit root_path
@@ -37,31 +41,9 @@ describe 'User enter new items' do
 
   it 'Successfully' do
     # Arrange
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    wh = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
-      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
-    )
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e o pao',
-      cnpj: '59201134000113', address: 'Av Fernandes China',
-      email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 5, height: 15, width: 2,
-      length: 2, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1100, height: 100, width: 100,
-      length: 100, supplier: s, product_category: pc
-    )
+    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier, product_category: pc)
+    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier, product_category: pc)
+    pm3 = create(:product_model, name: "Doces", supplier: supplier, product_category: pc)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -74,7 +56,7 @@ describe 'User enter new items' do
     click_on 'Save'
 
     # Assert
-    expect(current_path).to eq warehouse_path(wh.id)
+    expect(current_path).to eq warehouse_path(warehouse.id)
     expect(page).to have_content 'Successfully registered items'
     expect(page).to have_css('h2', text: 'Estoque')
     within("div#product-#{pm3.id}") do
@@ -85,31 +67,9 @@ describe 'User enter new items' do
 
   it 'Successfully throught the warehouse screen' do
     # Arrange
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    wh = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
-      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
-    )
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e o pao',
-      cnpj: '59201134000113', address: 'Av Fernandes China',
-      email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 5, height: 15, width: 2,
-      length: 2, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1100, height: 100, width: 100,
-      length: 100, supplier: s, product_category: pc
-    )
+    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier, product_category: pc)
+    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier, product_category: pc)
+    pm3 = create(:product_model, name: "Doces", supplier: supplier, product_category: pc)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -121,7 +81,7 @@ describe 'User enter new items' do
     click_on 'Save'
 
     # Assert
-    expect(current_path).to eq warehouse_path(wh.id)
+    expect(current_path).to eq warehouse_path(warehouse.id)
     expect(page).to have_css('h2', text: 'Estoque')
     within("div#product-#{pm3.id}") do
       expect(page).to have_content('Doces')
@@ -131,31 +91,9 @@ describe 'User enter new items' do
 
   it "and quantity can't be less than 0" do
     # Arrange
-    pc = ProductCategory.create!(
-      name: 'Enlatados'
-    )
-    wh = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
-      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
-    )
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e o pao',
-      cnpj: '59201134000113', address: 'Av Fernandes China',
-      email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 5, height: 15, width: 2,
-      length: 2, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1100, height: 100, width: 100,
-      length: 100, supplier: s, product_category: pc
-    )
+    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier, product_category: pc)
+    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier, product_category: pc)
+    pm3 = create(:product_model, name: "Doces", supplier: supplier, product_category: pc)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -175,31 +113,9 @@ describe 'User enter new items' do
 
   pending "and quantity can't be less than 0 throught the warehouse screen" do
     # Arrange
-    pc = ProductCategory.create!(
-      name: 'Enlatados'
-    )
-    wh = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
-      total_area: 10_000, useful_area: 8000, product_category_ids: [pc.id]
-    )
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e o pao',
-      cnpj: '59201134000113', address: 'Av Fernandes China',
-      email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 5, height: 15, width: 2,
-      length: 2, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1100, height: 100, width: 100,
-      length: 100, supplier: s, product_category: pc
-    )
+    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier, product_category: pc)
+    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier, product_category: pc)
+    pm3 = create(:product_model, name: "Doces", supplier: supplier, product_category: pc)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -218,34 +134,10 @@ describe 'User enter new items' do
 
   it "and category in warehouse and product_bundle can't be different " do
     # Arrange
-    pc1 = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pc2 = ProductCategory.create!(
-      name: 'Enlatados'
-    )
-    wh = Warehouse.create!(
-      name: 'Alimenticio', code: 'ALM', description: 'Otimo galpao numa linda cidade com luzes',
-      address: 'Av Fernandes Lima', city: 'Maceio', state: 'AL', postal_code: '57050-000',
-      total_area: 10_000, useful_area: 8000, product_category_ids: [pc2.id]
-    )
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e o pao',
-      cnpj: '59201134000113', address: 'Av Fernandes China',
-      email: 'maria.pao@yahoo.com', phone: '91124-7799'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc1
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 5, height: 15, width: 2,
-      length: 2, supplier: s, product_category: pc1
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1100, height: 100, width: 100,
-      length: 100, supplier: s, product_category: pc1
-    )
+    pc2 = create(:product_category, name: "Enlatados")
+    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier, product_category: pc2)
+    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier, product_category: pc2)
+    pm3 = create(:product_model, name: "Doces", supplier: supplier, product_category: pc2)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act

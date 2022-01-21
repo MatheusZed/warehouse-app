@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe 'User registers a bundle' do
+  let(:supplier) { create(:supplier) }
+
   it 'Visitor not sees the menu' do
     # Act
     visit root_path
@@ -35,26 +37,9 @@ describe 'User registers a bundle' do
 
   it 'Successfully' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
-      cnpj: '30605809000108', address: 'Av Cabernet, 100',
-      email: 'contato@miolovinhos.com', phone: '71 91124-7753'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    ProductModel.create!(
-      name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
-      length: 10, supplier: s, product_category: pc
-    )
-    ProductModel.create!(
-      name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
-      length: 10, supplier: s, product_category: pc
-    )
-    ProductModel.create!(
-      name: 'Saco de batata rustica', weight: 1500, height: 100, width: 100,
-      length: 100, supplier: s, product_category: pc
-    )
+    create(:product_model, name: "Vinho Tinto Miolo", supplier: supplier)
+    create(:product_model, name: "Taça para vinho tinto", supplier: supplier)
+    create(:product_model, name: "Saco de batata rustica", supplier: supplier)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -78,26 +63,9 @@ describe 'User registers a bundle' do
 
   it 'and the fields are required' do
     # Arrange
-    s = Supplier.create!(
-      fantasy_name: 'Maria', legal_name: 'Maria e os doces',
-      cnpj: '22416076000136', address: 'Rua Benedito Spinardi',
-      email: 'maria.doceria@yahoo.com', phone: '91124-2855'
-    )
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    pm1 = ProductModel.create!(
-      name: 'Migalhas de pao', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm2 = ProductModel.create!(
-      name: 'Osso de Frango', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
-    pm3 = ProductModel.create!(
-      name: 'Doces', weight: 1000, height: 4, width: 17,
-      length: 22, supplier: s, product_category: pc
-    )
+    create(:product_model, name: "Migalhas de pao", supplier: supplier)
+    create(:product_model, name: "Osso de Frango", supplier: supplier)
+    create(:product_model, name: "Doces", supplier: supplier)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -116,46 +84,15 @@ describe 'User registers a bundle' do
 
   pending "and the supplier can't see the other supplier's product model" do
     # Arrange
-    s1 = Supplier.create!(
-      fantasy_name: 'Vinicola Miolo', legal_name: 'Miolo Fabrica de Bebidas LTDA',
-      cnpj: '30605809000108', address: 'Av Cabernet, 100',
-      email: 'contato@miolovinhos.com', phone: '71 91124-7753'
-    )
-    s2 = Supplier.create!(
-      fantasy_name: 'Toys', legal_name: 'Fabrica de Brinquedos LTDA',
-      cnpj: '30605809580108', address: 'Av Cabernet, 200',
-      email: 'contato@toys.com', phone: '71 92924-7853'
-    )
-    pc1 = ProductCategory.create!(
-      name: 'Destilados'
-    )
-    pc2 = ProductCategory.create!(
-      name: 'Action Figure'
-    )
-    ProductModel.create!(
-      name: 'Vinho Tinto Miolo', weight: 800, height: 30, width: 10,
-      length: 10, supplier: s1, product_category: pc1
-    )
-    ProductModel.create!(
-      name: 'Taça para vinho tinto', weight: 30, height: 12, width: 10,
-      length: 10, supplier: s1, product_category: pc1
-    )
-    ProductModel.create!(
-      name: 'Vinho Rose', weight: 1000, height: 100, width: 100,
-      length: 100, supplier: s1, product_category: pc1
-    )
-    ProductModel.create!(
-      name: 'Boneco do Batman', weight: 500, height: 100, width: 100,
-      length: 100, supplier: s2, product_category: pc2
-    )
-    ProductModel.create!(
-      name: 'Boneco do Homem-Aranha', weight: 500, height: 100, width: 100,
-      length: 100, supplier: s2, product_category: pc2
-    )
-    ProductModel.create!(
-      name: 'Boneco do Mutano', weight: 500, height: 100, width: 100,
-      length: 100, supplier: s2, product_category: pc2
-    )
+    supplier2 = create(:supplier, fantasy_name: "Toys")
+    pc1 = create(:product_category, name: 'Destilados')
+    pc2 = create(:product_category, name: 'Action Figure')
+    create(:product_model, name: 'Vinho Tinto Miolo', supplier: s1, product_category: pc1)
+    create(:product_model, name: 'Taça para vinho tinto', supplier: s1, product_category: pc1)
+    create(:product_model, name: 'Vinho Rose', supplier: s1, product_category: pc1)
+    create(:product_model, name: 'Boneco do Batman', supplier: s2, product_category: pc2)
+    create(:product_model, name: 'Boneco do Homem-Aranha', supplier: s2, product_category: pc2)
+    create(:product_model, name: 'Boneco do Mutano', supplier: s2, product_category: pc2)
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act

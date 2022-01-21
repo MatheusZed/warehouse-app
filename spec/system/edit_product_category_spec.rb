@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'User edits product category' do
   it 'Visitor not sees the menu' do
     # Arrange
-    ProductCategory.create!(name: 'Enlatados')
-    ProductCategory.create!(name: 'Congelados')
+    create(:product_category, name: "Enlatados")
+    create(:product_category, name: "Congelados")
 
     # Act
     visit root_path
@@ -16,7 +16,7 @@ describe 'User edits product category' do
 
   it "Visitor don't access the form directly" do
     # Arrange
-    pc = ProductCategory.create!(name: 'Enlatados')
+    pc = create(:product_category, name: 'Enlatados')
 
     # Act
     visit edit_product_category_path(pc.id)
@@ -28,8 +28,8 @@ describe 'User edits product category' do
 
   it 'through the list screen' do
     # Arrange
-    pc1 = ProductCategory.create!(name: 'Enlatados')
-    pc2 = ProductCategory.create!(name: 'Congelados')
+    pc1 = create(:product_category, name: "Enlatados")
+    pc2 = create(:product_category, name: "Congelados")
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -45,8 +45,8 @@ describe 'User edits product category' do
 
   it 'successfully' do
     # Arrange
-    pc1 = ProductCategory.create!(name: 'Enlatados')
-    pc2 = ProductCategory.create!(name: 'Congelados')
+    pc1 = create(:product_category, name: "Enlatados")
+    pc2 = create(:product_category, name: "Congelados")
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
@@ -65,8 +65,8 @@ describe 'User edits product category' do
 
   it "and can't edit" do
     # Arrange
-    pc1 = ProductCategory.create!(name: 'Enlatados')
-    pc2 = ProductCategory.create!(name: 'Congelados')
+    pc1 = create(:product_category, name: "Enlatados")
+    pc2 = create(:product_category, name: "Congelados")
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act

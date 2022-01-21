@@ -44,7 +44,7 @@ describe 'User register warehouse' do
 
   it 'successfully' do
     # Arrange
-    ProductCategory.create!(name: 'Conservados')
+    create(:product_category, name: "Conservados")
     user = User.create!(email: 'joao@email.com', password: 'admino')
 
     # Act
