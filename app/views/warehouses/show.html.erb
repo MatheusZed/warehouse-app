@@ -54,6 +54,8 @@
 <br>
 
 <div class="content">
+  
+  <h3> <%= flash[:errors] %> </h3>
   <h2>Entrada de Itens</h2>
   <% if @pe %> 
     <% if @pe.errors.any? %>

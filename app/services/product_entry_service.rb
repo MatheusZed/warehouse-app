@@ -2,6 +2,7 @@ class ProductEntryService
   include ActiveModel::Validations
   validate :quantity_must_be_greater_than_zero
   validate :validate_product_category
+  validate :validate_inactive
 
   def initialize(quantity:, product_model_id:, warehouse_id:, sku:)
     @quantity = quantity.to_i
@@ -41,6 +42,12 @@ class ProductEntryService
       )
     end
     # rubocop:enable Style/GuardClause
+  end
+
+  def validate_inactive
+    if product_model.inactive?
+      errors.add(:base, 'Este modelo de produto está inativo')
+    end
   end
 
   def warehouse

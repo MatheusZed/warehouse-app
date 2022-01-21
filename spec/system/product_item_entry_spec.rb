@@ -111,7 +111,7 @@ describe 'User enter new items' do
     expect(page).to have_content 'Quantidade nao pode ser 0 ou menor'
   end
 
-  pending "and quantity can't be less than 0 throught the warehouse screen" do
+  it "and quantity can't be less than 0 throught the warehouse screen" do
     # Arrange
     pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier, product_category: pc)
     pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier, product_category: pc)
@@ -151,5 +151,20 @@ describe 'User enter new items' do
 
     # Assert
     expect(page).to have_content 'Nao foi possivel salvar estoque, categoria de modelo de produto incompativel com categoria de galpao'
+  end
+
+  it 'and product model must be actived' do
+    # Arrange
+    create(:product_model, name: "Migalhas de pao", status: 1, supplier: supplier, product_category: pc)
+    create(:product_model, name: "Doces", supplier: supplier, product_category: pc)
+    user = User.create!(email: 'joao@email.com', password: 'admino')
+
+    # Act
+    login_as(user, scope: :user)
+    visit root_path
+    click_on 'Enter new items'
+
+    # Assert
+    expect(page).to have_select('Produto', options:['Doces'])
   end
 end

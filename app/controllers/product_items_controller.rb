@@ -33,6 +33,6 @@ class ProductItemsController < ApplicationController
 
   def set_all
     @warehouses = Warehouse.all
-    @product_models = ProductModel.all
+    @product_models = ProductModel.active
   end
 end

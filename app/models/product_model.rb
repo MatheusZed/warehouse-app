@@ -9,6 +9,8 @@ class ProductModel < ApplicationRecord
   validates :weight, :height, :width, :length, numericality: { greater_than: 0 }
   validates :sku, format: { with: /(^[A-Z]{3}.{17}$)/, message: 'não é valido, precisa conter 20 digitos' }
 
+  enum status: { active: 0, inactive: 1 }
+
   before_validation :generate_sku, on: :create
 
   def dimensions
