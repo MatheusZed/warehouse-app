@@ -1,5 +1,5 @@
 <div class="content">
-  <h1><%= @product_model.name %></h1>
+  <h1><%= @product_model.name %> - <%= @product_model.status %></h1>
   <dl>
   <dt>Peso:</dt>
   <dd><%= @product_model.weight %></dd> gramas
@@ -12,6 +12,14 @@
   <dt>Categoria de Produto:</dt>
   <dd><%= @product_model.product_category.name %></dd>
   </dl>
+</div>
+
+<div class="content">
+  <% if @product_model.active? %>
+    <%= button_to 'Desativar', activate_product_model_path, method: :patch, class: 'button is-primary' %>
+  <% else %>
+    <%= button_to 'Ativar', activate_product_model_path, method: :patch, class: 'button is-primary' %>
+  <% end %>
 </div>
 
 <br>

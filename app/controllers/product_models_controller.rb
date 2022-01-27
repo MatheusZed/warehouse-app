@@ -1,6 +1,6 @@
 class ProductModelsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update]
-  before_action :set_product_model, only: %i[show edit update]
+  before_action :set_product_model, only: %i[show edit update activate]
   before_action :set_params, only: %i[create update]
   before_action :set_all, only: %i[new create edit update]
 
@@ -31,6 +31,16 @@ class ProductModelsController < ApplicationController
     else
       flash.now[:alert] = "It wasn't possible to edit the product model"
       render 'new'
+    end
+  end
+
+  def activate
+    if @product_model.active?
+      @product_model.inactive!
+      redirect_to product_model_path(@product_model.id), notice: 'O Modelo de Produto foi desativado com sucesso!'
+    else
+      @product_model.active!
+      redirect_to product_model_path(@product_model.id), notice: 'O Modelo de Produto foi ativado com sucesso!'
     end
   end
 

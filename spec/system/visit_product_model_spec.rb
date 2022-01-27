@@ -66,4 +66,42 @@ describe 'Visitor sees the product model' do
       expect(page).to have_content 'PLN 4'
     end
   end
+
+  it 'and can active' do
+    # Arrrange
+    pm = create(
+      :product_model, name: "Saco de Feijao", status: 1, supplier: supplier
+    )
+
+    # Act
+    visit root_path
+    click_on 'See suppliers'
+    click_on 'Joao'
+    click_on 'Saco de Feijao'
+    click_on 'Ativar'
+
+    # Assert
+    expect(page).to have_content 'O Modelo de Produto foi ativado com sucesso!'
+    expect(page).to have_css 'h1', text: 'Saco de Feijao - active'
+    expect(page).to have_button 'Desativar'
+  end
+
+  it 'and can inactive' do
+    # Arrrange
+    pm = create(
+      :product_model, name: "Saco de Feijao", supplier: supplier
+    )
+
+    # Act
+    visit root_path
+    click_on 'See suppliers'
+    click_on 'Joao'
+    click_on 'Saco de Feijao'
+    click_on 'Desativar'
+
+    # Assert
+    expect(page).to have_content 'O Modelo de Produto foi desativado com sucesso!'
+    expect(page).to have_css 'h1', text: 'Saco de Feijao - inactive'
+    expect(page).to have_button 'Ativar'
+  end
 end

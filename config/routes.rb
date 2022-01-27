@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     post 'product_entry', on: :member
   end
   resources :suppliers,          except: %i[destroy]
-  resources :product_models,     except: %i[index destroy]
+  resources :product_models,     except: %i[index destroy] do
+    patch :activate, on: :member
+  end
   resources :product_bundles,    except: %i[index destroy]
   resources :product_categories, except: %i[destroy]
   get 'product_items/entry', to: 'product_items#new_entry'
