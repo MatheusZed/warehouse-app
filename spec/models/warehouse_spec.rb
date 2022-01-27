@@ -1,17 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Warehouse, type: :model do
+  let(:pc) { create(:product_category, name: "Conservados") }
+
   context 'should not be valid if the fields are empty' do
     it 'name' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: '', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: 10_000,
-        useful_area: 8000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, name: '', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -22,14 +17,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'code' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Amazonas', code: '', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: 10_000,
-        useful_area: 8000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, code: '', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -40,14 +28,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'description' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Amazonas', code: 'AMZ', description: '', address: 'Av Amazonas 5000',
-        city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: 10_000,
-        useful_area: 8000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, description: '', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -58,14 +39,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'address' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: '', city: 'Amazonas',
-        state: 'AM', postal_code: '70510-000', total_area: 10_000, useful_area: 8000,
-        product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, address: '', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -76,14 +50,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'city' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: '', state: 'AM', postal_code: '70510-000', total_area: 10_000,
-        useful_area: 8000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, city: '', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -94,14 +61,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'state' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: '', postal_code: '70510-000', total_area: 10_000,
-        useful_area: 8000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, state: '', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -112,14 +72,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'postal code' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code: '', total_area: 10_000,
-        useful_area: 8000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, postal_code: '', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -130,14 +83,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'total area' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: '',
-        useful_area: 8000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, total_area: '', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -148,14 +94,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'useful area' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code: '705100-000', total_area: 10_000,
-        useful_area: '', product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, useful_area: '', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -166,14 +105,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'product category' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-        city: 'Amazonas', state: 'AM', postal_code: '705100-000', total_area: 10_000,
-        useful_area: 8000, product_category_ids: []
-      )
+      wh = build(:warehouse, product_category_ids: [])
 
       # Act
       result = wh.valid?
@@ -185,23 +117,11 @@ RSpec.describe Warehouse, type: :model do
 
   it 'should not be valid if name is duplicate' do
     # Arrange
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    wh1 = Warehouse.create!(
-      name: 'Amazonas', code: 'AMZ', description: 'Codigo legal', address: 'Av Amazonas',
-      city: 'Amazonas', state: 'AM', postal_code: '70510-000', total_area: 10_000,
-      useful_area: 8000, product_category_ids: [pc.id]
-    )
-
-    wh2 = Warehouse.new(
-      name: 'Amazonas', code: 'AMA', description: 'Otimo galpao mas frio', address: 'Av Amazonas',
-      city: 'Amazonas', state: 'AM', postal_code: '70500-000', total_area: 15_000,
-      useful_area: 12_000, product_category_ids: [pc.id]
-    )
+    create(:warehouse, name: 'Amazonas', product_category_ids: [pc.id])
+    wh = build(:warehouse, name: 'Amazonas', product_category_ids: [pc.id])
 
     # Act
-    result = wh2.valid?
+    result = wh.valid?
 
     # Assert
     expect(result).to eq false
@@ -209,23 +129,11 @@ RSpec.describe Warehouse, type: :model do
 
   it 'should not be valid if code is duplicate' do
     # Arrange
-    pc = ProductCategory.create!(
-      name: 'Conservados'
-    )
-    wh1 = Warehouse.create!(
-      name: 'Vitoria', code: 'VIX', description: 'Codigo legal', address: 'Av Vitoria',
-      city: 'Vitoria', state: 'ES', postal_code: '55000-000', total_area: 10_000,
-      useful_area: 8000, product_category_ids: [pc.id]
-    )
-
-    wh2 = Warehouse.new(
-      name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-      city: 'Curitiba', state: 'PR', postal_code: '70500-000', total_area: 15_000,
-      useful_area: 12_000, product_category_ids: [pc.id]
-    )
+    create(:warehouse, code: 'VIX', product_category_ids: [pc.id])
+    wh = build(:warehouse, code: 'VIX', product_category_ids: [pc.id])
 
     # Act
-    result = wh2.valid?
+    result = wh.valid?
 
     # Assert
     expect(result).to eq false
@@ -234,14 +142,7 @@ RSpec.describe Warehouse, type: :model do
   context 'should not be valid if cep is in wrong format' do
     it 'cep eq 705' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code: '705', total_area: 15_000,
-        useful_area: 12_000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, postal_code: '705', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -252,14 +153,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'cep eq 700000-00' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code: '700000-00', total_area: 15_000,
-        useful_area: 12_000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, postal_code: '700000-00', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -270,14 +164,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'cep eq aaaaa-aaa' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code: 'aaaaa-aaa', total_area: 15_000,
-        useful_area: 12_000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, postal_code: 'aaaaa-aaa', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -288,14 +175,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'cep eq 111112-111' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code: '111112-111', total_area: 15_000,
-        useful_area: 12_000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, postal_code: '111112-111', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?
@@ -306,14 +186,7 @@ RSpec.describe Warehouse, type: :model do
 
     it 'cep eq 11111-1112' do
       # Arrange
-      pc = ProductCategory.create!(
-        name: 'Conservados'
-      )
-      wh = Warehouse.new(
-        name: 'Curitiba', code: 'VIX', description: 'Otimo galpao mas frio', address: 'Av Curitiba',
-        city: 'Curitiba', state: 'PR', postal_code: '11111-1112', total_area: 15_000,
-        useful_area: 12_000, product_category_ids: [pc.id]
-      )
+      wh = build(:warehouse, postal_code: '11111-1112', product_category_ids: [pc.id])
 
       # Act
       result = wh.valid?

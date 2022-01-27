@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ProductCategory, type: :model do
   it 'should not be valid if name is empty' do
     # Arrage
-    pc = ProductCategory.new(name: '')
+    pc = build(:product_category, name: '')
 
     # Act
     result = pc.valid?
@@ -14,8 +14,8 @@ RSpec.describe ProductCategory, type: :model do
 
   it 'should not be valid if name is duplicate' do
     # Arrage
-    ProductCategory.create!(name: 'Conservados')
-    pc = ProductCategory.new(name: 'Conservados')
+    create(:product_category, name: 'Conservados')
+    pc = build(:product_category, name: 'Conservados')
 
     # Act
     result = pc.valid?
