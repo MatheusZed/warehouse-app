@@ -438,6 +438,7 @@ Status: 200(OK)
     "width": 17,
     "length": 22,
     "sku": "SKUAOdnmSfo6Jr3VJiy8",
+    "status": "active(0)/inactive(1)",
     "dimensions": "4 x 17 x 22",
     "supplier": {
       "id": 2,
@@ -475,6 +476,7 @@ Status: 200(OK)
   "width": 17,
   "length": 22,
   "sku": "SKUAOdnmSfo6Jr3VJiy8",
+  "status": "active(0)/inactive(1)",
   "dimensions": "4 x 17 x 22",
   "supplier": {
     "id": 2,
@@ -524,6 +526,7 @@ Status: 201(CREATED)
   "height": 10,
   "width": 5,
   "length": 2,
+  "status": "active(0)",
   "sku": "SKU2shqLA14UskO8lQzF",
   "supplier_id": 1,
   "product_category_id": 1
@@ -564,6 +567,7 @@ Status: 201(CREATED)
   "height": 10,
   "width": 5,
   "length": 2,
+  "status": "active(0)",
   "sku": "SKU2shqLA14UskO8lQzF",
   "supplier_id": 1,
   "product_category_id": 1
