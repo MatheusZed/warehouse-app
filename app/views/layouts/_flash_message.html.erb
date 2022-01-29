@@ -1,0 +1,11 @@
+<div>
+  <% flash.each do |key, value| %>
+    <div class="notification is-<%= flash_class(key).to_s %>">
+      <% if value.is_a?(Array) %>
+      <%= value&.join("<br>")&.html_safe %>
+      <% else %>
+      <%= value %>
+      <%end%>
+    </div>
+  <% end %>
+</div>

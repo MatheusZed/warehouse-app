@@ -41,8 +41,8 @@ class WarehousesController < ApplicationController
     if @pe.process
       redirect_to warehouse_path(@pe.warehouse_id), notice: 'Successfully registered items'
     else
-      flash[:alert] = "It wasn't possible to record the items"
-      flash[:errors] = "#{@pe.errors.full_messages.map{ |msg| "#{ msg + "\n" }" }.reduce(:+) }"
+      flash[:alert] = ["It wasn't possible to record the items"]
+      flash[:alert] << @pe.errors.full_messages
       redirect_to warehouse_path(@pe.warehouse_id), locals: { pe: @product_entry }
     end
   end

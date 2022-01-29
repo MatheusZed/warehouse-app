@@ -54,19 +54,7 @@
 <br>
 
 <div class="content">
-  
-  <h3> <%= flash[:errors] %> </h3>
   <h2>Entrada de Itens</h2>
-  <% if @pe %> 
-    <% if @pe.errors.any? %>
-      <span>Check the fields below:</span>
-      <ul>
-      <% @pe.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    <% end %>
-  <% end %>
 </div>
 
 <%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |form| %>

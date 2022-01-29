@@ -45,9 +45,7 @@ class ProductEntryService
   end
 
   def validate_inactive
-    if product_model.inactive?
-      errors.add(:base, 'Este modelo de produto está inativo')
-    end
+    errors.add(:base, 'Este modelo de produto está inativo') if product_model.inactive?
   end
 
   def warehouse
