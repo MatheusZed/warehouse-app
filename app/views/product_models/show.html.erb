@@ -15,11 +15,8 @@
 </div>
 
 <div class="content">
-  <% if @product_model.active? %>
-    <%= button_to 'Desativar', activate_product_model_path, method: :patch, class: 'button is-primary' %>
-  <% else %>
-    <%= button_to 'Ativar', activate_product_model_path, method: :patch, class: 'button is-primary' %>
-  <% end %>
+  <% button_text = @product_model.active? ? 'Desativar' : 'Ativar' %>
+  <%= button_to button_text, activate_product_model_path, method: :patch, class: 'button is-primary' %>
 </div>
 
 <br>
