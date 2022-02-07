@@ -4,6 +4,7 @@ class WarehousesController < ApplicationController
   before_action :set_params, only: %i[create update]
   before_action :set_models_and_categories, except: %i[show]
   before_action :product_entry_service, only: %i[product_entry]
+  before_action :product_remove_service, only: %i[product_remove]
 
   def show
     @product_models = ProductModel.all
@@ -47,6 +48,16 @@ class WarehousesController < ApplicationController
     end
   end
 
+  def product_remove
+    if @pr.process
+      redirect_to warehouse_path(@pr.warehouse_id), notice: "Successfully removed items. Quantity: #{@pr.quantity}"
+    else
+      flash[:alert] = ["It wasn't possible to remove the items"]
+      flash[:alert] << @pr.errors.full_messages
+      redirect_to warehouse_path(@pr.warehouse_id), locals: { pr: @product_remove }
+    end
+  end
+
   private
 
   def set_warehouse
@@ -64,6 +75,13 @@ class WarehousesController < ApplicationController
     @pe = ProductEntryService.new(
       quantity: params[:quantity], product_model_id: params[:product_model_id],
       warehouse_id: params[:id], sku: params[:sku]
+    )
+  end
+
+  def product_remove_service
+    @pr = ProductRemoveService.new(
+      quantity: params[:quantity], product_model_id: params[:product_model_id],
+      warehouse_id: params[:id]
     )
   end
 

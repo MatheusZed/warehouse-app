@@ -65,30 +65,6 @@ describe 'User enter new items' do
     end
   end
 
-  it 'Successfully throught the warehouse screen' do
-    # Arrange
-    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier, product_category: pc)
-    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier, product_category: pc)
-    pm3 = create(:product_model, name: "Doces", supplier: supplier, product_category: pc)
-    user = User.create!(email: 'joao@email.com', password: 'admino')
-
-    # Act
-    login_as(user, scope: :user)
-    visit root_path
-    click_on 'Alimenticio'
-    fill_in 'Quantidade', with: 100
-    select 'Doces', from: 'Produto'
-    click_on 'Save'
-
-    # Assert
-    expect(current_path).to eq warehouse_path(warehouse.id)
-    expect(page).to have_css('h2', text: 'Estoque')
-    within("div#product-#{pm3.id}") do
-      expect(page).to have_content('Doces')
-      expect(page).to have_content('Quantidade: 100')
-    end
-  end
-
   it "and quantity can't be less than 0" do
     # Arrange
     pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier, product_category: pc)
@@ -102,27 +78,6 @@ describe 'User enter new items' do
     click_on 'Enter new items'
     fill_in 'Quantidade', with: 0
     select 'ALM', from: 'Galpao Destino'
-    select 'Doces', from: 'Produto'
-    click_on 'Save'
-
-    # Assert
-    expect(page).not_to have_content 'Successfully registered items'
-    expect(page).to have_content "It wasn't possible to record the items"
-    expect(page).to have_content 'Quantidade nao pode ser 0 ou menor'
-  end
-
-  it "and quantity can't be less than 0 throught the warehouse screen" do
-    # Arrange
-    pm1 = create(:product_model, name: "Migalhas de pao", supplier: supplier, product_category: pc)
-    pm2 = create(:product_model, name: "Osso de Frango", supplier: supplier, product_category: pc)
-    pm3 = create(:product_model, name: "Doces", supplier: supplier, product_category: pc)
-    user = User.create!(email: 'joao@email.com', password: 'admino')
-
-    # Act
-    login_as(user, scope: :user)
-    visit root_path
-    click_on 'Alimenticio'
-    fill_in 'Quantidade', with: 0
     select 'Doces', from: 'Produto'
     click_on 'Save'
 

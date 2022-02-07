@@ -6,7 +6,7 @@ FactoryBot.define do
     width { 100 }
     length { 100 }
     status { 0 }
-    association :supplier
-    association :product_category
+    supplier
+    product_category
   end
 end

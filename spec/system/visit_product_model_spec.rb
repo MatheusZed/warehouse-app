@@ -45,10 +45,9 @@ describe 'Visitor sees the product model' do
     pc = create(:product_category)
     wh1 = create(:warehouse, code: "JRZ", product_category_ids: [pc.id])
     wh2 = create(:warehouse, code: "PLN", product_category_ids: [pc.id])
-    pm1 = create(:product_model,name: "Saco de Feijao", supplier: supplier, product_category: pc)
-    pm2 = create(:product_model,name: "Doces", supplier: supplier, product_category: pc)
-    create_list(:product_item, 5, warehouse: wh1, product_model: pm2)
-    create_list(:product_item, 4, warehouse: wh2, product_model: pm2)
+    pm = create(:product_model,name: "Doces", supplier: supplier, product_category: pc)
+    create_list(:product_item, 5, warehouse: wh1, product_model: pm)
+    create_list(:product_item, 4, warehouse: wh2, product_model: pm)
 
     # Act
     visit root_path

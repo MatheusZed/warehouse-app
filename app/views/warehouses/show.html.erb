@@ -53,31 +53,61 @@
 <br>
 <br>
 
-<div class="content">
-  <h2>Entrada de Itens</h2>
-</div>
-
-<%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |form| %>
-  <div class="field">
-    <%= form.label :quantity, 'Quantidade', class: 'label' %>
-    <div class="control">
-      <%= form.number_field :quantity, class: 'input', placeholder: 'quantidade' %>
-    </div>
+<div id="add">
+  <div class="content">
+    <h2>Entrada de Itens</h2>
   </div>
-  <div class="field">
-    <%= form.label :product_model_id, 'Produto', class: 'label' %>
-    <div class="control">
-      <div class="select">
-        <%= form.collection_select :product_model_id, @product_models, :id, :name %>
+
+  <%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |form| %>
+    <div class="field">
+      <%= form.label :quantity, 'Quantidade', class: 'label' %>
+      <div class="control">
+        <%= form.number_field :quantity, class: 'input', placeholder: 'quantidade' %>
       </div>
     </div>
+    <div class="field">
+      <%= form.label :product_model_id, 'Produto', class: 'label' %>
+      <div class="control">
+        <div class="select">
+          <%= form.collection_select :product_model_id, @product_models, :id, :name %>
+        </div>
+      </div>
+    </div>
+    <%= form.submit 'Save', class: 'button is-primary' %>
+  <% end %>
+</div>
+
+<br>
+<br>
+<br>
+
+<div id="remove">
+  <div class="content">
+    <h2>Remoção de Itens</h2>
   </div>
-  <%= form.submit 'Save', class: 'button is-primary' %>
-<% end %>
 
-  <br>
-  <br>
-  <br>
+  <%= form_with(url: product_remove_warehouse_path(@warehouse.id)) do |form| %>
+    <div class="field">
+      <%= form.label :quantity, 'Quantidade', class: 'label' %>
+      <div class="control">
+        <%= form.number_field :quantity, class: 'input', placeholder: 'quantidade' %>
+      </div>
+    </div>
+    <div class="field">
+      <%= form.label :product_model_id, 'Produto', class: 'label' %>
+      <div class="control">
+        <div class="select">
+          <%= form.collection_select :product_model_id, @product_models, :id, :name %>
+        </div>
+      </div>
+    </div>
+    <%= form.submit 'Save', class: 'button is-primary' %>
+  <% end %>
+</div>
 
-  <%= link_to 'Return', root_path %>
+<br>
+<br>
+<br>
+
+<%= link_to 'Return', root_path %>
  
